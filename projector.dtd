@@ -6,13 +6,13 @@
 
 <!ELEMENT object (name,package?,field*,reference*)>
 
-<!ELEMENT field (name,elementName?,type,size,defaultValue?,modifier*)>
+<!ELEMENT field (name,elementName,type,size,defaultValue?,modifier*)>
 <!ELEMENT elementName (#PCDATA)>
 <!ELEMENT type (#PCDATA)>
 <!ELEMENT size (#PCDATA)>
 <!ELEMENT defaultValue (#PCDATA)>
 <!ELEMENT modifier (#PCDATA)>
 
-<!ELEMENT reference (name,elementName?,targetType,relationship)>
+<!ELEMENT reference (name,elementName,targetType,relationship)>
 <!ELEMENT targetType (#PCDATA)>
 <!ELEMENT relationship (#PCDATA)>

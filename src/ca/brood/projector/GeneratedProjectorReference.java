@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import ca.brood.projector.util.Util;
 
 public class GeneratedProjectorReference extends Generated {
 	protected String name = "";
 	protected String targetType = "";
 	protected String relationship = "";
+	protected String elementName = "";
 	protected GeneratedProjectorReference() {
 		super();
 		log = Logger.getLogger("ProjectorReference");
@@ -18,6 +20,7 @@ public class GeneratedProjectorReference extends Generated {
 		this.name = "";
 		this.targetType = "";
 		this.relationship = "";
+		this.elementName = "";
 		NodeList configNodes = configNode.getChildNodes();
 		for (int i=0; i<configNodes.getLength(); i++) {
 			Node currentConfigNode = configNodes.item(i);
@@ -30,6 +33,8 @@ public class GeneratedProjectorReference extends Generated {
 				this.targetType = currentConfigNode.getFirstChild().getNodeValue();
 			} else if ("relationship".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
 				this.relationship = currentConfigNode.getFirstChild().getNodeValue();
+			} else if ("elementName".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				this.elementName = currentConfigNode.getFirstChild().getNodeValue();
 			} else {
 				log.warn("Got unknown node in config: "+currentConfigNode.getNodeName());
 			}
@@ -37,6 +42,7 @@ public class GeneratedProjectorReference extends Generated {
 		log.debug("ProjectorReference name: "+this.name);
 		log.debug("ProjectorReference targetType: "+this.targetType);
 		log.debug("ProjectorReference relationship: "+this.relationship);
-	return true;
+		log.debug("ProjectorReference elementName: "+this.elementName);
+		return true;
 	}
 }

@@ -94,14 +94,14 @@ public class ProjectorObject {
 		return true;
 	}
 	private boolean generateFieldLoad(PrintStream ps, GeneratedProjectorField gpf) {
-		ps.println("			} else if (\""+gpf.name+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
+		ps.println("			} else if (\""+gpf.elementName+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
 		if ("string".equalsIgnoreCase(gpf.type)) {
 			ps.println("				this."+gpf.name+" = currentConfigNode.getFirstChild().getNodeValue();");
 		} else if ("integer".equalsIgnoreCase(gpf.type)) {
 			ps.println("				try {");
 			ps.println("					this."+gpf.name+" = Util.parseInt(currentConfigNode.getFirstChild().getNodeValue());");
 			ps.println("				} catch (Exception e) {");
-			ps.println("					log.error(\"Error parsing "+gpf.name+": \"+currentConfigNode.getFirstChild().getNodeValue());");
+			ps.println("					log.error(\"Error parsing "+gpf.elementName+": \"+currentConfigNode.getFirstChild().getNodeValue());");
 			ps.println("				}");
 		} else if ("decimal".equalsIgnoreCase(gpf.type)) {
 			log.error("Decimal field loading not implemented yet...");
@@ -109,14 +109,14 @@ public class ProjectorObject {
 		return true;
 	}
 	private boolean generateReferenceLoad(PrintStream ps, GeneratedProjectorReference gpr) {
-		ps.println("			} else if (\""+gpr.name+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
+		ps.println("			} else if (\""+gpr.elementName+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
 		if ("onetoone".compareToIgnoreCase(gpr.relationship)==0) {
 			ps.println("				this."+gpr.name+".configure(currentConfigNode);");
 		} else if ("onetomany".compareToIgnoreCase(gpr.relationship)==0) {
 			String objType = "Generated"+gpr.targetType;
 			String variable = "generated"+gpr.targetType;
 			ps.println("				"+objType+" "+variable+" = new "+objType+"();");
-			ps.println("				if ("+variable+".configure(currentConfigNode);");
+			ps.println("				if ("+variable+".configure(currentConfigNode)){");
 			ps.println("					this."+gpr.name+".add("+variable+");");
 			ps.println("				}");
 		} 
@@ -140,6 +140,7 @@ public class ProjectorObject {
 		ps.println("import org.apache.log4j.Logger;");
 		ps.println("import org.w3c.dom.Node;");
 		ps.println("import org.w3c.dom.NodeList;");
+		ps.println("import ca.brood.projector.util.Util;");
 		ps.println("");
 		ps.println("public class "+className+" extends Generated {");
 		//TODO: generate fields and references

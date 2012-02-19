@@ -1,6 +1,6 @@
 package ca.brood.projector;
 
-import java.io.File;
+import java.io.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -100,9 +100,57 @@ public class Projector extends GeneratedProjector {
 		//recurse into the projects/Projector directory, and copy generated source files
 		// over to the src directory, while renaming the old ones by appending .old just
 		// to not break it too bad.
+		log.debug("Starting install of projector generated classes...");
+		installDir("projects/Projector/", "src/");
+		log.debug("Done installing newly generated projector classes... does it still work?");
 	}
 	private void installDir(String checkDir, String installDir) {
-		
+		log.debug("Working on "+checkDir+" with install dir of "+installDir);
+		File pwd = new File(checkDir);
+		File[] pwdFiles = pwd.listFiles();
+		for (int i=0; i<pwdFiles.length; i++) {
+			if (pwdFiles[i].isDirectory()) {
+				installDir(checkDir+pwdFiles[i].getName()+"/", installDir+pwdFiles[i].getName()+"/");
+			} else {
+				if (pwdFiles[i].getName().endsWith(".java")) {
+					log.debug("Copying "+pwdFiles[i].getName()+" from "+checkDir+" to "+installDir);
+					renameAndCopy(pwdFiles[i], installDir+pwdFiles[i].getName());
+				}
+			}
+		}
+	}
+	private boolean renameAndCopy(File inFile, String outFile) {
+		File of = new File(outFile);
+		if (of.exists()) {
+			File rename = new File(outFile+".old");
+			of.renameTo(rename);
+		}
+		copyFile(inFile, of);
+		return true;
+	}
+	private boolean copyFile(File in, File out) {
+		InputStream is;
+		OutputStream os;
+		try {
+			is = new FileInputStream(in);
+			os = new FileOutputStream(out);
+		} catch (FileNotFoundException e) {
+			log.error("Error copying "+in.getName()+" to "+out.getName());
+			return false;
+		}
+		try {
+			byte[] buf = new byte[1024];
+			int len;
+			while ((len = is.read(buf)) > 0){
+				os.write(buf, 0, len);
+			}
+			is.close();
+			os.close();
+		} catch (Exception e) {
+			log.error("Error during copy of "+in.getName()+" to "+out.getName());
+			return false;
+		}
+		return true;
 	}
 
 	public void run() {

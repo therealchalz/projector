@@ -1,0 +1,956 @@
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+125 [main] ERROR Projector - Element type "name" must not be declared more than once.
+156 [main] FATAL Projector - Exception while trying to load config file: sampleproject.xmlConfig doesn't conform to schema.
+156 [main] INFO Projector - Starting project: projector.xml
+156 [main] ERROR Projector - Element type "name" must not be declared more than once.
+172 [main] FATAL Projector - Exception while trying to load config file: projector.xmlConfig doesn't conform to schema.
+172 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] WARN Projector - Got unknown node in config: project
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] WARN Projector - Got unknown node in config: project
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] INFO Projector - Done with projector.xml
+47 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] WARN Projector - Got unknown node in config: project
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+63 [main] ERROR Projector - Element type "projectPackage" must be declared.
+63 [main] FATAL Projector - The element type "projectPackage" must be terminated by the matching end-tag "</projectPackage>".
+63 [main] FATAL Projector - Exception while trying to load config file: projector.xmlThe element type "projectPackage" must be terminated by the matching end-tag "</projectPackage>".
+63 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] WARN Projector - Got unknown node in config: project
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+47 [main] FATAL Projector - The element type "projectPackage" must be terminated by the matching end-tag "</projectPackage>".
+47 [main] FATAL Projector - Exception while trying to load config file: projector.xmlThe element type "projectPackage" must be terminated by the matching end-tag "</projectPackage>".
+47 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+46 [main] DEBUG Projector - Reading project configuration now
+46 [main] WARN Projector - Got unknown node in config: project
+46 [main] WARN Projector - Got unknown node in config: object
+46 [main] WARN Projector - Got unknown node in config: object
+46 [main] WARN Projector - Got unknown node in config: object
+46 [main] INFO Projector - Done with sampleproject.xml
+46 [main] INFO Projector - Starting project: projector.xml
+62 [main] DEBUG Projector - Reading project configuration now
+62 [main] WARN Projector - Got unknown node in config: project
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] INFO Projector - Done with projector.xml
+62 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+16 [main] INFO Projector - Starting project: sampleproject.xml
+63 [main] DEBUG Projector - Reading project configuration now
+63 [main] INFO Projector - Done with sampleproject.xml
+63 [main] INFO Projector - Starting project: projector.xml
+63 [main] DEBUG Projector - Reading project configuration now
+63 [main] INFO Projector - Done with projector.xml
+63 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] WARN Projector - Got unknown node in config: project
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+62 [main] DEBUG Projector - Projector name: 
+62 [main] DEBUG Projector - Projector projectPackage: 
+62 [main] INFO Projector - Done with sampleproject.xml
+62 [main] INFO Projector - Starting project: projector.xml
+62 [main] DEBUG Projector - Reading project configuration now
+62 [main] DEBUG Projector - Configuring projector...
+62 [main] WARN Projector - Got unknown node in config: project
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] DEBUG Projector - Projector name: 
+62 [main] DEBUG Projector - Projector projectPackage: 
+62 [main] INFO Projector - Done with projector.xml
+62 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+62 [main] DEBUG GeneratedProject - Project name: Projector
+62 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.projector
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] WARN Projector - Got unknown node in config: object
+62 [main] INFO Projector - Done with projector.xml
+62 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+32 [main] DEBUG Projector - Reading project configuration now
+32 [main] DEBUG Projector - Configuring projector...
+32 [main] DEBUG GeneratedProject - Project name: Softlogger
+32 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProject - Project name: Projector
+47 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.projector
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] WARN Projector - Got unknown node in config: object
+47 [main] INFO Projector - Done with projector.xml
+47 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProject - Project name: Projector
+47 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.projector
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectObject
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectField
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectReference
+62 [main] INFO Projector - Done with projector.xml
+62 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+63 [main] DEBUG Projector - Reading project configuration now
+63 [main] DEBUG Projector - Configuring projector...
+63 [main] DEBUG GeneratedProject - Project name: Projector
+63 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.projector
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectObject
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectField
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectReference
+63 [main] INFO Projector - Generating...
+63 [main] INFO Projector - Done with projector.xml
+63 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+47 [main] FATAL Projector - Couldn't create projects/Softlogger/ca/brood/softlogger directory...
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+47 [main] DEBUG Projector - Reading project configuration now
+62 [main] DEBUG Projector - Configuring projector...
+62 [main] DEBUG GeneratedProject - Project name: Projector
+62 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.projector
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectObject
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectField
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectReference
+62 [main] INFO Projector - Generating...
+62 [main] FATAL Projector - Couldn't create projects/Projector/ca/brood/projector directory...
+62 [main] INFO Projector - Done with projector.xml
+62 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+62 [main] DEBUG Projector - Reading project configuration now
+62 [main] DEBUG Projector - Configuring projector...
+62 [main] DEBUG GeneratedProject - Project name: Projector
+62 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.projector
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectObject
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectField
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectReference
+62 [main] INFO Projector - Generating...
+62 [main] INFO Projector - Done with projector.xml
+62 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+62 [main] DEBUG Projector - Reading project configuration now
+62 [main] DEBUG Projector - Configuring projector...
+62 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+62 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+250 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+250 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+250 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+250 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+250 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+250 [main] INFO Projector - Generating...
+265 [main] INFO Projector - Done with sampleproject.xml
+265 [main] INFO Projector - Starting project: projector.xml
+296 [main] DEBUG Projector - Reading project configuration now
+296 [main] DEBUG Projector - Configuring projector...
+296 [main] DEBUG GeneratedProjectorProject - Project name: Projector
+296 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.projector
+296 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+296 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+296 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+296 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+296 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+296 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+296 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+296 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+296 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+296 [main] DEBUG GeneratedProjectorObject - Object name: ProjectObject
+296 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+296 [main] DEBUG GeneratedProjectorObject - Object name: ProjectField
+296 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+296 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+296 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+296 [main] DEBUG GeneratedProjectorObject - Object name: ProjectReference
+296 [main] INFO Projector - Generating...
+343 [main] INFO Projector - Done with projector.xml
+343 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+31 [main] DEBUG Projector - Reading project configuration now
+31 [main] DEBUG Projector - Configuring projector...
+31 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+31 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+31 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+31 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+31 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+31 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+31 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+31 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+31 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+31 [main] INFO Projector - Generating...
+47 [main] INFO Projector - Starting file generation
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/Softlogger.java
+63 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/DataServer.java
+63 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/SoftloggerChannel.java
+63 [main] INFO Projector - Done with sampleproject.xml
+63 [main] INFO Projector - Starting project: projector.xml
+63 [main] DEBUG Projector - Reading project configuration now
+63 [main] DEBUG Projector - Configuring projector...
+63 [main] DEBUG GeneratedProjectorProject - Project name: Projector
+63 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.projector
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectObject
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+78 [main] DEBUG GeneratedProjectorObject - Object name: ProjectField
+78 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+78 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+78 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+78 [main] DEBUG GeneratedProjectorObject - Object name: ProjectReference
+78 [main] INFO Projector - Generating...
+125 [main] INFO Projector - Starting file generation
+125 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/Softlogger.java
+125 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/DataServer.java
+125 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/SoftloggerChannel.java
+125 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/Projector.java
+125 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/ProjectorProject.java
+125 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/ProjectObject.java
+141 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/ProjectField.java
+141 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/ProjectReference.java
+141 [main] INFO Projector - Done with projector.xml
+141 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+47 [main] INFO Projector - Starting file generation
+63 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/Softlogger.java
+63 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/DataServer.java
+63 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/SoftloggerChannel.java
+63 [main] INFO Projector - Done with sampleproject.xml
+63 [main] INFO Projector - Starting project: projector.xml
+63 [main] DEBUG Projector - Reading project configuration now
+63 [main] DEBUG Projector - Configuring projector...
+63 [main] DEBUG GeneratedProjectorProject - Project name: Projector
+63 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.projector
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectObject
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectField
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectReference
+63 [main] INFO Projector - Generating...
+109 [main] INFO Projector - Starting file generation
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/Projector.java
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/ProjectorProject.java
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/ProjectObject.java
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/ProjectField.java
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/ProjectReference.java
+109 [main] INFO Projector - Done with projector.xml
+109 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+31 [main] DEBUG Projector - Reading project configuration now
+31 [main] DEBUG Projector - Configuring projector...
+31 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+31 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+31 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+31 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+31 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+31 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+31 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+31 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+31 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+31 [main] INFO Projector - Generating...
+46 [main] INFO Projector - Starting file generation
+62 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftlogger.java
+62 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedDataServer.java
+62 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftloggerChannel.java
+62 [main] INFO Projector - Done with sampleproject.xml
+62 [main] INFO Projector - Starting project: projector.xml
+62 [main] DEBUG Projector - Reading project configuration now
+62 [main] DEBUG Projector - Configuring projector...
+62 [main] DEBUG GeneratedProjectorProject - Project name: Projector
+62 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.projector
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectObject
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectField
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectReference
+62 [main] INFO Projector - Generating...
+62 [main] INFO Projector - Starting file generation
+62 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjector.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorProject.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectObject.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectField.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectReference.java
+78 [main] INFO Projector - Done with projector.xml
+78 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+47 [main] INFO Projector - Starting file generation
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftlogger.java
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedDataServer.java
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftloggerChannel.java
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+63 [main] DEBUG Projector - Reading project configuration now
+63 [main] DEBUG Projector - Configuring projector...
+63 [main] DEBUG GeneratedProjectorProject - Project name: Projector
+63 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.projector
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectObject
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectField
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectReference
+63 [main] INFO Projector - Generating...
+63 [main] INFO Projector - Starting file generation
+63 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjector.java
+63 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorProject.java
+63 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectObject.java
+79 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectField.java
+79 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectReference.java
+79 [main] INFO Projector - Done with projector.xml
+79 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+47 [main] INFO Projector - Starting file generation
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftlogger.java
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedDataServer.java
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftloggerChannel.java
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+62 [main] DEBUG Projector - Reading project configuration now
+62 [main] DEBUG Projector - Configuring projector...
+62 [main] DEBUG GeneratedProjectorProject - Project name: Projector
+62 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.projector
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectObject
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectField
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: field
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectReference
+62 [main] INFO Projector - Generating...
+62 [main] INFO Projector - Starting file generation
+62 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjector.java
+62 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorProject.java
+62 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectObject.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectField.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectReference.java
+78 [main] INFO Projector - Done with projector.xml
+78 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+16 [main] INFO Projector - Starting project: sampleproject.xml
+313 [main] DEBUG Projector - Reading project configuration now
+313 [main] DEBUG Projector - Configuring projector...
+313 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+313 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+313 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+313 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+313 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+313 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+313 [main] WARN GeneratedProjectorField - Got unknown node in config: modifier
+313 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+313 [main] INFO Projector - Generating...
+313 [main] INFO Projector - Starting file generation
+344 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftlogger.java
+344 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedDataServer.java
+344 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftloggerChannel.java
+344 [main] INFO Projector - Done with sampleproject.xml
+344 [main] INFO Projector - Starting project: projector.xml
+360 [main] DEBUG Projector - Reading project configuration now
+360 [main] DEBUG Projector - Configuring projector...
+360 [main] DEBUG GeneratedProjectorProject - Project name: Projector
+360 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.projector
+360 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+360 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+360 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+360 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+360 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+360 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+360 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorObject
+360 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorField
+360 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorReference
+360 [main] INFO Projector - Generating...
+360 [main] INFO Projector - Starting file generation
+360 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjector.java
+360 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorProject.java
+360 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorObject.java
+360 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorField.java
+375 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorReference.java
+375 [main] INFO Projector - Done with projector.xml
+375 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorField - Got unknown node in config: modifier
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+47 [main] INFO Projector - Starting file generation
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftlogger.java
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedDataServer.java
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftloggerChannel.java
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+62 [main] DEBUG Projector - Reading project configuration now
+62 [main] DEBUG Projector - Configuring projector...
+62 [main] DEBUG GeneratedProjectorProject - Project name: Projector
+62 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.projector
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] WARN GeneratedProjectorObject - Got unknown node in config: reference
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorObject
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorField
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorReference
+62 [main] INFO Projector - Generating...
+62 [main] INFO Projector - Starting file generation
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjector.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorProject.java
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorObject.java
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorField.java
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorReference.java
+109 [main] INFO Projector - Done with projector.xml
+109 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN ProjectorReference - Got unknown node in config: targetName
+47 [main] DEBUG ProjectorReference - ProjectorReference name: DataServer
+47 [main] DEBUG ProjectorReference - ProjectorReference targetType: 
+47 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetoone
+47 [main] WARN ProjectorReference - Got unknown node in config: targetName
+47 [main] DEBUG ProjectorReference - ProjectorReference name: SoftloggerChannels
+47 [main] DEBUG ProjectorReference - ProjectorReference targetType: 
+47 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorField - Got unknown node in config: modifier
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+47 [main] INFO Projector - Starting file generation
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftlogger.java
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedDataServer.java
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftloggerChannel.java
+63 [main] INFO Projector - Done with sampleproject.xml
+63 [main] INFO Projector - Starting project: projector.xml
+63 [main] DEBUG Projector - Reading project configuration now
+63 [main] DEBUG Projector - Configuring projector...
+63 [main] DEBUG GeneratedProjectorProject - Project name: Projector
+63 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.projector
+63 [main] WARN ProjectorReference - Got unknown node in config: targetName
+63 [main] DEBUG ProjectorReference - ProjectorReference name: project
+63 [main] DEBUG ProjectorReference - ProjectorReference targetType: 
+63 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetoone
+63 [main] WARN ProjectorReference - Got unknown node in config: targetName
+63 [main] DEBUG ProjectorReference - ProjectorReference name: projectObjects
+63 [main] DEBUG ProjectorReference - ProjectorReference targetType: 
+63 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+63 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+63 [main] WARN ProjectorReference - Got unknown node in config: targetName
+63 [main] DEBUG ProjectorReference - ProjectorReference name: fields
+63 [main] DEBUG ProjectorReference - ProjectorReference targetType: 
+63 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+63 [main] WARN ProjectorReference - Got unknown node in config: targetName
+63 [main] DEBUG ProjectorReference - ProjectorReference name: references
+63 [main] DEBUG ProjectorReference - ProjectorReference targetType: 
+63 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorObject
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorField
+63 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorReference
+63 [main] INFO Projector - Generating...
+63 [main] INFO Projector - Starting file generation
+79 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjector.java
+79 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorProject.java
+79 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorObject.java
+79 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorField.java
+79 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorReference.java
+79 [main] INFO Projector - Done with projector.xml
+79 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN ProjectorReference - Got unknown node in config: targetName
+47 [main] DEBUG ProjectorReference - ProjectorReference name: DataServer
+47 [main] DEBUG ProjectorReference - ProjectorReference targetType: 
+47 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetoone
+47 [main] WARN ProjectorReference - Got unknown node in config: targetName
+47 [main] DEBUG ProjectorReference - ProjectorReference name: SoftloggerChannels
+47 [main] DEBUG ProjectorReference - ProjectorReference targetType: 
+47 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorField - Got unknown node in config: modifier
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+47 [main] INFO Projector - Starting file generation
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftlogger.java
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedDataServer.java
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftloggerChannel.java
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+94 [main] ERROR Projector - Element type "targetType" must be declared.
+94 [main] ERROR Projector - The content of element type "reference" must match "(name,targetName,relationship)".
+94 [main] ERROR Projector - Element type "targetType" must be declared.
+94 [main] ERROR Projector - The content of element type "reference" must match "(name,targetName,relationship)".
+94 [main] ERROR Projector - Element type "targetType" must be declared.
+94 [main] ERROR Projector - The content of element type "reference" must match "(name,targetName,relationship)".
+110 [main] ERROR Projector - Element type "targetType" must be declared.
+110 [main] ERROR Projector - The content of element type "reference" must match "(name,targetName,relationship)".
+110 [main] FATAL Projector - Exception while trying to load config file: projector.xmlConfig doesn't conform to schema.
+110 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] ERROR Projector - The content of element type "reference" must match "(name,targetName,relationship)".
+47 [main] ERROR Projector - The content of element type "reference" must match "(name,targetName,relationship)".
+47 [main] FATAL Projector - Exception while trying to load config file: sampleproject.xmlConfig doesn't conform to schema.
+47 [main] INFO Projector - Starting project: projector.xml
+63 [main] ERROR Projector - The content of element type "reference" must match "(name,targetName,relationship)".
+63 [main] ERROR Projector - The content of element type "reference" must match "(name,targetName,relationship)".
+63 [main] ERROR Projector - The content of element type "reference" must match "(name,targetName,relationship)".
+63 [main] ERROR Projector - The content of element type "reference" must match "(name,targetName,relationship)".
+63 [main] FATAL Projector - Exception while trying to load config file: projector.xmlConfig doesn't conform to schema.
+63 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+47 [main] DEBUG ProjectorReference - ProjectorReference name: DataServer
+47 [main] DEBUG ProjectorReference - ProjectorReference targetType: DataServer
+47 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetoone
+47 [main] DEBUG ProjectorReference - ProjectorReference name: SoftloggerChannels
+47 [main] DEBUG ProjectorReference - ProjectorReference targetType: SoftloggerChannel
+47 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorField - Got unknown node in config: modifier
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+47 [main] INFO Projector - Starting file generation
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftlogger.java
+62 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedDataServer.java
+62 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftloggerChannel.java
+62 [main] INFO Projector - Done with sampleproject.xml
+62 [main] INFO Projector - Starting project: projector.xml
+62 [main] DEBUG Projector - Reading project configuration now
+62 [main] DEBUG Projector - Configuring projector...
+62 [main] DEBUG GeneratedProjectorProject - Project name: Projector
+62 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.projector
+62 [main] DEBUG ProjectorReference - ProjectorReference name: project
+62 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorProject
+62 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetoone
+62 [main] DEBUG ProjectorReference - ProjectorReference name: projectObjects
+62 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorObject
+62 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+62 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+62 [main] DEBUG ProjectorReference - ProjectorReference name: fields
+62 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorField
+62 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+62 [main] DEBUG ProjectorReference - ProjectorReference name: references
+78 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorReferences
+78 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+78 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorObject
+78 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorField
+78 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorReference
+78 [main] INFO Projector - Generating...
+78 [main] INFO Projector - Starting file generation
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjector.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorProject.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorObject.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorField.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorReference.java
+78 [main] INFO Projector - Done with projector.xml
+78 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+31 [main] DEBUG Projector - Reading project configuration now
+31 [main] DEBUG Projector - Configuring projector...
+31 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+31 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+47 [main] DEBUG ProjectorReference - ProjectorReference name: DataServer
+47 [main] DEBUG ProjectorReference - ProjectorReference targetType: DataServer
+47 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetoone
+47 [main] DEBUG ProjectorReference - ProjectorReference name: SoftloggerChannels
+47 [main] DEBUG ProjectorReference - ProjectorReference targetType: SoftloggerChannel
+47 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorField - Got unknown node in config: modifier
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+47 [main] INFO Projector - Starting file generation
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftlogger.java
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedDataServer.java
+47 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftloggerChannel.java
+47 [main] INFO Projector - Done with sampleproject.xml
+47 [main] INFO Projector - Starting project: projector.xml
+62 [main] DEBUG Projector - Reading project configuration now
+62 [main] DEBUG Projector - Configuring projector...
+62 [main] DEBUG GeneratedProjectorProject - Project name: Projector
+62 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.projector
+62 [main] DEBUG ProjectorReference - ProjectorReference name: project
+62 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorProject
+62 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetoone
+62 [main] DEBUG ProjectorReference - ProjectorReference name: projectObjects
+62 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorObject
+62 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+62 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+62 [main] DEBUG ProjectorReference - ProjectorReference name: fields
+62 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorField
+62 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+62 [main] DEBUG ProjectorReference - ProjectorReference name: references
+62 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorReferences
+62 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorObject
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorField
+62 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorReference
+62 [main] INFO Projector - Generating...
+62 [main] INFO Projector - Starting file generation
+62 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjector.java
+62 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorProject.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorObject.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorField.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorReference.java
+78 [main] INFO Projector - Done with projector.xml
+78 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Starting project: sampleproject.xml
+47 [main] DEBUG Projector - Reading project configuration now
+47 [main] DEBUG Projector - Configuring projector...
+47 [main] DEBUG GeneratedProjectorProject - Project name: Softlogger
+47 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.softlogger
+47 [main] WARN ProjectorReference - Got unknown node in config: elementName
+47 [main] DEBUG ProjectorReference - ProjectorReference name: DataServer
+47 [main] DEBUG ProjectorReference - ProjectorReference targetType: DataServer
+47 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetoone
+47 [main] WARN ProjectorReference - Got unknown node in config: elementName
+47 [main] DEBUG ProjectorReference - ProjectorReference name: SoftloggerChannels
+47 [main] DEBUG ProjectorReference - ProjectorReference targetType: SoftloggerChannel
+47 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+47 [main] DEBUG GeneratedProjectorObject - Object name: Softlogger
+47 [main] DEBUG GeneratedProjectorObject - Object name: DataServer
+47 [main] WARN GeneratedProjectorField - Got unknown node in config: modifier
+47 [main] DEBUG GeneratedProjectorObject - Object name: SoftloggerChannel
+47 [main] INFO Projector - Generating...
+62 [main] INFO Projector - Starting file generation
+62 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftlogger.java
+62 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedDataServer.java
+62 [main] DEBUG ProjectorObject - Generating: projects/Softlogger/ca/brood/softlogger/GeneratedSoftloggerChannel.java
+62 [main] INFO Projector - Done with sampleproject.xml
+62 [main] INFO Projector - Starting project: projector.xml
+78 [main] DEBUG Projector - Reading project configuration now
+78 [main] DEBUG Projector - Configuring projector...
+78 [main] DEBUG GeneratedProjectorProject - Project name: Projector
+78 [main] DEBUG GeneratedProjectorProject - Project projectPackage: ca.brood.projector
+78 [main] DEBUG ProjectorReference - ProjectorReference name: project
+78 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorProject
+78 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetoone
+78 [main] WARN ProjectorReference - Got unknown node in config: elementName
+78 [main] DEBUG ProjectorReference - ProjectorReference name: projectObjects
+78 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorObject
+78 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+78 [main] DEBUG GeneratedProjectorObject - Object name: Projector
+78 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorProject
+78 [main] WARN ProjectorReference - Got unknown node in config: elementName
+78 [main] DEBUG ProjectorReference - ProjectorReference name: fields
+78 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorField
+78 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+78 [main] WARN ProjectorReference - Got unknown node in config: elementName
+78 [main] DEBUG ProjectorReference - ProjectorReference name: references
+78 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorReferences
+78 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+78 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorObject
+78 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorField
+78 [main] DEBUG GeneratedProjectorObject - Object name: ProjectorReference
+78 [main] INFO Projector - Generating...
+78 [main] INFO Projector - Starting file generation
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjector.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorProject.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorObject.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorField.java
+78 [main] DEBUG ProjectorObject - Generating: projects/Projector/ca/brood/projector/GeneratedProjectorReference.java
+78 [main] INFO Projector - Done with projector.xml
+78 [main] INFO Projector - Projector is finished.

@@ -1,20 +1,16 @@
 package ca.brood.projector;
 
 import java.io.*;
-import org.apache.log4j.PropertyConfigurator;
 
 public class Projector extends BaseProjector {
 	
 	public Projector() {
 		super();
-		PropertyConfigurator.configure("logger.config");
 		log.info("Projector is starting...");
 	}
 	public static void main(String[] args) {
 		Projector p = new Projector();
-		
 		p.run();
-		
 	}
 	private boolean testDir(String dir) {
 		File f = new File(dir);
@@ -172,7 +168,6 @@ public class Projector extends BaseProjector {
 	}
 
 	public void run() {
-		
 		run("sampleproject.xml");
 		run("projector.xml");
 		

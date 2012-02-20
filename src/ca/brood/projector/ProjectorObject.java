@@ -56,7 +56,7 @@ public class ProjectorObject {
 		}
 		return true;
 	}
-	//this function also does error checking for subsequent field code generation methods
+	//this function also does error checking for subsequent reference code generation methods
 	private boolean generateReferenceDeclaration(PrintStream ps, BaseProjectorReference gpr) {
 		if (gpr.targetType.equals("")) {
 			log.error("Invalid reference targetType: ");

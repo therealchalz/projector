@@ -8,19 +8,19 @@ import org.apache.log4j.Logger;
 
 public class ProjectorObject {
 	private Logger log;
-	private GeneratedProjectorObject gpo;
+	private BaseProjectorObject gpo;
 	public ProjectorObject() {
 		super();
 		log = Logger.getLogger("ProjectorObject");
 	}
-	public ProjectorObject(GeneratedProjectorObject o) {
+	public ProjectorObject(BaseProjectorObject o) {
 		super();
 		log = Logger.getLogger("ProjectorObject");
 		gpo = o;
 	}
 	
 	//this function also does error checking for subsequent field code generation methods
-	private boolean generateFieldDeclaration(PrintStream ps, GeneratedProjectorField gpf) {
+	private boolean generateFieldDeclaration(PrintStream ps, BaseProjectorField gpf) {
 		if (gpf.name.length() == 0) {
 			log.error("Bad name for field: ");
 			return false;
@@ -41,14 +41,15 @@ public class ProjectorObject {
 				return false;
 			}
 		} else if ("decimal".equalsIgnoreCase(gpf.type)) {
-			if (gpf.size <= 4 && gpf.size > 0) {
+			log.error("Decimal fields are not implement yet");
+			/*if (gpf.size <= 4 && gpf.size > 0) {
 				ps.println("	protected float "+gpf.name+" = 0.0;");
 			} else if (gpf.size > 4 && gpf.size <= 8) {
 				ps.println("	protected double "+gpf.name+" = 0.0;");
 			} else {
 				log.error("Bad size for field: "+gpf.size);
 				return false;
-			}
+			}*/
 		} else {
 			log.error("Bad type for field: "+gpf.type);
 			return false;
@@ -56,7 +57,7 @@ public class ProjectorObject {
 		return true;
 	}
 	//this function also does error checking for subsequent field code generation methods
-	private boolean generateReferenceDeclaration(PrintStream ps, GeneratedProjectorReference gpr) {
+	private boolean generateReferenceDeclaration(PrintStream ps, BaseProjectorReference gpr) {
 		if (gpr.targetType.equals("")) {
 			log.error("Invalid reference targetType: ");
 			return false;
@@ -68,7 +69,7 @@ public class ProjectorObject {
 		if (gpr.elementName.equals("")) {
 			gpr.elementName = gpr.name;
 		}
-		String objType = "Generated"+gpr.targetType;
+		String objType = "Base"+gpr.targetType;
 		if ("onetoone".compareToIgnoreCase(gpr.relationship)==0) {
 			ps.println("	protected "+objType+" "+gpr.name+" = new "+objType+"();");
 		} else if ("onetomany".compareToIgnoreCase(gpr.relationship)==0) {
@@ -78,7 +79,7 @@ public class ProjectorObject {
 		}
 		return true;
 	}
-	private boolean generateFieldReset(PrintStream ps, GeneratedProjectorField gpf) {
+	private boolean generateFieldReset(PrintStream ps, BaseProjectorField gpf) {
 		if ("string".equalsIgnoreCase(gpf.type)) {
 			ps.println("		this."+gpf.name+" = \"\";");
 		} else if ("integer".equalsIgnoreCase(gpf.type)) {
@@ -91,8 +92,8 @@ public class ProjectorObject {
 		}
 		return true;
 	}
-	private boolean generateReferenceReset(PrintStream ps, GeneratedProjectorReference gpr) {
-		String objType = "Generated"+gpr.targetType;
+	private boolean generateReferenceReset(PrintStream ps, BaseProjectorReference gpr) {
+		String objType = "Base"+gpr.targetType;
 		if ("onetoone".compareToIgnoreCase(gpr.relationship)==0) {
 			ps.println("		this."+gpr.name+" = new "+objType+"();");
 		} else if ("onetomany".compareToIgnoreCase(gpr.relationship)==0) {
@@ -100,7 +101,7 @@ public class ProjectorObject {
 		}
 		return true;
 	}
-	private boolean generateFieldLoad(PrintStream ps, GeneratedProjectorField gpf) {
+	private boolean generateFieldLoad(PrintStream ps, BaseProjectorField gpf) {
 		ps.println("			} else if (\""+gpf.elementName+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
 		if ("string".equalsIgnoreCase(gpf.type)) {
 			ps.println("				this."+gpf.name+" = currentConfigNode.getFirstChild().getNodeValue();");
@@ -115,13 +116,13 @@ public class ProjectorObject {
 		}
 		return true;
 	}
-	private boolean generateReferenceLoad(PrintStream ps, GeneratedProjectorReference gpr) {
+	private boolean generateReferenceLoad(PrintStream ps, BaseProjectorReference gpr) {
 		ps.println("			} else if (\""+gpr.elementName+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
 		if ("onetoone".compareToIgnoreCase(gpr.relationship)==0) {
 			ps.println("				this."+gpr.name+".configure(currentConfigNode);");
 		} else if ("onetomany".compareToIgnoreCase(gpr.relationship)==0) {
-			String objType = "Generated"+gpr.targetType;
-			String variable = "generated"+gpr.targetType;
+			String objType = "Base"+gpr.targetType;
+			String variable = "base"+gpr.targetType;
 			ps.println("				"+objType+" "+variable+" = new "+objType+"();");
 			ps.println("				if ("+variable+".configure(currentConfigNode)){");
 			ps.println("					this."+gpr.name+".add("+variable+");");
@@ -134,13 +135,13 @@ public class ProjectorObject {
 		ps.println("	public boolean configure(Node configNode) {");
 		//TODO:wipe fields, create new references
 		for (int i=0; i<this.gpo.fields.size(); i++) {
-			GeneratedProjectorField gpf = this.gpo.fields.get(i);
+			BaseProjectorField gpf = this.gpo.fields.get(i);
 			if (!generateFieldReset(ps, gpf)) {
 				return false;
 			}
 		}
 		for (int i=0; i<this.gpo.references.size(); i++) {
-			GeneratedProjectorReference gpr = this.gpo.references.get(i);
+			BaseProjectorReference gpr = this.gpo.references.get(i);
 			if (!generateReferenceReset(ps, gpr)) {
 				return false;
 			}
@@ -153,13 +154,13 @@ public class ProjectorObject {
 		ps.println("				continue;");
 		//Generate loading of fields from XML
 		for (int i=0; i<this.gpo.fields.size(); i++) {
-			GeneratedProjectorField gpf = this.gpo.fields.get(i);
+			BaseProjectorField gpf = this.gpo.fields.get(i);
 			if (!generateFieldLoad(ps, gpf)) {
 				return false;
 			}
 		}
 		for (int i=0; i<this.gpo.references.size(); i++) {
-			GeneratedProjectorReference gpr = this.gpo.references.get(i);
+			BaseProjectorReference gpr = this.gpo.references.get(i);
 			if (!generateReferenceLoad(ps, gpr)) {
 				return false;
 			}
@@ -170,14 +171,14 @@ public class ProjectorObject {
 		ps.println("		}");
 		//Print debug info for loaded fields
 		for (int i=0; i<this.gpo.fields.size(); i++) {
-			GeneratedProjectorField gpf = this.gpo.fields.get(i);
+			BaseProjectorField gpf = this.gpo.fields.get(i);
 			ps.println("		log.debug(\""+this.gpo.name+" "+gpf.name+": \"+this."+gpf.name+");");
 		}
 		ps.println("		return true;");
 		ps.println("	}");
 		return true;
 	}
-	private boolean generateLoadCode(PrintStream ps, GeneratedProjectorProject gpp) {
+	private boolean generateLoadCode(PrintStream ps, BaseProjectorProject gpp) {
 		ps.println("	protected void load(String filename) {");
 		ps.println("		log.info(\"Loading file: \"+filename);");
 		ps.println();
@@ -211,9 +212,9 @@ public class ProjectorObject {
 		ps.println("	}");
 		return true;
 	}
-	public boolean generate(String location, String packageStr, GeneratedProjectorProject gpp) {
+	public boolean generate(String location, String packageStr, BaseProjectorProject gpp) {
 		PrintStream ps;
-		String className = "Generated"+this.gpo.name;
+		String className = "Base"+this.gpo.name;
 		String fileName = location+"/"+className+".java";
 		try {
 			ps = new PrintStream(fileName);
@@ -235,6 +236,7 @@ public class ProjectorObject {
 		if (this.gpo.name.equals(gpp.name)) {
 			ps.println("import java.io.*;");
 			ps.println("import javax.xml.parsers.*;");
+			ps.println("import org.apache.log4j.PropertyConfigurator;");
 		}
 		//if this object has an integer/decimal field or is the main object, have to import util
 		if (this.gpo.name.equals(gpp.name)) {
@@ -251,16 +253,16 @@ public class ProjectorObject {
 		ps.println("import org.apache.log4j.Logger;");
 		ps.println("import org.w3c.dom.*;");
 		ps.println("");
-		ps.println("public class "+className+" extends Generated {");
+		ps.println("public class "+className+" extends BaseGenerated {");
 		//TODO: generate fields and references
 		for (int i=0; i<this.gpo.fields.size(); i++) {
-			GeneratedProjectorField gpf = this.gpo.fields.get(i);
+			BaseProjectorField gpf = this.gpo.fields.get(i);
 			if (!generateFieldDeclaration(ps, gpf)) {
 				return false;
 			}
 		}
 		for (int i=0; i<this.gpo.references.size(); i++) {
-			GeneratedProjectorReference gpr = this.gpo.references.get(i);
+			BaseProjectorReference gpr = this.gpo.references.get(i);
 			if (!generateReferenceDeclaration(ps, gpr)) {
 				return false;
 			}
@@ -268,6 +270,9 @@ public class ProjectorObject {
 		//Constructor:
 		ps.println("	protected "+className+"() {");
 		ps.println("		super();");
+		if (this.gpo.name.equals(gpp.name)) {
+			ps.println("		PropertyConfigurator.configure(\"logger.config\");");
+		}
 		ps.println("		log = Logger.getLogger(\""+this.gpo.name+"\");");
 		ps.println("	}");
 		//Configure override:

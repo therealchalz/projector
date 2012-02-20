@@ -3,7 +3,7 @@ package ca.brood.projector;
 import java.io.*;
 import org.apache.log4j.PropertyConfigurator;
 
-public class Projector extends GeneratedProjector {
+public class Projector extends BaseProjector {
 	
 	public Projector() {
 		super();
@@ -51,7 +51,7 @@ public class Projector extends GeneratedProjector {
 			ProjectorObject gpo = new ProjectorObject(this.projectObjects.get(i));
 			gpo.generate(javaPath, this.project.projectPackage, this.project);
 		}
-		String[] stdFiles = {"Generated.java","SimpleXmlErrorHandler.java", "Util.java", "XmlErrorCallback.java"};
+		String[] stdFiles = {"BaseGenerated.java","SimpleXmlErrorHandler.java", "Util.java", "XmlErrorCallback.java"};
 		copyStdFiles("src/ca/brood/projector/", "projects/"+this.project.name+"/src/"+this.project.projectPackage.replaceAll("\\.", "/")+"/", stdFiles, "ca.brood.projector", this.project.projectPackage);
 		//Hack: install a default logger.config file
 		String[] loggerFile = {"logger.config"};

@@ -49,7 +49,7 @@ public class Projector extends GeneratedProjector {
 			gpo.generate(javaPath, this.project.projectPackage, this.project);
 		}
 		String[] stdFiles = {"Generated.java","SimpleXmlErrorHandler.java", "Util.java", "XmlErrorCallback.java"};
-		copyStdFiles("src/", "projects/"+this.project.name+"/src/", stdFiles, "", "");
+		copyStdFiles("src/ca/brood/projector/", "projects/"+this.project.name+"/src/"+this.project.projectPackage.replaceAll("\\.", "/")+"/", stdFiles, "ca.brood.projector", this.project.projectPackage);
 		//Hack: install a default logger.config file
 		String[] loggerFile = {"logger.config"};
 		copyStdFiles(".", "projects/"+this.project.name+"/", loggerFile, "projector",this.project.name.toLowerCase());

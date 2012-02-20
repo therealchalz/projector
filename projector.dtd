@@ -1,8 +1,10 @@
 <!ELEMENT projector (project,object*)>
 
-<!ELEMENT project (name,projectPackage)>
+<!ELEMENT project (name,projectPackage,rootElement,rootObject)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT projectPackage (#PCDATA)>
+<!ELEMENT rootElement (#PCDATA)>
+<!ELEMENT rootObject (#PCDATA)>
 
 <!ELEMENT object (name,package?,field*,reference*)>
 

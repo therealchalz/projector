@@ -3,6 +3,8 @@
 	<project>
 		<name>Projector</name>
 		<projectPackage>ca.brood.projector</projectPackage>
+		<rootElement>projector</rootElement>
+		<rootObject>Projector</rootObject>
 	</project>
 	<object>
 		<name>Projector</name>
@@ -21,6 +23,18 @@
 	</object>
 	<object>
 		<name>ProjectorProject</name>
+		<field>
+			<name>rootElement</name>
+			<elementName>rootElement</elementName>
+			<type>string</type>
+			<size>512</size>
+		</field>
+		<field>
+			<name>rootObject</name>
+			<elementName>rootObject</elementName>
+			<type>string</type>
+			<size>512</size>
+		</field>
 		<field>
 			<name>name</name>
 			<elementName>name</elementName>

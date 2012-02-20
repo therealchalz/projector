@@ -3,9 +3,8 @@ package ca.brood.projector;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
+
 import org.apache.log4j.Logger;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class ProjectorObject {
 	private Logger log;
@@ -122,46 +121,7 @@ public class ProjectorObject {
 		} 
 		return true;
 	}
-	public boolean generate(String location, String packageStr) {
-		PrintStream ps;
-		String className = "Generated"+this.gpo.name;
-		String fileName = location+"/"+className+".java";
-		try {
-			ps = new PrintStream(fileName);
-		} catch (FileNotFoundException e) {
-			log.error("Error creating output file: "+fileName);
-			return false;
-		}
-		log.debug("Generating: "+fileName);
-		ps.println("package "+packageStr+";");
-		ps.println("");
-		//TODO: if we have onetomany relations, import ArrayList
-		ps.println("import java.util.ArrayList;");
-		ps.println("import org.apache.log4j.Logger;");
-		ps.println("import org.w3c.dom.Node;");
-		ps.println("import org.w3c.dom.NodeList;");
-		ps.println("import ca.brood.projector.util.Util;");
-		ps.println("");
-		ps.println("public class "+className+" extends Generated {");
-		//TODO: generate fields and references
-		for (int i=0; i<this.gpo.fields.size(); i++) {
-			GeneratedProjectorField gpf = this.gpo.fields.get(i);
-			if (!generateFieldDeclaration(ps, gpf)) {
-				return false;
-			}
-		}
-		for (int i=0; i<this.gpo.references.size(); i++) {
-			GeneratedProjectorReference gpr = this.gpo.references.get(i);
-			if (!generateReferenceDeclaration(ps, gpr)) {
-				return false;
-			}
-		}
-		//Constructor:
-		ps.println("	protected "+className+"() {");
-		ps.println("		super();");
-		ps.println("		log = Logger.getLogger(\""+this.gpo.name+"\");");
-		ps.println("	}");
-		//Configure override:
+	private boolean generateConfigureCode(PrintStream ps) {
 		ps.println("	@Override");
 		ps.println("	public boolean configure(Node configNode) {");
 		//TODO:wipe fields, create new references
@@ -207,6 +167,113 @@ public class ProjectorObject {
 		}
 		ps.println("		return true;");
 		ps.println("	}");
+		return true;
+	}
+	private boolean generateLoadCode(PrintStream ps, GeneratedProjectorProject gpp) {
+		ps.println("	protected void load(String filename) {");
+		ps.println("		log.info(\"Loading file: \"+filename);");
+		ps.println();
+		ps.println("		File xmlFile = new File(filename);");
+		ps.println("		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();");
+		ps.println("		dbFactory.setValidating(true);");
+		ps.println("		dbFactory.setNamespaceAware(true);");
+		ps.println("		XmlErrorCallback error = new XmlErrorCallback();");
+		ps.println("		Document doc;");
+		ps.println("		try {");
+		ps.println("			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();");
+		ps.println("			dBuilder.setErrorHandler(new SimpleXmlErrorHandler(this.log, error));");
+		ps.println("			doc = dBuilder.parse(xmlFile);");
+		ps.println("			doc.getDocumentElement().normalize();");
+		ps.println("			if (!error.isConfigValid()) {");
+		ps.println("				throw new Exception(\"Config doesn't conform to schema.\");");
+		ps.println("			}");
+		ps.println("		} catch (Exception e) {");
+		ps.println("			log.fatal(\"Exception while trying to load config file: \"+filename + e.getMessage());");
+		ps.println("			return;");
+		ps.println("		}");
+		ps.println("		Node currentConfigNode = doc.getDocumentElement();");
+		ps.println("		log.debug(\"Reading configuration now\");");
+		ps.println("		if (\""+gpp.rootElement+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0) {");
+		ps.println("			log.debug(\"Configuring project...\");");
+		ps.println("			this.configure(currentConfigNode);");
+		ps.println("		} else {");
+		ps.println("			log.fatal(\"Bad XML file: root element isn't a "+gpp.rootElement+".\");");
+		ps.println("		}");
+		ps.println("		log.info(\"Done with \"+filename);");
+		ps.println("	}");
+		return true;
+	}
+	public boolean generate(String location, String packageStr, GeneratedProjectorProject gpp) {
+		PrintStream ps;
+		String className = "Generated"+this.gpo.name;
+		String fileName = location+"/"+className+".java";
+		try {
+			ps = new PrintStream(fileName);
+		} catch (FileNotFoundException e) {
+			log.error("Error creating output file: "+fileName);
+			return false;
+		}
+		log.debug("Generating: "+fileName);
+		ps.println("package "+packageStr+";");
+		ps.println("");
+		//if we have onetomany relations, import ArrayList
+		for (int i=0; i<this.gpo.references.size(); i++) {
+			if ("onetomany".equalsIgnoreCase(this.gpo.references.get(i).relationship)) {
+				ps.println("import java.util.ArrayList;");
+				break;
+			}
+		}
+		//if this is the main object, import the extra stuff:
+		if (this.gpo.name.equals(gpp.name)) {
+			ps.println("import java.io.*;");
+			ps.println("import javax.xml.parsers.*;");
+		}
+		//if this object has an integer/decimal field or is the main object, have to import util
+		if (this.gpo.name.equals(gpp.name)) {
+			ps.println("import "+gpp.projectPackage+".util.*;");
+		} else {
+			for (int i=0; i<this.gpo.fields.size(); i++) {
+				if (("integer".equalsIgnoreCase(this.gpo.fields.get(i).type)) ||
+						("decimal".equalsIgnoreCase(this.gpo.fields.get(i).type))){
+					ps.println("import "+gpp.projectPackage+".util.*;");
+					break;
+				}
+			}
+		}
+		ps.println("import org.apache.log4j.Logger;");
+		ps.println("import org.w3c.dom.*;");
+		ps.println("");
+		ps.println("public class "+className+" extends Generated {");
+		//TODO: generate fields and references
+		for (int i=0; i<this.gpo.fields.size(); i++) {
+			GeneratedProjectorField gpf = this.gpo.fields.get(i);
+			if (!generateFieldDeclaration(ps, gpf)) {
+				return false;
+			}
+		}
+		for (int i=0; i<this.gpo.references.size(); i++) {
+			GeneratedProjectorReference gpr = this.gpo.references.get(i);
+			if (!generateReferenceDeclaration(ps, gpr)) {
+				return false;
+			}
+		}
+		//Constructor:
+		ps.println("	protected "+className+"() {");
+		ps.println("		super();");
+		ps.println("		log = Logger.getLogger(\""+this.gpo.name+"\");");
+		ps.println("	}");
+		//Configure override:
+		if (!generateConfigureCode(ps)) {
+			log.error("Couldn't generate configure code for "+this.gpo.name);
+			return false;
+		}
+		if (this.gpo.name.equals(gpp.name)) {
+			//This is the main object, so we add the XML loading code
+			if (!generateLoadCode(ps, gpp)) {
+				log.error("Couldn't generate run code for "+this.gpo.name);
+				return false;
+			}
+		}
 		ps.println("}");
 		return true;
 	}

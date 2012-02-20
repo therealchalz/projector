@@ -1,12 +1,11 @@
 package ca.brood.projector;
 
-import java.util.ArrayList;
 import org.apache.log4j.Logger;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import ca.brood.projector.util.Util;
+import org.w3c.dom.*;
 
 public class GeneratedProjectorProject extends Generated {
+	protected String rootElement = "";
+	protected String rootObject = "";
 	protected String name = "";
 	protected String projectPackage = "";
 	protected GeneratedProjectorProject() {
@@ -15,6 +14,8 @@ public class GeneratedProjectorProject extends Generated {
 	}
 	@Override
 	public boolean configure(Node configNode) {
+		this.rootElement = "";
+		this.rootObject = "";
 		this.name = "";
 		this.projectPackage = "";
 		NodeList configNodes = configNode.getChildNodes();
@@ -23,6 +24,10 @@ public class GeneratedProjectorProject extends Generated {
 			if (("#comment".compareToIgnoreCase(currentConfigNode.getNodeName())==0) ||
 			("#text".compareToIgnoreCase(currentConfigNode.getNodeName())==0))	{
 				continue;
+			} else if ("rootElement".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				this.rootElement = currentConfigNode.getFirstChild().getNodeValue();
+			} else if ("rootObject".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				this.rootObject = currentConfigNode.getFirstChild().getNodeValue();
 			} else if ("name".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
 				this.name = currentConfigNode.getFirstChild().getNodeValue();
 			} else if ("projectPackage".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
@@ -31,6 +36,8 @@ public class GeneratedProjectorProject extends Generated {
 				log.warn("Got unknown node in config: "+currentConfigNode.getNodeName());
 			}
 		}
+		log.debug("ProjectorProject rootElement: "+this.rootElement);
+		log.debug("ProjectorProject rootObject: "+this.rootObject);
 		log.debug("ProjectorProject name: "+this.name);
 		log.debug("ProjectorProject projectPackage: "+this.projectPackage);
 		return true;

@@ -1,10 +1,11 @@
 package ca.brood.projector;
 
 import java.util.ArrayList;
+import java.io.*;
+import javax.xml.parsers.*;
+import ca.brood.projector.util.*;
 import org.apache.log4j.Logger;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import ca.brood.projector.util.Util;
+import org.w3c.dom.*;
 
 public class GeneratedProjector extends Generated {
 	protected GeneratedProjectorProject project = new GeneratedProjectorProject();
@@ -35,5 +36,36 @@ public class GeneratedProjector extends Generated {
 			}
 		}
 		return true;
+	}
+	protected void load(String filename) {
+		log.info("Loading file: "+filename);
+
+		File xmlFile = new File(filename);
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		dbFactory.setValidating(true);
+		dbFactory.setNamespaceAware(true);
+		XmlErrorCallback error = new XmlErrorCallback();
+		Document doc;
+		try {
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			dBuilder.setErrorHandler(new SimpleXmlErrorHandler(this.log, error));
+			doc = dBuilder.parse(xmlFile);
+			doc.getDocumentElement().normalize();
+			if (!error.isConfigValid()) {
+				throw new Exception("Config doesn't conform to schema.");
+			}
+		} catch (Exception e) {
+			log.fatal("Exception while trying to load config file: "+filename + e.getMessage());
+			return;
+		}
+		Node currentConfigNode = doc.getDocumentElement();
+		log.debug("Reading configuration now");
+		if ("projector".compareToIgnoreCase(currentConfigNode.getNodeName())==0) {
+			log.debug("Configuring project...");
+			this.configure(currentConfigNode);
+		} else {
+			log.fatal("Bad XML file: root element isn't a projector.");
+		}
+		log.info("Done with "+filename);
 	}
 }

@@ -9,4 +9,5 @@ public abstract class Generated {
 		log = Logger.getLogger("Generated");
 	}
 	public abstract boolean configure(Node configNode);
+
 }

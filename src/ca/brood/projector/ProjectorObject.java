@@ -19,10 +19,14 @@ public class ProjectorObject {
 		gpo = o;
 	}
 	
+	//this function also does error checking for subsequent field code generation methods
 	private boolean generateFieldDeclaration(PrintStream ps, GeneratedProjectorField gpf) {
 		if (gpf.name.length() == 0) {
 			log.error("Bad name for field: ");
 			return false;
+		}
+		if (gpf.elementName.equals("")) {
+			gpf.elementName = gpf.name;
 		}
 			
 		if ("string".equalsIgnoreCase(gpf.type)) {
@@ -51,6 +55,7 @@ public class ProjectorObject {
 		}
 		return true;
 	}
+	//this function also does error checking for subsequent field code generation methods
 	private boolean generateReferenceDeclaration(PrintStream ps, GeneratedProjectorReference gpr) {
 		if (gpr.targetType.equals("")) {
 			log.error("Invalid reference targetType: ");
@@ -59,6 +64,9 @@ public class ProjectorObject {
 		if (gpr.name.equals("")) {
 			log.error("Invalid reference name: ");
 			return false;
+		}
+		if (gpr.elementName.equals("")) {
+			gpr.elementName = gpr.name;
 		}
 		String objType = "Generated"+gpr.targetType;
 		if ("onetoone".compareToIgnoreCase(gpr.relationship)==0) {

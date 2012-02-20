@@ -176,7 +176,7 @@ public class Projector extends GeneratedProjector {
 		run("sampleproject.xml");
 		run("projector.xml");
 		
-		//installProjectorForTesting();
+		installProjectorForTesting();
 		
 		log.info("Projector is finished.");
 	}

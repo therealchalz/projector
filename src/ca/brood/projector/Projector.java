@@ -34,6 +34,9 @@ public class Projector extends GeneratedProjector {
 		
 		if (!testDir("projects/"+this.project.name))
 			return;
+		
+		if (!testDir("projects/"+this.project.name+"/lib/"))
+			return;
 
 		String javaPath = "projects/"+this.project.name+"/src/"+this.project.projectPackage.replace(".", "/");
 		if (!testDir(javaPath))
@@ -54,6 +57,8 @@ public class Projector extends GeneratedProjector {
 		String[] loggerFile = {"logger.config"};
 		copyStdFiles(".", "projects/"+this.project.name+"/", loggerFile, "projector",this.project.name.toLowerCase());
 		
+		//Copy logger libs over now
+		copyFile(new File("lib/log4j-1.2.16.jar"), new File("projects/"+this.project.name+"/lib/log4j-1.2.16.jar"));
 	}
 	
 	private void copyStdFiles(String checkDir, String installDir, String[] stdFiles, String oldPackage, String newPackage) {
@@ -149,9 +154,10 @@ public class Projector extends GeneratedProjector {
 			while ((len = is.read(buf)) > 0){
 				if (packageCheck) {
 					packageCheck = false; //only expect package in first 1024
-					String inLine = new String(buf);
+					String inLine = new String(buf).substring(0, len);
 					inLine = inLine.replaceFirst(oldP.replaceAll("\\.", "\\\\."), newP);
 					buf = inLine.getBytes();
+					len = inLine.length();
 				}
 				os.write(buf, 0, len);
 			}
@@ -159,6 +165,7 @@ public class Projector extends GeneratedProjector {
 			os.close();
 		} catch (Exception e) {
 			log.error("Error during copy of "+in.getName()+" to "+out.getName());
+			log.error(e.getMessage());
 			return false;
 		}
 		return true;
@@ -169,7 +176,7 @@ public class Projector extends GeneratedProjector {
 		run("sampleproject.xml");
 		run("projector.xml");
 		
-		installProjectorForTesting();
+		//installProjectorForTesting();
 		
 		log.info("Projector is finished.");
 	}

@@ -26,16 +26,20 @@ public class BaseProjectorField extends BaseGenerated {
 			("#text".compareToIgnoreCase(currentConfigNode.getNodeName())==0))	{
 				continue;
 			} else if ("name".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				configNode.removeChild(currentConfigNode);
 				this.name = currentConfigNode.getFirstChild().getNodeValue();
 			} else if ("type".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				configNode.removeChild(currentConfigNode);
 				this.type = currentConfigNode.getFirstChild().getNodeValue();
 			} else if ("size".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				configNode.removeChild(currentConfigNode);
 				try {
 					this.size = Util.parseInt(currentConfigNode.getFirstChild().getNodeValue());
 				} catch (Exception e) {
 					log.error("Error parsing size: "+currentConfigNode.getFirstChild().getNodeValue());
 				}
 			} else if ("elementName".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				configNode.removeChild(currentConfigNode);
 				this.elementName = currentConfigNode.getFirstChild().getNodeValue();
 			} else {
 				log.warn("Got unknown node in config: "+currentConfigNode.getNodeName());

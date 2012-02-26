@@ -84,7 +84,8 @@ public class Projector extends BaseProjector {
 	}
 	
 	private void run(String filename) {
-		this.load(filename);
+		if (!this.load(filename))
+			return;
 		
 		log.info("Generating...");
 		

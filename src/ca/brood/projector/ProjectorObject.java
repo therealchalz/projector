@@ -103,6 +103,7 @@ public class ProjectorObject {
 	}
 	private boolean generateFieldLoad(PrintStream ps, BaseProjectorField gpf) {
 		ps.println("			} else if (\""+gpf.elementName+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
+		ps.println("				configNode.removeChild(currentConfigNode);");
 		if ("string".equalsIgnoreCase(gpf.type)) {
 			ps.println("				this."+gpf.name+" = currentConfigNode.getFirstChild().getNodeValue();");
 		} else if ("integer".equalsIgnoreCase(gpf.type)) {
@@ -116,13 +117,16 @@ public class ProjectorObject {
 		}
 		return true;
 	}
-	private boolean generateReferenceLoad(PrintStream ps, BaseProjectorReference gpr) {
-		ps.println("			} else if (\""+gpr.elementName+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
+	private boolean generateReferenceLoadText(PrintStream ps, BaseProjectorReference gpr, String elementName, String targetType, boolean reinstantiate) {
+		ps.println("			} else if (\""+elementName+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
 		if ("onetoone".compareToIgnoreCase(gpr.relationship)==0) {
+			if (reinstantiate) {
+				ps.println("				this."+gpr.name+" = new "+targetType+"();");
+			}
 			ps.println("				this."+gpr.name+".configure(currentConfigNode);");
 		} else if ("onetomany".compareToIgnoreCase(gpr.relationship)==0) {
-			String objType = "Base"+gpr.targetType;
-			String variable = "base"+gpr.targetType;
+			String objType = targetType;
+			String variable = targetType.substring(0, 1).toLowerCase()+targetType.substring(1);
 			ps.println("				"+objType+" "+variable+" = new "+objType+"();");
 			ps.println("				if ("+variable+".configure(currentConfigNode)){");
 			ps.println("					this."+gpr.name+".add("+variable+");");
@@ -130,10 +134,26 @@ public class ProjectorObject {
 		} 
 		return true;
 	}
+	private boolean generateReferenceLoad(PrintStream ps, BaseProjectorReference gpr) {
+		if (gpr.subclassTypes.size() == 0) {
+			generateReferenceLoadText(ps, gpr, gpr.elementName, "Base"+gpr.targetType, false);
+		} else {
+			for (BaseSubclassType bst : gpr.subclassTypes) {
+				generateReferenceLoadText(ps, gpr, bst.elementName, "Base"+bst.targetType, true);
+			}
+		}
+		return true;
+	}
 	private boolean generateConfigureCode(PrintStream ps) {
 		ps.println("	@Override");
 		ps.println("	public boolean configure(Node configNode) {");
-		//TODO:wipe fields, create new references
+		//Go through super first if we're a subclass
+		if (!gpo.superclass.equals("")) {
+			ps.println("		if (!super.configure(configNode)) {");
+			ps.println("			return false;");
+			ps.println("		}");
+		}
+		//wipe fields, create new references
 		for (int i=0; i<this.gpo.fields.size(); i++) {
 			BaseProjectorField gpf = this.gpo.fields.get(i);
 			if (!generateFieldReset(ps, gpf)) {
@@ -179,7 +199,7 @@ public class ProjectorObject {
 		return true;
 	}
 	private boolean generateLoadCode(PrintStream ps, BaseProjectorProject gpp) {
-		ps.println("	protected void load(String filename) {");
+		ps.println("	protected boolean load(String filename) {");
 		ps.println("		log.info(\"Loading file: \"+filename);");
 		ps.println();
 		ps.println("		File xmlFile = new File(filename);");
@@ -197,8 +217,9 @@ public class ProjectorObject {
 		ps.println("				throw new Exception(\"Config doesn't conform to schema.\");");
 		ps.println("			}");
 		ps.println("		} catch (Exception e) {");
-		ps.println("			log.fatal(\"Exception while trying to load config file: \"+filename + e.getMessage());");
-		ps.println("			return;");
+		ps.println("			log.fatal(\"Exception while trying to load config file: \"+filename);");
+		ps.println("			log.fatal(e.getMessage());");
+		ps.println("			return false;");
 		ps.println("		}");
 		ps.println("		Node currentConfigNode = doc.getDocumentElement();");
 		ps.println("		log.debug(\"Reading configuration now\");");
@@ -207,8 +228,10 @@ public class ProjectorObject {
 		ps.println("			this.configure(currentConfigNode);");
 		ps.println("		} else {");
 		ps.println("			log.fatal(\"Bad XML file: root element isn't a "+gpp.rootElement+".\");");
+		ps.println("			return false;");
 		ps.println("		}");
 		ps.println("		log.info(\"Done with \"+filename);");
+		ps.println("		return true;");
 		ps.println("	}");
 		return true;
 	}
@@ -253,7 +276,11 @@ public class ProjectorObject {
 		ps.println("import org.apache.log4j.Logger;");
 		ps.println("import org.w3c.dom.*;");
 		ps.println("");
-		ps.println("public class "+className+" extends BaseGenerated {");
+		if (gpo.superclass.equals("")) {
+			ps.println("public class "+className+" extends BaseGenerated {");
+		} else {
+			ps.println("public class "+className+" extends Base"+gpo.superclass+" {");
+		}
 		//TODO: generate fields and references
 		for (int i=0; i<this.gpo.fields.size(); i++) {
 			BaseProjectorField gpf = this.gpo.fields.get(i);

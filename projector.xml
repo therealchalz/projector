@@ -50,6 +50,11 @@
 			<type>string</type>
 			<size>255</size>
 		</field>
+		<field>
+			<name>superclass</name>
+			<type>string</type>
+			<size>255</size>
+		</field>
 		<reference>
 			<name>fields</name>
 			<elementName>field</elementName>
@@ -87,6 +92,19 @@
 		</field>
 	</object>
 	<object>
+		<name>SubclassType</name>
+		<field>
+			<name>elementName</name>
+			<type>string</type>
+			<size>255</size>
+		</field>
+		<field>
+			<name>targetType</name>
+			<type>string</type>
+			<size>255</size>
+		</field>
+	</object>
+	<object>
 		<name>ProjectorReference</name>
 		<field>
 			<name>name</name>
@@ -108,5 +126,11 @@
 			<type>string</type>
 			<size>255</size>
 		</field>
+		<reference>
+			<name>subclassTypes</name>
+			<elementName>subclassType</elementName>
+			<targetType>SubclassType</targetType>
+			<relationship>onetomany</relationship>
+		</reference>
 	</object>
 </projector>

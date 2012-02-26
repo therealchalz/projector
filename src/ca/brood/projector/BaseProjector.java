@@ -39,7 +39,7 @@ public class BaseProjector extends BaseGenerated {
 		}
 		return true;
 	}
-	protected void load(String filename) {
+	protected boolean load(String filename) {
 		log.info("Loading file: "+filename);
 
 		File xmlFile = new File(filename);
@@ -57,8 +57,9 @@ public class BaseProjector extends BaseGenerated {
 				throw new Exception("Config doesn't conform to schema.");
 			}
 		} catch (Exception e) {
-			log.fatal("Exception while trying to load config file: "+filename + e.getMessage());
-			return;
+			log.fatal("Exception while trying to load config file: "+filename);
+			log.fatal(e.getMessage());
+			return false;
 		}
 		Node currentConfigNode = doc.getDocumentElement();
 		log.debug("Reading configuration now");
@@ -67,7 +68,9 @@ public class BaseProjector extends BaseGenerated {
 			this.configure(currentConfigNode);
 		} else {
 			log.fatal("Bad XML file: root element isn't a projector.");
+			return false;
 		}
 		log.info("Done with "+filename);
+		return true;
 	}
 }

@@ -25,12 +25,16 @@ public class BaseProjectorProject extends BaseGenerated {
 			("#text".compareToIgnoreCase(currentConfigNode.getNodeName())==0))	{
 				continue;
 			} else if ("rootElement".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				configNode.removeChild(currentConfigNode);
 				this.rootElement = currentConfigNode.getFirstChild().getNodeValue();
 			} else if ("rootObject".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				configNode.removeChild(currentConfigNode);
 				this.rootObject = currentConfigNode.getFirstChild().getNodeValue();
 			} else if ("name".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				configNode.removeChild(currentConfigNode);
 				this.name = currentConfigNode.getFirstChild().getNodeValue();
 			} else if ("projectPackage".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				configNode.removeChild(currentConfigNode);
 				this.projectPackage = currentConfigNode.getFirstChild().getNodeValue();
 			} else {
 				log.warn("Got unknown node in config: "+currentConfigNode.getNodeName());

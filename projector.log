@@ -469,3 +469,325 @@
 172 [main] DEBUG Projector - Copying XmlErrorCallback.java from projects/Projector/src/ca/brood/projector/util/ to src/ca/brood/projector/util/
 172 [main] DEBUG Projector - Done installing newly generated projector classes... does it still work?
 172 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Loading file: sampleproject.xml
+47 [main] ERROR Projector - The content of element type "reference" must match "(name,elementName?,targetType,relationship,subclassType*)".
+47 [main] FATAL Projector - Exception while trying to load config file: sampleproject.xml
+47 [main] FATAL Projector - Config doesn't conform to schema.
+47 [main] INFO Projector - Saving to file: sampleprojectOut.xml
+78 [main] INFO Projector - Done with sampleprojectOut.xml
+78 [main] INFO Projector - Loading file: projector.xml
+93 [main] DEBUG Projector - Reading configuration now
+93 [main] DEBUG Projector - Configuring project...
+93 [main] DEBUG ProjectorProject - ProjectorProject name: Projector
+93 [main] DEBUG ProjectorProject - ProjectorProject projectPackage: ca.brood.projector
+93 [main] DEBUG ProjectorProject - ProjectorProject rootElement: projector
+93 [main] DEBUG ProjectorProject - ProjectorProject rootObject: Projector
+93 [main] DEBUG ProjectorReference - ProjectorReference name: project
+93 [main] DEBUG ProjectorReference - ProjectorReference elementName: project
+93 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorProject
+93 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetoone
+93 [main] DEBUG ProjectorReference - ProjectorReference name: projectObjects
+93 [main] DEBUG ProjectorReference - ProjectorReference elementName: object
+93 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorObject
+93 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+93 [main] DEBUG ProjectorObject - ProjectorObject name: Projector
+93 [main] DEBUG ProjectorObject - ProjectorObject superclass: 
+93 [main] DEBUG ProjectorField - ProjectorField name: name
+93 [main] DEBUG ProjectorField - ProjectorField elementName: name
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 512
+93 [main] DEBUG ProjectorField - ProjectorField name: projectPackage
+93 [main] DEBUG ProjectorField - ProjectorField elementName: projectPackage
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 512
+93 [main] DEBUG ProjectorField - ProjectorField name: rootElement
+93 [main] DEBUG ProjectorField - ProjectorField elementName: rootElement
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 512
+93 [main] DEBUG ProjectorField - ProjectorField name: rootObject
+93 [main] DEBUG ProjectorField - ProjectorField elementName: rootObject
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 512
+93 [main] DEBUG ProjectorObject - ProjectorObject name: ProjectorProject
+93 [main] DEBUG ProjectorObject - ProjectorObject superclass: 
+93 [main] DEBUG ProjectorField - ProjectorField name: name
+93 [main] DEBUG ProjectorField - ProjectorField elementName: name
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 255
+93 [main] DEBUG ProjectorField - ProjectorField name: superclass
+93 [main] DEBUG ProjectorField - ProjectorField elementName: superclass
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 255
+93 [main] DEBUG ProjectorReference - ProjectorReference name: fields
+93 [main] DEBUG ProjectorReference - ProjectorReference elementName: field
+93 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorField
+93 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+93 [main] DEBUG ProjectorReference - ProjectorReference name: references
+93 [main] DEBUG ProjectorReference - ProjectorReference elementName: reference
+93 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorReference
+93 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+93 [main] DEBUG ProjectorObject - ProjectorObject name: ProjectorObject
+93 [main] DEBUG ProjectorObject - ProjectorObject superclass: 
+93 [main] DEBUG ProjectorField - ProjectorField name: name
+93 [main] DEBUG ProjectorField - ProjectorField elementName: name
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 255
+93 [main] DEBUG ProjectorField - ProjectorField name: elementName
+93 [main] DEBUG ProjectorField - ProjectorField elementName: elementName
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 255
+93 [main] DEBUG ProjectorField - ProjectorField name: type
+93 [main] DEBUG ProjectorField - ProjectorField elementName: type
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 32
+93 [main] DEBUG ProjectorField - ProjectorField name: size
+93 [main] DEBUG ProjectorField - ProjectorField elementName: size
+93 [main] DEBUG ProjectorField - ProjectorField type: integer
+93 [main] DEBUG ProjectorField - ProjectorField size: 4
+93 [main] DEBUG ProjectorObject - ProjectorObject name: ProjectorField
+93 [main] DEBUG ProjectorObject - ProjectorObject superclass: 
+93 [main] DEBUG ProjectorField - ProjectorField name: elementName
+93 [main] DEBUG ProjectorField - ProjectorField elementName: elementName
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 255
+93 [main] DEBUG ProjectorField - ProjectorField name: targetType
+93 [main] DEBUG ProjectorField - ProjectorField elementName: targetType
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 255
+93 [main] DEBUG ProjectorObject - ProjectorObject name: SubclassType
+93 [main] DEBUG ProjectorObject - ProjectorObject superclass: 
+93 [main] DEBUG ProjectorField - ProjectorField name: name
+93 [main] DEBUG ProjectorField - ProjectorField elementName: name
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 255
+93 [main] DEBUG ProjectorField - ProjectorField name: elementName
+93 [main] DEBUG ProjectorField - ProjectorField elementName: elementName
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 255
+93 [main] DEBUG ProjectorField - ProjectorField name: targetType
+93 [main] DEBUG ProjectorField - ProjectorField elementName: targetType
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 255
+93 [main] DEBUG ProjectorField - ProjectorField name: relationship
+93 [main] DEBUG ProjectorField - ProjectorField elementName: relationship
+93 [main] DEBUG ProjectorField - ProjectorField type: string
+93 [main] DEBUG ProjectorField - ProjectorField size: 255
+93 [main] DEBUG ProjectorReference - ProjectorReference name: subclassTypes
+93 [main] DEBUG ProjectorReference - ProjectorReference elementName: subclassType
+93 [main] DEBUG ProjectorReference - ProjectorReference targetType: SubclassType
+93 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+93 [main] DEBUG ProjectorObject - ProjectorObject name: ProjectorReference
+93 [main] DEBUG ProjectorObject - ProjectorObject superclass: 
+93 [main] INFO Projector - Done with projector.xml
+93 [main] INFO Projector - Generating...
+109 [main] INFO Projector - Starting file generation
+140 [main] DEBUG ProjectorObject - Generating: projects/Projector/src/ca/brood/projector/BaseProjector.java
+156 [main] DEBUG ProjectorObject - Generating: projects/Projector/src/ca/brood/projector/BaseProjectorProject.java
+156 [main] DEBUG ProjectorObject - Generating: projects/Projector/src/ca/brood/projector/BaseProjectorObject.java
+156 [main] DEBUG ProjectorObject - Generating: projects/Projector/src/ca/brood/projector/BaseProjectorField.java
+156 [main] DEBUG ProjectorObject - Generating: projects/Projector/src/ca/brood/projector/BaseSubclassType.java
+156 [main] DEBUG ProjectorObject - Generating: projects/Projector/src/ca/brood/projector/BaseProjectorReference.java
+172 [main] DEBUG Projector - Std file copy: Working on src/ca/brood/projector/ with install dir of projects/Projector/src/ca/brood/projector/
+172 [main] DEBUG Projector - Std file copy: Old package: ca.brood.projector New Package: ca.brood.projector
+172 [main] DEBUG Projector - Copying BaseGenerated.java from src/ca/brood/projector/ to projects/Projector/src/ca/brood/projector/
+172 [main] DEBUG Projector - Std file copy: Working on src/ca/brood/projector/util/ with install dir of projects/Projector/src/ca/brood/projector/util/
+172 [main] DEBUG Projector - Std file copy: Old package: ca.brood.projector.util New Package: ca.brood.projector.util
+172 [main] DEBUG Projector - Copying SimpleXmlErrorHandler.java from src/ca/brood/projector/util/ to projects/Projector/src/ca/brood/projector/util/
+172 [main] DEBUG Projector - Copying Util.java from src/ca/brood/projector/util/ to projects/Projector/src/ca/brood/projector/util/
+172 [main] DEBUG Projector - Copying XmlErrorCallback.java from src/ca/brood/projector/util/ to projects/Projector/src/ca/brood/projector/util/
+172 [main] DEBUG Projector - Std file copy: Working on . with install dir of projects/Projector/
+172 [main] DEBUG Projector - Std file copy: Old package: projector New Package: projector
+172 [main] DEBUG Projector - Std file copy: Working on ..git/ with install dir of projects/Projector/.git/
+172 [main] DEBUG Projector - Std file copy: Old package: projector..git New Package: projector..git
+172 [main] DEBUG Projector - Std file copy: Working on .bin/ with install dir of projects/Projector/bin/
+172 [main] DEBUG Projector - Std file copy: Old package: projector.bin New Package: projector.bin
+172 [main] DEBUG Projector - Std file copy: Working on .lib/ with install dir of projects/Projector/lib/
+172 [main] DEBUG Projector - Std file copy: Old package: projector.lib New Package: projector.lib
+172 [main] DEBUG Projector - Copying logger.config from . to projects/Projector/
+172 [main] DEBUG Projector - Std file copy: Working on .projects/ with install dir of projects/Projector/projects/
+172 [main] DEBUG Projector - Std file copy: Old package: projector.projects New Package: projector.projects
+172 [main] DEBUG Projector - Std file copy: Working on .src/ with install dir of projects/Projector/src/
+172 [main] DEBUG Projector - Std file copy: Old package: projector.src New Package: projector.src
+172 [main] INFO Projector - Done with projector.xml
+172 [main] INFO Projector - Saving to file: projectorOut.xml
+187 [main] INFO Projector - Done with projectorOut.xml
+187 [main] DEBUG Projector - Starting install of projector generated classes...
+187 [main] DEBUG Projector - Working on projects/Projector/src/ with install dir of src/
+187 [main] DEBUG Projector - Working on projects/Projector/src/ca/ with install dir of src/ca/
+187 [main] DEBUG Projector - Working on projects/Projector/src/ca/brood/ with install dir of src/ca/brood/
+187 [main] DEBUG Projector - Working on projects/Projector/src/ca/brood/projector/ with install dir of src/ca/brood/projector/
+187 [main] DEBUG Projector - Copying BaseGenerated.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+187 [main] DEBUG Projector - Copying BaseProjector.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+187 [main] DEBUG Projector - Copying BaseProjectorField.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+187 [main] DEBUG Projector - Copying BaseProjectorObject.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+187 [main] DEBUG Projector - Copying BaseProjectorProject.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+187 [main] DEBUG Projector - Copying BaseProjectorReference.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+187 [main] DEBUG Projector - Copying BaseSubclassType.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+187 [main] DEBUG Projector - Working on projects/Projector/src/ca/brood/projector/util/ with install dir of src/ca/brood/projector/util/
+187 [main] DEBUG Projector - Copying SimpleXmlErrorHandler.java from projects/Projector/src/ca/brood/projector/util/ to src/ca/brood/projector/util/
+187 [main] DEBUG Projector - Copying Util.java from projects/Projector/src/ca/brood/projector/util/ to src/ca/brood/projector/util/
+187 [main] DEBUG Projector - Copying XmlErrorCallback.java from projects/Projector/src/ca/brood/projector/util/ to src/ca/brood/projector/util/
+187 [main] DEBUG Projector - Done installing newly generated projector classes... does it still work?
+187 [main] INFO Projector - Projector is finished.
+0 [main] INFO Projector - Projector is starting...
+0 [main] INFO Projector - Loading file: sampleproject.xml
+47 [main] ERROR Projector - The content of element type "reference" must match "(name,elementName?,targetType,relationship,subclassType*)".
+47 [main] FATAL Projector - Exception while trying to load config file: sampleproject.xml
+47 [main] FATAL Projector - Config doesn't conform to schema.
+47 [main] INFO Projector - Saving to file: sampleprojectOut.xml
+78 [main] INFO Projector - Done with sampleprojectOut.xml
+78 [main] INFO Projector - Loading file: projector.xml
+94 [main] DEBUG Projector - Reading configuration now
+94 [main] DEBUG Projector - Configuring project...
+94 [main] DEBUG ProjectorProject - ProjectorProject name: Projector
+94 [main] DEBUG ProjectorProject - ProjectorProject projectPackage: ca.brood.projector
+94 [main] DEBUG ProjectorProject - ProjectorProject rootElement: projector
+94 [main] DEBUG ProjectorProject - ProjectorProject rootObject: Projector
+94 [main] DEBUG ProjectorReference - ProjectorReference name: project
+94 [main] DEBUG ProjectorReference - ProjectorReference elementName: project
+94 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorProject
+94 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetoone
+94 [main] DEBUG ProjectorReference - ProjectorReference name: projectObjects
+94 [main] DEBUG ProjectorReference - ProjectorReference elementName: object
+94 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorObject
+94 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+94 [main] DEBUG ProjectorObject - ProjectorObject name: Projector
+94 [main] DEBUG ProjectorObject - ProjectorObject superclass: 
+94 [main] DEBUG ProjectorField - ProjectorField name: name
+94 [main] DEBUG ProjectorField - ProjectorField elementName: name
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 512
+94 [main] DEBUG ProjectorField - ProjectorField name: projectPackage
+94 [main] DEBUG ProjectorField - ProjectorField elementName: projectPackage
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 512
+94 [main] DEBUG ProjectorField - ProjectorField name: rootElement
+94 [main] DEBUG ProjectorField - ProjectorField elementName: rootElement
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 512
+94 [main] DEBUG ProjectorField - ProjectorField name: rootObject
+94 [main] DEBUG ProjectorField - ProjectorField elementName: rootObject
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 512
+94 [main] DEBUG ProjectorObject - ProjectorObject name: ProjectorProject
+94 [main] DEBUG ProjectorObject - ProjectorObject superclass: 
+94 [main] DEBUG ProjectorField - ProjectorField name: name
+94 [main] DEBUG ProjectorField - ProjectorField elementName: name
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 255
+94 [main] DEBUG ProjectorField - ProjectorField name: superclass
+94 [main] DEBUG ProjectorField - ProjectorField elementName: superclass
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 255
+94 [main] DEBUG ProjectorReference - ProjectorReference name: fields
+94 [main] DEBUG ProjectorReference - ProjectorReference elementName: field
+94 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorField
+94 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+94 [main] DEBUG ProjectorReference - ProjectorReference name: references
+94 [main] DEBUG ProjectorReference - ProjectorReference elementName: reference
+94 [main] DEBUG ProjectorReference - ProjectorReference targetType: ProjectorReference
+94 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+94 [main] DEBUG ProjectorObject - ProjectorObject name: ProjectorObject
+94 [main] DEBUG ProjectorObject - ProjectorObject superclass: 
+94 [main] DEBUG ProjectorField - ProjectorField name: name
+94 [main] DEBUG ProjectorField - ProjectorField elementName: name
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 255
+94 [main] DEBUG ProjectorField - ProjectorField name: elementName
+94 [main] DEBUG ProjectorField - ProjectorField elementName: elementName
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 255
+94 [main] DEBUG ProjectorField - ProjectorField name: type
+94 [main] DEBUG ProjectorField - ProjectorField elementName: type
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 32
+94 [main] DEBUG ProjectorField - ProjectorField name: size
+94 [main] DEBUG ProjectorField - ProjectorField elementName: size
+94 [main] DEBUG ProjectorField - ProjectorField type: integer
+94 [main] DEBUG ProjectorField - ProjectorField size: 4
+94 [main] DEBUG ProjectorObject - ProjectorObject name: ProjectorField
+94 [main] DEBUG ProjectorObject - ProjectorObject superclass: 
+94 [main] DEBUG ProjectorField - ProjectorField name: elementName
+94 [main] DEBUG ProjectorField - ProjectorField elementName: elementName
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 255
+94 [main] DEBUG ProjectorField - ProjectorField name: targetType
+94 [main] DEBUG ProjectorField - ProjectorField elementName: targetType
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 255
+94 [main] DEBUG ProjectorObject - ProjectorObject name: SubclassType
+94 [main] DEBUG ProjectorObject - ProjectorObject superclass: 
+94 [main] DEBUG ProjectorField - ProjectorField name: name
+94 [main] DEBUG ProjectorField - ProjectorField elementName: name
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 255
+94 [main] DEBUG ProjectorField - ProjectorField name: elementName
+94 [main] DEBUG ProjectorField - ProjectorField elementName: elementName
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 255
+94 [main] DEBUG ProjectorField - ProjectorField name: targetType
+94 [main] DEBUG ProjectorField - ProjectorField elementName: targetType
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 255
+94 [main] DEBUG ProjectorField - ProjectorField name: relationship
+94 [main] DEBUG ProjectorField - ProjectorField elementName: relationship
+94 [main] DEBUG ProjectorField - ProjectorField type: string
+94 [main] DEBUG ProjectorField - ProjectorField size: 255
+94 [main] DEBUG ProjectorReference - ProjectorReference name: subclassTypes
+94 [main] DEBUG ProjectorReference - ProjectorReference elementName: subclassType
+94 [main] DEBUG ProjectorReference - ProjectorReference targetType: SubclassType
+94 [main] DEBUG ProjectorReference - ProjectorReference relationship: onetomany
+94 [main] DEBUG ProjectorObject - ProjectorObject name: ProjectorReference
+94 [main] DEBUG ProjectorObject - ProjectorObject superclass: 
+94 [main] INFO Projector - Done with projector.xml
+94 [main] INFO Projector - Generating...
+109 [main] INFO Projector - Starting file generation
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/src/ca/brood/projector/BaseProjector.java
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/src/ca/brood/projector/BaseProjectorProject.java
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/src/ca/brood/projector/BaseProjectorObject.java
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/src/ca/brood/projector/BaseProjectorField.java
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/src/ca/brood/projector/BaseSubclassType.java
+109 [main] DEBUG ProjectorObject - Generating: projects/Projector/src/ca/brood/projector/BaseProjectorReference.java
+125 [main] DEBUG Projector - Std file copy: Working on src/ca/brood/projector/ with install dir of projects/Projector/src/ca/brood/projector/
+125 [main] DEBUG Projector - Std file copy: Old package: ca.brood.projector New Package: ca.brood.projector
+125 [main] DEBUG Projector - Copying BaseGenerated.java from src/ca/brood/projector/ to projects/Projector/src/ca/brood/projector/
+125 [main] DEBUG Projector - Std file copy: Working on src/ca/brood/projector/util/ with install dir of projects/Projector/src/ca/brood/projector/util/
+125 [main] DEBUG Projector - Std file copy: Old package: ca.brood.projector.util New Package: ca.brood.projector.util
+125 [main] DEBUG Projector - Copying SimpleXmlErrorHandler.java from src/ca/brood/projector/util/ to projects/Projector/src/ca/brood/projector/util/
+125 [main] DEBUG Projector - Copying Util.java from src/ca/brood/projector/util/ to projects/Projector/src/ca/brood/projector/util/
+125 [main] DEBUG Projector - Copying XmlErrorCallback.java from src/ca/brood/projector/util/ to projects/Projector/src/ca/brood/projector/util/
+125 [main] DEBUG Projector - Std file copy: Working on . with install dir of projects/Projector/
+125 [main] DEBUG Projector - Std file copy: Old package: projector New Package: projector
+125 [main] DEBUG Projector - Std file copy: Working on ..git/ with install dir of projects/Projector/.git/
+125 [main] DEBUG Projector - Std file copy: Old package: projector..git New Package: projector..git
+125 [main] DEBUG Projector - Std file copy: Working on .bin/ with install dir of projects/Projector/bin/
+125 [main] DEBUG Projector - Std file copy: Old package: projector.bin New Package: projector.bin
+125 [main] DEBUG Projector - Std file copy: Working on .lib/ with install dir of projects/Projector/lib/
+125 [main] DEBUG Projector - Std file copy: Old package: projector.lib New Package: projector.lib
+125 [main] DEBUG Projector - Copying logger.config from . to projects/Projector/
+125 [main] DEBUG Projector - Std file copy: Working on .projects/ with install dir of projects/Projector/projects/
+125 [main] DEBUG Projector - Std file copy: Old package: projector.projects New Package: projector.projects
+125 [main] DEBUG Projector - Std file copy: Working on .src/ with install dir of projects/Projector/src/
+125 [main] DEBUG Projector - Std file copy: Old package: projector.src New Package: projector.src
+125 [main] INFO Projector - Done with projector.xml
+125 [main] INFO Projector - Saving to file: projectorOut.xml
+141 [main] INFO Projector - Done with projectorOut.xml
+141 [main] DEBUG Projector - Starting install of projector generated classes...
+141 [main] DEBUG Projector - Working on projects/Projector/src/ with install dir of src/
+141 [main] DEBUG Projector - Working on projects/Projector/src/ca/ with install dir of src/ca/
+141 [main] DEBUG Projector - Working on projects/Projector/src/ca/brood/ with install dir of src/ca/brood/
+141 [main] DEBUG Projector - Working on projects/Projector/src/ca/brood/projector/ with install dir of src/ca/brood/projector/
+141 [main] DEBUG Projector - Copying BaseGenerated.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+141 [main] DEBUG Projector - Copying BaseProjector.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+141 [main] DEBUG Projector - Copying BaseProjectorField.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+141 [main] DEBUG Projector - Copying BaseProjectorObject.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+141 [main] DEBUG Projector - Copying BaseProjectorProject.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+141 [main] DEBUG Projector - Copying BaseProjectorReference.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+141 [main] DEBUG Projector - Copying BaseSubclassType.java from projects/Projector/src/ca/brood/projector/ to src/ca/brood/projector/
+141 [main] DEBUG Projector - Working on projects/Projector/src/ca/brood/projector/util/ with install dir of src/ca/brood/projector/util/
+141 [main] DEBUG Projector - Copying SimpleXmlErrorHandler.java from projects/Projector/src/ca/brood/projector/util/ to src/ca/brood/projector/util/
+141 [main] DEBUG Projector - Copying Util.java from projects/Projector/src/ca/brood/projector/util/ to src/ca/brood/projector/util/
+141 [main] DEBUG Projector - Copying XmlErrorCallback.java from projects/Projector/src/ca/brood/projector/util/ to src/ca/brood/projector/util/
+141 [main] DEBUG Projector - Done installing newly generated projector classes... does it still work?
+141 [main] INFO Projector - Projector is finished.

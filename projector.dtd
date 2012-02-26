@@ -9,14 +9,12 @@
 <!ELEMENT object (name,superclass?,field*,reference*)>
 <!ELEMENT superclass (#PCDATA)>
 
-<!ELEMENT field (name,elementName?,type,size,defaultValue?,modifier*)>
+<!ELEMENT field (name,elementName?,type,size)>
 <!ELEMENT elementName (#PCDATA)>
 <!ELEMENT type (#PCDATA)>
 <!ELEMENT size (#PCDATA)>
-<!ELEMENT defaultValue (#PCDATA)>
-<!ELEMENT modifier (#PCDATA)>
 
-<!ELEMENT reference (name,elementName?,targetType,subclassType*,relationship)>
+<!ELEMENT reference (name,elementName?,targetType,relationship,subclassType*)>
 <!ELEMENT targetType (#PCDATA)>
-<!ELEMENT subclassType (elementName,targetType)>
 <!ELEMENT relationship (#PCDATA)>
+<!ELEMENT subclassType (elementName,targetType)>

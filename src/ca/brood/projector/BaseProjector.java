@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.io.*;
 import javax.xml.parsers.*;
 import org.apache.log4j.PropertyConfigurator;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import ca.brood.projector.util.*;
 import org.apache.log4j.Logger;
 import org.w3c.dom.*;
@@ -39,6 +42,15 @@ public class BaseProjector extends BaseGenerated {
 		}
 		return true;
 	}
+	@Override
+	public Element save(Document doc, String root) {
+		Element ret = doc.createElement(root);
+		ret.appendChild(project.save(doc, "project"));
+		for (BaseProjectorObject baseProjectorObject : projectObjects) {
+			ret.appendChild(baseProjectorObject.save(doc, "object"));
+		}
+		return ret;
+	}
 	protected boolean load(String filename) {
 		log.info("Loading file: "+filename);
 
@@ -68,6 +80,31 @@ public class BaseProjector extends BaseGenerated {
 			this.configure(currentConfigNode);
 		} else {
 			log.fatal("Bad XML file: root element isn't a projector.");
+			return false;
+		}
+		log.info("Done with "+filename);
+		return true;
+	}
+	protected boolean save(String filename) {
+		log.info("Saving to file: "+filename);
+
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		Document doc;
+		try {
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			doc = dBuilder.newDocument();
+			doc.appendChild(this.save(doc, "projector"));
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource(doc);
+			StreamResult result = new StreamResult(new File(filename));
+			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "projector.dtd");
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+			transformer.transform(source, result);
+		} catch (Exception e) {
+			log.fatal("Exception while trying to build config file: "+filename);
+			log.fatal(e.getMessage());
 			return false;
 		}
 		log.info("Done with "+filename);

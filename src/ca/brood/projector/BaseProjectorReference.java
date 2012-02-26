@@ -54,4 +54,32 @@ public class BaseProjectorReference extends BaseGenerated {
 		log.debug("ProjectorReference elementName: "+this.elementName);
 		return true;
 	}
+	@Override
+	public Element save(Document doc, String root) {
+		Element ret = doc.createElement(root);
+		if (!name.equals("")) {
+			Element f1 = doc.createElement("name");
+			f1.appendChild(doc.createTextNode(name));
+			ret.appendChild(f1);
+		}
+		if (!targetType.equals("")) {
+			Element f2 = doc.createElement("targetType");
+			f2.appendChild(doc.createTextNode(targetType));
+			ret.appendChild(f2);
+		}
+		if (!relationship.equals("")) {
+			Element f3 = doc.createElement("relationship");
+			f3.appendChild(doc.createTextNode(relationship));
+			ret.appendChild(f3);
+		}
+		if (!elementName.equals("")) {
+			Element f4 = doc.createElement("elementName");
+			f4.appendChild(doc.createTextNode(elementName));
+			ret.appendChild(f4);
+		}
+		for (BaseSubclassType baseSubclassType : subclassTypes) {
+			ret.appendChild(baseSubclassType.save(doc, "subclassType"));
+		}
+		return ret;
+	}
 }

@@ -170,7 +170,12 @@ public class Projector extends BaseProjector {
 
 	public void run() {
 		run("sampleproject.xml");
+		
+		this.save("sampleprojectOut.xml");
+		
 		run("projector.xml");
+		
+		this.save("projectorOut.xml");
 		
 		installProjectorForTesting();
 		

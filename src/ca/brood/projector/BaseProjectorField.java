@@ -51,4 +51,27 @@ public class BaseProjectorField extends BaseGenerated {
 		log.debug("ProjectorField elementName: "+this.elementName);
 		return true;
 	}
+	@Override
+	public Element save(Document doc, String root) {
+		Element ret = doc.createElement(root);
+		if (!name.equals("")) {
+			Element f1 = doc.createElement("name");
+			f1.appendChild(doc.createTextNode(name));
+			ret.appendChild(f1);
+		}
+		if (!type.equals("")) {
+			Element f2 = doc.createElement("type");
+			f2.appendChild(doc.createTextNode(type));
+			ret.appendChild(f2);
+		}
+		Element f3 = doc.createElement("size");
+		f3.appendChild(doc.createTextNode(Integer.toString(size)));
+		ret.appendChild(f3);
+		if (!elementName.equals("")) {
+			Element f4 = doc.createElement("elementName");
+			f4.appendChild(doc.createTextNode(elementName));
+			ret.appendChild(f4);
+		}
+		return ret;
+	}
 }

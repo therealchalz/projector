@@ -34,4 +34,19 @@ public class BaseSubclassType extends BaseGenerated {
 		log.debug("SubclassType targetType: "+this.targetType);
 		return true;
 	}
+	@Override
+	public Element save(Document doc, String root) {
+		Element ret = doc.createElement(root);
+		if (!elementName.equals("")) {
+			Element f1 = doc.createElement("elementName");
+			f1.appendChild(doc.createTextNode(elementName));
+			ret.appendChild(f1);
+		}
+		if (!targetType.equals("")) {
+			Element f2 = doc.createElement("targetType");
+			f2.appendChild(doc.createTextNode(targetType));
+			ret.appendChild(f2);
+		}
+		return ret;
+	}
 }

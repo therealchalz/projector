@@ -46,4 +46,29 @@ public class BaseProjectorProject extends BaseGenerated {
 		log.debug("ProjectorProject projectPackage: "+this.projectPackage);
 		return true;
 	}
+	@Override
+	public Element save(Document doc, String root) {
+		Element ret = doc.createElement(root);
+		if (!rootElement.equals("")) {
+			Element f1 = doc.createElement("rootElement");
+			f1.appendChild(doc.createTextNode(rootElement));
+			ret.appendChild(f1);
+		}
+		if (!rootObject.equals("")) {
+			Element f2 = doc.createElement("rootObject");
+			f2.appendChild(doc.createTextNode(rootObject));
+			ret.appendChild(f2);
+		}
+		if (!name.equals("")) {
+			Element f3 = doc.createElement("name");
+			f3.appendChild(doc.createTextNode(name));
+			ret.appendChild(f3);
+		}
+		if (!projectPackage.equals("")) {
+			Element f4 = doc.createElement("projectPackage");
+			f4.appendChild(doc.createTextNode(projectPackage));
+			ret.appendChild(f4);
+		}
+		return ret;
+	}
 }

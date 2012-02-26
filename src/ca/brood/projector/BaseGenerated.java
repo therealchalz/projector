@@ -1,7 +1,7 @@
 package ca.brood.projector;
 
 import org.apache.log4j.Logger;
-import org.w3c.dom.Node;
+import org.w3c.dom.*;
 
 public abstract class BaseGenerated {
 	protected Logger log;
@@ -9,5 +9,5 @@ public abstract class BaseGenerated {
 		log = Logger.getLogger("Generated");
 	}
 	public abstract boolean configure(Node configNode);
-
+	public abstract Element save(Document doc, String root);
 }

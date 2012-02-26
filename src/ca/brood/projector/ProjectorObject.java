@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
 
+
 import org.apache.log4j.Logger;
 
 public class ProjectorObject {
@@ -235,6 +236,98 @@ public class ProjectorObject {
 		ps.println("	}");
 		return true;
 	}
+	private boolean generateFileSaveCode(PrintStream ps, BaseProjectorProject gpp) {
+		ps.println("	protected boolean save(String filename) {");
+		ps.println("		log.info(\"Saving to file: \"+filename);");
+		ps.println();
+		ps.println("		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();");
+		ps.println("		Document doc;");
+		ps.println("		try {");
+		ps.println("			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();");
+		ps.println("			doc = dBuilder.newDocument();");
+		ps.println("			doc.appendChild(this.save(doc, \""+gpp.rootElement+"\"));");
+		ps.println("			TransformerFactory transformerFactory = TransformerFactory.newInstance();");
+		ps.println("			Transformer transformer = transformerFactory.newTransformer();");
+		ps.println("			DOMSource source = new DOMSource(doc);");
+		ps.println("			StreamResult result = new StreamResult(new File(filename));");
+		ps.println("			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, \""+gpp.name.toLowerCase()+".dtd\");");
+		ps.println("			transformer.setOutputProperty(OutputKeys.INDENT, \"yes\");");
+		ps.println("			transformer.setOutputProperty(\"{http://xml.apache.org/xslt}indent-amount\", \"2\");");
+		ps.println("			transformer.transform(source, result);");
+		ps.println("		} catch (Exception e) {");
+		ps.println("			log.fatal(\"Exception while trying to build config file: \"+filename);");
+		ps.println("			log.fatal(e.getMessage());");
+		ps.println("			return false;");
+		ps.println("		}");
+		ps.println("		log.info(\"Done with \"+filename);");
+		ps.println("		return true;");
+		ps.println("	}");
+		return true;
+	}
+	private boolean generateSaveCode(PrintStream ps, BaseProjectorObject bpo) {
+		ps.println("	@Override");
+		ps.println("	public Element save(Document doc, String root) {");
+		//Generate save for superclass if applicable
+		if (bpo.superclass.equals("")) {
+			ps.println("		Element ret = doc.createElement(root);");
+		} else {
+			ps.println("		Element ret = super.save(doc, root);");
+		}
+		//Generate saves for fields
+		int fieldCount = 1;
+		for (BaseProjectorField bpf : bpo.fields) {
+			String indent = "";
+			if (bpf.type.equalsIgnoreCase("string")) {
+				ps.println("		if (!"+bpf.name+".equals(\"\")) {");
+				indent = "\t";
+			}
+			ps.println(indent+"		Element f"+(fieldCount)+" = doc.createElement(\""+(bpf.elementName.equals("") ? bpf.name : bpf.elementName)+"\");");
+			if (bpf.type.equalsIgnoreCase("string")){
+				ps.println(indent+"		f"+fieldCount+".appendChild(doc.createTextNode("+bpf.name+"));");
+			} else if (bpf.type.equalsIgnoreCase("integer")) {
+				ps.println(indent+"		f"+fieldCount+".appendChild(doc.createTextNode(Integer.toString("+bpf.name+")));");
+			} else if (bpf.type.equalsIgnoreCase("decimal")) {
+				log.error("Error: saving decimal fields isn't supported yet");
+			}
+			ps.println(indent+"		ret.appendChild(f"+fieldCount+");");
+			if (bpf.type.equalsIgnoreCase("string")) {
+				ps.println("		}");
+			}
+			fieldCount++;
+		}
+		//Generate saves for references
+		for (BaseProjectorReference bpr : bpo.references) {
+			if (bpr.relationship.equals("onetoone")) {
+				if (bpr.subclassTypes.size() == 0) {
+					ps.println("		ret.appendChild("+bpr.name+".save(doc, \""+(bpr.elementName.equals("") ? bpr.name : bpr.elementName )+"\"));");
+				} else {
+					boolean firstSubclass = true;
+					for (BaseSubclassType bst : bpr.subclassTypes) {
+						if (firstSubclass) { //same as others except for "if" vs "else if"
+							ps.println("		if ("+bpr.name+" instanceof Base"+bst.targetType+") {");
+							firstSubclass = false;
+						} else {
+							ps.println("		} else if ("+bpr.name+" instanceof Base"+bst.targetType+") {");
+						}
+						ps.println("			ret.appendChild("+bpr.name+".save(doc, \""+bst.elementName+"\"));");
+					}
+					ps.println("		}");
+				}
+			} else if (bpr.relationship.equals("onetomany")) {
+				if (bpr.subclassTypes.size() == 0) {
+					ps.println("		for (Base"+bpr.targetType+" base"+bpr.targetType+" : "+bpr.name+") {");
+					ps.println("			ret.appendChild(base"+bpr.targetType+".save(doc, \""+(bpr.elementName.equals("") ? bpr.name : bpr.elementName )+"\"));");
+					ps.println("		}");
+				} else {
+					log.error("One to many subclass types saving to xml is not implemented yet");
+				}
+			}
+		}
+		ps.println("		return ret;");
+		ps.println("	}");
+
+		return true;
+	}
 	public boolean generate(String location, String packageStr, BaseProjectorProject gpp) {
 		PrintStream ps;
 		String className = "Base"+this.gpo.name;
@@ -260,6 +353,9 @@ public class ProjectorObject {
 			ps.println("import java.io.*;");
 			ps.println("import javax.xml.parsers.*;");
 			ps.println("import org.apache.log4j.PropertyConfigurator;");
+			ps.println("import javax.xml.transform.*;");
+			ps.println("import javax.xml.transform.dom.DOMSource;");
+			ps.println("import javax.xml.transform.stream.StreamResult;");
 		}
 		//if this object has an integer/decimal field or is the main object, have to import util
 		if (this.gpo.name.equals(gpp.name)) {
@@ -307,10 +403,19 @@ public class ProjectorObject {
 			log.error("Couldn't generate configure code for "+this.gpo.name);
 			return false;
 		}
+		//Save override:
+		if (!generateSaveCode(ps, this.gpo)) {
+			log.error("Couldn't generate save code for "+this.gpo.name);
+			return false;
+		}
 		if (this.gpo.name.equals(gpp.name)) {
-			//This is the main object, so we add the XML loading code
+			//This is the main object, so we add the XML loading and saving code
 			if (!generateLoadCode(ps, gpp)) {
 				log.error("Couldn't generate run code for "+this.gpo.name);
+				return false;
+			}
+			if (!generateFileSaveCode(ps, gpp)) {
+				log.error("Couldn't generate file save code for "+this.gpo.name);
 				return false;
 			}
 		}

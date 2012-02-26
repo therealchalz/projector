@@ -49,4 +49,25 @@ public class BaseProjectorObject extends BaseGenerated {
 		log.debug("ProjectorObject superclass: "+this.superclass);
 		return true;
 	}
+	@Override
+	public Element save(Document doc, String root) {
+		Element ret = doc.createElement(root);
+		if (!name.equals("")) {
+			Element f1 = doc.createElement("name");
+			f1.appendChild(doc.createTextNode(name));
+			ret.appendChild(f1);
+		}
+		if (!superclass.equals("")) {
+			Element f2 = doc.createElement("superclass");
+			f2.appendChild(doc.createTextNode(superclass));
+			ret.appendChild(f2);
+		}
+		for (BaseProjectorField baseProjectorField : fields) {
+			ret.appendChild(baseProjectorField.save(doc, "field"));
+		}
+		for (BaseProjectorReference baseProjectorReference : references) {
+			ret.appendChild(baseProjectorReference.save(doc, "reference"));
+		}
+		return ret;
+	}
 }

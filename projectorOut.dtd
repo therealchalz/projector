@@ -1,23 +1,18 @@
 <!ELEMENT projector (project,object*)>
-
 <!ELEMENT project (name,projectPackage,rootElement,rootObject)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT projectPackage (#PCDATA)>
 <!ELEMENT rootElement (#PCDATA)>
 <!ELEMENT rootObject (#PCDATA)>
-
 <!ELEMENT object (name,superclass?,field*,reference*)>
 <!ELEMENT superclass (#PCDATA)>
-
 <!ELEMENT field (name,elementName?,type,size,options?)>
 <!ELEMENT elementName (#PCDATA)>
 <!ELEMENT type (#PCDATA)>
 <!ELEMENT size (#PCDATA)>
 <!ELEMENT options (option*)>
 <!ELEMENT option (#PCDATA)>
-
-<!ELEMENT reference (name,elementName?,targetType,relationship,subclassType*,options?)>
+<!ELEMENT reference (name,elementName,targetType,relationship,subclassType*,options?)>
 <!ELEMENT targetType (#PCDATA)>
 <!ELEMENT relationship (#PCDATA)>
 <!ELEMENT subclassType (elementName,targetType)>
-

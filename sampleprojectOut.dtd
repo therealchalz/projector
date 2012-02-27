@@ -1,0 +1,14 @@
+<!ELEMENT softlogger (name,poll,tableFilePath,dataFilePath,server,channel*)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT poll (#PCDATA)>
+<!ELEMENT tableFilePath (#PCDATA)>
+<!ELEMENT dataFilePath (#PCDATA)>
+<!ELEMENT server (user,host,password,keyfile,configPoll,path)>
+<!ELEMENT user (#PCDATA)>
+<!ELEMENT host (#PCDATA)>
+<!ELEMENT password (#PCDATA)>
+<!ELEMENT keyfile (#PCDATA)>
+<!ELEMENT configPoll (#PCDATA)>
+<!ELEMENT path (#PCDATA)>
+<!ELEMENT channel (modbusChannel)>
+<!ELEMENT modbusChannel (poll)>

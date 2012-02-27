@@ -173,9 +173,15 @@ public class Projector extends BaseProjector {
 		
 		this.save("sampleprojectOut.xml");
 		
+		ProjectorDtdGenerator pdg1 = new ProjectorDtdGenerator();
+		pdg1.writeDtd("sampleprojectOut.dtd", this);
+		
 		run("projector.xml");
 		
 		this.save("projectorOut.xml");
+		
+		ProjectorDtdGenerator pdg2 = new ProjectorDtdGenerator();
+		pdg2.writeDtd("projectorOut.dtd", this);
 		
 		installProjectorForTesting();
 		

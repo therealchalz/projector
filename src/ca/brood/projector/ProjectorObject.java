@@ -29,31 +29,67 @@ public class ProjectorObject {
 		if (gpf.elementName.equals("")) {
 			gpf.elementName = gpf.name;
 		}
-			
-		if ("string".equalsIgnoreCase(gpf.type)) {
-			ps.println("	protected String "+gpf.name+" = \"\";");
-		} else if ("integer".equalsIgnoreCase(gpf.type)) {
-			if (gpf.size <= 4 && gpf.size > 0) {
-				ps.println("	protected int "+gpf.name+" = 0;");
-			} else if (gpf.size > 4 && gpf.size <= 8) {
-				ps.println("	protected long "+gpf.name+" = 0;");
+		boolean optionIsArray = false;
+		if (gpf.options.options.size() != 0) {
+			for (String option : gpf.options.options) {
+				if ("multiple".equalsIgnoreCase(option)) {
+					optionIsArray = true;
+				}
+			}
+		}
+		
+		if (!optionIsArray) {
+			if ("string".equalsIgnoreCase(gpf.type)) {
+				ps.println("	protected String "+gpf.name+" = \"\";");
+			} else if ("integer".equalsIgnoreCase(gpf.type)) {
+				if (gpf.size <= 4 && gpf.size > 0) {
+					ps.println("	protected int "+gpf.name+" = 0;");
+				} else if (gpf.size > 4 && gpf.size <= 8) {
+					ps.println("	protected long "+gpf.name+" = 0;");
+				} else {
+					log.error("Bad size for field: "+gpf.size);
+					return false;
+				}
+			} else if ("decimal".equalsIgnoreCase(gpf.type)) {
+				log.error("Decimal fields are not implement yet");
+				/*if (gpf.size <= 4 && gpf.size > 0) {
+					ps.println("	protected float "+gpf.name+" = 0.0;");
+				} else if (gpf.size > 4 && gpf.size <= 8) {
+					ps.println("	protected double "+gpf.name+" = 0.0;");
+				} else {
+					log.error("Bad size for field: "+gpf.size);
+					return false;
+				}*/
 			} else {
-				log.error("Bad size for field: "+gpf.size);
+				log.error("Bad type for field: "+gpf.type);
 				return false;
 			}
-		} else if ("decimal".equalsIgnoreCase(gpf.type)) {
-			log.error("Decimal fields are not implement yet");
-			/*if (gpf.size <= 4 && gpf.size > 0) {
-				ps.println("	protected float "+gpf.name+" = 0.0;");
-			} else if (gpf.size > 4 && gpf.size <= 8) {
-				ps.println("	protected double "+gpf.name+" = 0.0;");
-			} else {
-				log.error("Bad size for field: "+gpf.size);
-				return false;
-			}*/
 		} else {
-			log.error("Bad type for field: "+gpf.type);
-			return false;
+			if ("string".equalsIgnoreCase(gpf.type)) {
+				ps.println("	protected ArrayList<String> "+gpf.name+" = new ArrayList<String>();");
+			} else if ("integer".equalsIgnoreCase(gpf.type)) {
+				if (gpf.size <= 4 && gpf.size > 0) {
+					ps.println("	protected ArrayList<Integer> "+gpf.name+" = new ArrayList<Integer>();");
+				} else if (gpf.size > 4 && gpf.size <= 8) {
+					ps.println("	protected ArrayList<Long> "+gpf.name+" = new ArrayList<Long>();");
+				} else {
+					log.error("Bad size for field: "+gpf.size);
+					return false;
+				}
+			} else if ("decimal".equalsIgnoreCase(gpf.type)) {
+				log.error("Decimal fields are not implement yet");
+				/*if (gpf.size <= 4 && gpf.size > 0) {
+					ps.println("	protected float "+gpf.name+" = 0.0;");
+				} else if (gpf.size > 4 && gpf.size <= 8) {
+					ps.println("	protected double "+gpf.name+" = 0.0;");
+				} else {
+					log.error("Bad size for field: "+gpf.size);
+					return false;
+				}*/
+			} else {
+				log.error("Bad type for field: "+gpf.type);
+				return false;
+			}
 		}
 		return true;
 	}
@@ -81,15 +117,40 @@ public class ProjectorObject {
 		return true;
 	}
 	private boolean generateFieldReset(PrintStream ps, BaseProjectorField gpf) {
-		if ("string".equalsIgnoreCase(gpf.type)) {
-			ps.println("		this."+gpf.name+" = \"\";");
-		} else if ("integer".equalsIgnoreCase(gpf.type)) {
-			ps.println("		this."+gpf.name+" = 0;");
-		} else if ("decimal".equalsIgnoreCase(gpf.type)) {
-			ps.println("		this."+gpf.name+" = 0.0;");
+		boolean optionIsArray = false;
+		if (gpf.options.options.size() != 0) {
+			for (String option : gpf.options.options) {
+				if ("multiple".equalsIgnoreCase(option)) {
+					optionIsArray = true;
+				}
+			}
+		}
+		if (!optionIsArray) {
+			if ("string".equalsIgnoreCase(gpf.type)) {
+				ps.println("		this."+gpf.name+" = \"\";");
+			} else if ("integer".equalsIgnoreCase(gpf.type)) {
+				ps.println("		this."+gpf.name+" = 0;");
+			} else if ("decimal".equalsIgnoreCase(gpf.type)) {
+				ps.println("		this."+gpf.name+" = 0.0;");
+			} else {
+				log.error("Bad type for field: "+gpf.type);
+				return false;
+			}
 		} else {
-			log.error("Bad type for field: "+gpf.type);
-			return false;
+			if ("string".equalsIgnoreCase(gpf.type)) {
+				ps.println("		this."+gpf.name+" = new ArrayList<String>();");
+			} else if ("integer".equalsIgnoreCase(gpf.type) && gpf.size <= 4) {
+				ps.println("		this."+gpf.name+" = new ArrayList<Integer>();");
+			} else if ("integer".equalsIgnoreCase(gpf.type) && gpf.size <= 8) {
+				ps.println("		this."+gpf.name+" = new ArrayList<Long>();");
+			} else if ("decimal".equalsIgnoreCase(gpf.type) && gpf.size <= 4) {
+				ps.println("		this."+gpf.name+" = new ArrayList<Float>();");
+			} else if ("decimal".equalsIgnoreCase(gpf.type) && gpf.size <= 8) {
+				ps.println("		this."+gpf.name+" = new ArrayList<Double>();");
+			} else {
+				log.error("Bad type for field: "+gpf.type);
+				return false;
+			}
 		}
 		return true;
 	}
@@ -103,18 +164,40 @@ public class ProjectorObject {
 		return true;
 	}
 	private boolean generateFieldLoad(PrintStream ps, BaseProjectorField gpf) {
+		boolean optionIsArray = false;
+		if (gpf.options.options.size() != 0) {
+			for (String option : gpf.options.options) {
+				if ("multiple".equalsIgnoreCase(option)) {
+					optionIsArray = true;
+				}
+			}
+		}
 		ps.println("			} else if (\""+gpf.elementName+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
 		ps.println("				configNode.removeChild(currentConfigNode);");
-		if ("string".equalsIgnoreCase(gpf.type)) {
-			ps.println("				this."+gpf.name+" = currentConfigNode.getFirstChild().getNodeValue();");
-		} else if ("integer".equalsIgnoreCase(gpf.type)) {
-			ps.println("				try {");
-			ps.println("					this."+gpf.name+" = Util.parseInt(currentConfigNode.getFirstChild().getNodeValue());");
-			ps.println("				} catch (Exception e) {");
-			ps.println("					log.error(\"Error parsing "+gpf.elementName+": \"+currentConfigNode.getFirstChild().getNodeValue());");
-			ps.println("				}");
-		} else if ("decimal".equalsIgnoreCase(gpf.type)) {
-			log.error("Decimal field loading not implemented yet...");
+		if (!optionIsArray) {
+			if ("string".equalsIgnoreCase(gpf.type)) {
+				ps.println("				this."+gpf.name+" = currentConfigNode.getFirstChild().getNodeValue();");
+			} else if ("integer".equalsIgnoreCase(gpf.type)) {
+				ps.println("				try {");
+				ps.println("					this."+gpf.name+" = Util.parseInt(currentConfigNode.getFirstChild().getNodeValue());");
+				ps.println("				} catch (Exception e) {");
+				ps.println("					log.error(\"Error parsing "+gpf.elementName+": \"+currentConfigNode.getFirstChild().getNodeValue());");
+				ps.println("				}");
+			} else if ("decimal".equalsIgnoreCase(gpf.type)) {
+				log.error("Decimal field loading not implemented yet...");
+			}
+		} else {
+			if ("string".equalsIgnoreCase(gpf.type)) {
+				ps.println("				this."+gpf.name+".add(currentConfigNode.getFirstChild().getNodeValue());");
+			} else if ("integer".equalsIgnoreCase(gpf.type)) {
+				ps.println("				try {");
+				ps.println("					this."+gpf.name+".add(Util.parseInt(currentConfigNode.getFirstChild().getNodeValue()));");
+				ps.println("				} catch (Exception e) {");
+				ps.println("					log.error(\"Error parsing "+gpf.elementName+": \"+currentConfigNode.getFirstChild().getNodeValue());");
+				ps.println("				}");
+			} else if ("decimal".equalsIgnoreCase(gpf.type)) {
+				log.error("Decimal field loading not implemented yet...");
+			}
 		}
 		return true;
 	}
@@ -264,6 +347,7 @@ public class ProjectorObject {
 		ps.println("	}");
 		return true;
 	}
+
 	private boolean generateSaveCode(PrintStream ps, BaseProjectorObject bpo) {
 		ps.println("	@Override");
 		ps.println("	public Element save(Document doc, String root) {");
@@ -276,22 +360,45 @@ public class ProjectorObject {
 		//Generate saves for fields
 		int fieldCount = 1;
 		for (BaseProjectorField bpf : bpo.fields) {
-			String indent = "";
-			if (bpf.type.equalsIgnoreCase("string")) {
-				ps.println("		if (!"+bpf.name+".equals(\"\")) {");
-				indent = "\t";
+			String indent = "\t\t";
+			boolean optionIsArray = false;
+			if (bpf.options.options.size() != 0) {
+				for (String option : bpf.options.options) {
+					if ("multiple".equalsIgnoreCase(option)) {
+						optionIsArray = true;
+					}
+				}
 			}
-			ps.println(indent+"		Element f"+(fieldCount)+" = doc.createElement(\""+(bpf.elementName.equals("") ? bpf.name : bpf.elementName)+"\");");
+			if (optionIsArray){
+				if (bpf.type.equalsIgnoreCase("string")) {
+					ps.println(indent+"for (String s : this."+bpf.name+") {");
+				} else if (bpf.type.equalsIgnoreCase("integer")) {
+					ps.println(indent+"for (Integer s : this."+bpf.name+") {");
+				} else {
+					log.error("Error - bad type for multiple option");
+				}
+				indent+="\t";
+			}
+			if (bpf.type.equalsIgnoreCase("string")) {
+				ps.println(indent+"if (!"+(optionIsArray? "s" : bpf.name)+".equals(\"\")) {");
+				indent+= "\t";
+			}
+			ps.println(indent+"Element f"+(fieldCount)+" = doc.createElement(\""+(bpf.elementName.equals("") ? bpf.name : bpf.elementName)+"\");");
 			if (bpf.type.equalsIgnoreCase("string")){
-				ps.println(indent+"		f"+fieldCount+".appendChild(doc.createTextNode("+bpf.name+"));");
+				ps.println(indent+"f"+fieldCount+".appendChild(doc.createTextNode("+(optionIsArray? "s" : bpf.name)+"));");
 			} else if (bpf.type.equalsIgnoreCase("integer")) {
-				ps.println(indent+"		f"+fieldCount+".appendChild(doc.createTextNode(Integer.toString("+bpf.name+")));");
+				ps.println(indent+"f"+fieldCount+".appendChild(doc.createTextNode(Integer.toString("+(optionIsArray? "s" : bpf.name)+")));");
 			} else if (bpf.type.equalsIgnoreCase("decimal")) {
 				log.error("Error: saving decimal fields isn't supported yet");
 			}
-			ps.println(indent+"		ret.appendChild(f"+fieldCount+");");
+			ps.println(indent+"ret.appendChild(f"+fieldCount+");");
 			if (bpf.type.equalsIgnoreCase("string")) {
-				ps.println("		}");
+				indent = indent.substring(1);
+				ps.println(indent+"}");
+			}
+			if (optionIsArray) {
+				indent = indent.substring(1);
+				ps.println(indent+"}");
 			}
 			fieldCount++;
 		}
@@ -341,8 +448,21 @@ public class ProjectorObject {
 		log.debug("Generating: "+fileName);
 		ps.println("package "+packageStr+";");
 		ps.println("");
-		//if we have onetomany relations, import ArrayList
-		for (int i=0; i<this.gpo.references.size(); i++) {
+		//if we have onetomany relations or 'multiple' option fields, import ArrayList
+		boolean doneImport = false;
+		for (BaseProjectorField bpf : this.gpo.fields) {
+			if (bpf.options.options.size() > 0) {
+				for (String opt : bpf.options.options) {
+					if ("multiple".equalsIgnoreCase(opt)) {
+						ps.println("import java.util.ArrayList;");
+						doneImport = true;
+					}
+				}
+				if (doneImport)
+					break;
+			}
+		}
+		for (int i=0; i<this.gpo.references.size() && !doneImport; i++) {
 			if ("onetomany".equalsIgnoreCase(this.gpo.references.get(i).relationship)) {
 				ps.println("import java.util.ArrayList;");
 				break;

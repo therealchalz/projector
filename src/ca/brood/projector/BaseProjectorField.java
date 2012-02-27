@@ -9,6 +9,7 @@ public class BaseProjectorField extends BaseGenerated {
 	protected String elementName = "";
 	protected String type = "";
 	protected int size = 0;
+	protected BaseProjectorOptions options = new BaseProjectorOptions();
 	protected BaseProjectorField() {
 		super();
 		log = Logger.getLogger("ProjectorField");
@@ -19,6 +20,7 @@ public class BaseProjectorField extends BaseGenerated {
 		this.elementName = "";
 		this.type = "";
 		this.size = 0;
+		this.options = new BaseProjectorOptions();
 		NodeList configNodes = configNode.getChildNodes();
 		for (int i=0; i<configNodes.getLength(); i++) {
 			Node currentConfigNode = configNodes.item(i);
@@ -41,6 +43,8 @@ public class BaseProjectorField extends BaseGenerated {
 				} catch (Exception e) {
 					log.error("Error parsing size: "+currentConfigNode.getFirstChild().getNodeValue());
 				}
+			} else if ("options".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				this.options.configure(currentConfigNode);
 			} else {
 				log.warn("Got unknown node in config: "+currentConfigNode.getNodeName());
 			}
@@ -72,6 +76,7 @@ public class BaseProjectorField extends BaseGenerated {
 		Element f4 = doc.createElement("size");
 		f4.appendChild(doc.createTextNode(Integer.toString(size)));
 		ret.appendChild(f4);
+		ret.appendChild(options.save(doc, "options"));
 		return ret;
 	}
 }

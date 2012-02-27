@@ -10,6 +10,7 @@ public class BaseProjectorReference extends BaseGenerated {
 	protected String targetType = "";
 	protected String relationship = "";
 	protected ArrayList<BaseSubclassType> subclassTypes = new ArrayList<BaseSubclassType>();
+	protected BaseProjectorOptions options = new BaseProjectorOptions();
 	protected BaseProjectorReference() {
 		super();
 		log = Logger.getLogger("ProjectorReference");
@@ -21,6 +22,7 @@ public class BaseProjectorReference extends BaseGenerated {
 		this.targetType = "";
 		this.relationship = "";
 		this.subclassTypes = new ArrayList<BaseSubclassType>();
+		this.options = new BaseProjectorOptions();
 		NodeList configNodes = configNode.getChildNodes();
 		for (int i=0; i<configNodes.getLength(); i++) {
 			Node currentConfigNode = configNodes.item(i);
@@ -44,6 +46,8 @@ public class BaseProjectorReference extends BaseGenerated {
 				if (baseSubclassType.configure(currentConfigNode)){
 					this.subclassTypes.add(baseSubclassType);
 				}
+			} else if ("options".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
+				this.options.configure(currentConfigNode);
 			} else {
 				log.warn("Got unknown node in config: "+currentConfigNode.getNodeName());
 			}
@@ -80,6 +84,7 @@ public class BaseProjectorReference extends BaseGenerated {
 		for (BaseSubclassType baseSubclassType : subclassTypes) {
 			ret.appendChild(baseSubclassType.save(doc, "subclassType"));
 		}
+		ret.appendChild(options.save(doc, "options"));
 		return ret;
 	}
 }

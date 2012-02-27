@@ -62,6 +62,9 @@
       <elementName>superclass</elementName>
       <type>string</type>
       <size>255</size>
+	  <options>
+		<option>optional</option>
+	  </options>
     </field>
     <reference>
       <name>fields</name>
@@ -89,6 +92,9 @@
       <elementName>elementName</elementName>
       <type>string</type>
       <size>255</size>
+	  <options>
+		<option>optional</option>
+	  </options>
     </field>
     <field>
       <name>type</name>
@@ -102,6 +108,27 @@
       <type>integer</type>
       <size>4</size>
     </field>
+    <reference>
+      <name>options</name>
+      <elementName>options</elementName>
+      <targetType>ProjectorOptions</targetType>
+      <relationship>onetoone</relationship>
+	  <options>
+		<option>optional</option>
+	  </options>
+    </reference>
+  </object>
+  <object>
+	<name>ProjectorOptions</name>
+	<field>
+		<name>options</name>
+		<elementName>option</elementName>
+		<type>string</type>
+		<size>255</size>
+		<options>
+			<option>multiple</option>
+		</options>
+	</field>
   </object>
   <object>
     <name>SubclassType</name>
@@ -149,6 +176,14 @@
       <elementName>subclassType</elementName>
       <targetType>SubclassType</targetType>
       <relationship>onetomany</relationship>
+    </reference>
+	<reference>
+      <name>options</name>
+      <targetType>ProjectorOptions</targetType>
+      <relationship>onetoone</relationship>
+	  <options>
+		<option>optional</option>
+	  </options>
     </reference>
   </object>
 </projector>

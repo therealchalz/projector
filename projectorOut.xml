@@ -14,12 +14,14 @@
       <elementName>project</elementName>
       <targetType>ProjectorProject</targetType>
       <relationship>onetoone</relationship>
+      <options/>
     </reference>
     <reference>
       <name>projectObjects</name>
       <elementName>object</elementName>
       <targetType>ProjectorObject</targetType>
       <relationship>onetomany</relationship>
+      <options/>
     </reference>
   </object>
   <object>
@@ -29,24 +31,28 @@
       <elementName>name</elementName>
       <type>string</type>
       <size>512</size>
+      <options/>
     </field>
     <field>
       <name>projectPackage</name>
       <elementName>projectPackage</elementName>
       <type>string</type>
       <size>512</size>
+      <options/>
     </field>
     <field>
       <name>rootElement</name>
       <elementName>rootElement</elementName>
       <type>string</type>
       <size>512</size>
+      <options/>
     </field>
     <field>
       <name>rootObject</name>
       <elementName>rootObject</elementName>
       <type>string</type>
       <size>512</size>
+      <options/>
     </field>
   </object>
   <object>
@@ -56,24 +62,30 @@
       <elementName>name</elementName>
       <type>string</type>
       <size>255</size>
+      <options/>
     </field>
     <field>
       <name>superclass</name>
       <elementName>superclass</elementName>
       <type>string</type>
       <size>255</size>
+      <options>
+        <option>optional</option>
+      </options>
     </field>
     <reference>
       <name>fields</name>
       <elementName>field</elementName>
       <targetType>ProjectorField</targetType>
       <relationship>onetomany</relationship>
+      <options/>
     </reference>
     <reference>
       <name>references</name>
       <elementName>reference</elementName>
       <targetType>ProjectorReference</targetType>
       <relationship>onetomany</relationship>
+      <options/>
     </reference>
   </object>
   <object>
@@ -83,24 +95,51 @@
       <elementName>name</elementName>
       <type>string</type>
       <size>255</size>
+      <options/>
     </field>
     <field>
       <name>elementName</name>
       <elementName>elementName</elementName>
       <type>string</type>
       <size>255</size>
+      <options>
+        <option>optional</option>
+      </options>
     </field>
     <field>
       <name>type</name>
       <elementName>type</elementName>
       <type>string</type>
       <size>32</size>
+      <options/>
     </field>
     <field>
       <name>size</name>
       <elementName>size</elementName>
       <type>integer</type>
       <size>4</size>
+      <options/>
+    </field>
+    <reference>
+      <name>options</name>
+      <elementName>options</elementName>
+      <targetType>ProjectorOptions</targetType>
+      <relationship>onetoone</relationship>
+      <options>
+        <option>optional</option>
+      </options>
+    </reference>
+  </object>
+  <object>
+    <name>ProjectorOptions</name>
+    <field>
+      <name>options</name>
+      <elementName>option</elementName>
+      <type>string</type>
+      <size>255</size>
+      <options>
+        <option>multiple</option>
+      </options>
     </field>
   </object>
   <object>
@@ -110,12 +149,14 @@
       <elementName>elementName</elementName>
       <type>string</type>
       <size>255</size>
+      <options/>
     </field>
     <field>
       <name>targetType</name>
       <elementName>targetType</elementName>
       <type>string</type>
       <size>255</size>
+      <options/>
     </field>
   </object>
   <object>
@@ -125,30 +166,46 @@
       <elementName>name</elementName>
       <type>string</type>
       <size>255</size>
+      <options/>
     </field>
     <field>
       <name>elementName</name>
       <elementName>elementName</elementName>
       <type>string</type>
       <size>255</size>
+      <options>
+		<option>optional</option>
+	  </options>
     </field>
     <field>
       <name>targetType</name>
       <elementName>targetType</elementName>
       <type>string</type>
       <size>255</size>
+      <options/>
     </field>
     <field>
       <name>relationship</name>
       <elementName>relationship</elementName>
       <type>string</type>
       <size>255</size>
+      <options/>
     </field>
     <reference>
       <name>subclassTypes</name>
       <elementName>subclassType</elementName>
       <targetType>SubclassType</targetType>
       <relationship>onetomany</relationship>
+      <options/>
+    </reference>
+    <reference>
+      <name>options</name>
+      <elementName>options</elementName>
+      <targetType>ProjectorOptions</targetType>
+      <relationship>onetoone</relationship>
+      <options>
+        <option>optional</option>
+      </options>
     </reference>
   </object>
 </projector>

@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 public class ProjectorField {
 	private Logger log;
 	private BaseProjectorField bpf;
+	private ProjectorOptions fieldOptions;
 	
 	public ProjectorField() {
 		log = Logger.getLogger("ProjectorField");
@@ -14,6 +15,13 @@ public class ProjectorField {
 	public ProjectorField(BaseProjectorField o) {
 		this();
 		bpf = o;
+		fieldOptions = new ProjectorOptions(o.options);
+	}
+	
+	public boolean hasOptionMultiple() {
+		if (fieldOptions.hasOption(ProjectorOptions.Options.MULTIPLE))
+			return true;
+		return false;
 	}
 	
 	public boolean generateDeclaration(PrintStream ps, String indent) {

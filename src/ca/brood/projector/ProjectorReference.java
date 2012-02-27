@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 public class ProjectorReference {
 	private BaseProjectorReference bpr;
+	private ProjectorOptions referenceOptions;
 	private Logger log;
 	
 	public ProjectorReference() {
@@ -14,6 +15,7 @@ public class ProjectorReference {
 	public ProjectorReference(BaseProjectorReference o) {
 		this();
 		bpr = o;
+		referenceOptions = new ProjectorOptions(bpr.options);
 	}
 	public boolean isOnetoMany() {
 		return "onetomany".equalsIgnoreCase(bpr.relationship);

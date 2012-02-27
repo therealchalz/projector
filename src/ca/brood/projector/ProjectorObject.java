@@ -251,16 +251,11 @@ public class ProjectorObject {
 		ps.println("");
 		//if we have onetomany relations or 'multiple' option fields, import ArrayList
 		boolean doneImport = false;
-		for (BaseProjectorField bpf : this.gpo.fields) {
-			if (bpf.options.options.size() > 0) {
-				for (String opt : bpf.options.options) {
-					if ("multiple".equalsIgnoreCase(opt)) {
-						ps.println("import java.util.ArrayList;");
-						doneImport = true;
-					}
-				}
-				if (doneImport)
-					break;
+		for (ProjectorField pf : this.fields) {
+			if (pf.hasOptionMultiple()) {
+				ps.println("import java.util.ArrayList;");
+				doneImport = true;
+				break;
 			}
 		}
 		for (int i=0; i<this.references.size() && !doneImport; i++) {

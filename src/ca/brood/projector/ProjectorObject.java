@@ -12,6 +12,7 @@ public class ProjectorObject {
 	private Logger log;
 	private BaseProjectorObject gpo;
 	protected ArrayList<ProjectorReference> references = new ArrayList<ProjectorReference>();
+	protected ArrayList<ProjectorField> fields = new ArrayList<ProjectorField>();
 	public ProjectorObject() {
 		log = Logger.getLogger("ProjectorObject");
 	}
@@ -19,160 +20,15 @@ public class ProjectorObject {
 		log = Logger.getLogger("ProjectorObject");
 		gpo = o;
 		references = new ArrayList<ProjectorReference>();
+		fields = new ArrayList<ProjectorField>();
 		for (BaseProjectorReference bpr : gpo.references) {
 			references.add(new ProjectorReference(bpr));
 		}
+		for (BaseProjectorField bpf : gpo.fields) {
+			fields.add(new ProjectorField(bpf));
+		}
 	}
 	
-	//this function also does error checking for subsequent field code generation methods
-	private boolean generateFieldDeclaration(PrintStream ps, BaseProjectorField gpf) {
-		if (gpf.name.length() == 0) {
-			log.error("Bad name for field: ");
-			return false;
-		}
-		if (gpf.elementName.equals("")) {
-			gpf.elementName = gpf.name;
-		}
-		boolean optionIsArray = false;
-		if (gpf.options.options.size() != 0) {
-			for (String option : gpf.options.options) {
-				if ("multiple".equalsIgnoreCase(option)) {
-					optionIsArray = true;
-				}
-			}
-		}
-		
-		if (!optionIsArray) {
-			if ("string".equalsIgnoreCase(gpf.type)) {
-				ps.println("	protected String "+gpf.name+" = \"\";");
-			} else if ("integer".equalsIgnoreCase(gpf.type)) {
-				if (gpf.size <= 4 && gpf.size > 0) {
-					ps.println("	protected int "+gpf.name+" = 0;");
-				} else if (gpf.size > 4 && gpf.size <= 8) {
-					ps.println("	protected long "+gpf.name+" = 0;");
-				} else {
-					log.error("Bad size for field: "+gpf.size);
-					return false;
-				}
-			} else if ("decimal".equalsIgnoreCase(gpf.type)) {
-				log.error("Decimal fields are not implement yet");
-				/*if (gpf.size <= 4 && gpf.size > 0) {
-					ps.println("	protected float "+gpf.name+" = 0.0;");
-				} else if (gpf.size > 4 && gpf.size <= 8) {
-					ps.println("	protected double "+gpf.name+" = 0.0;");
-				} else {
-					log.error("Bad size for field: "+gpf.size);
-					return false;
-				}*/
-			} else {
-				log.error("Bad type for field: "+gpf.type);
-				return false;
-			}
-		} else {
-			if ("string".equalsIgnoreCase(gpf.type)) {
-				ps.println("	protected ArrayList<String> "+gpf.name+" = new ArrayList<String>();");
-			} else if ("integer".equalsIgnoreCase(gpf.type)) {
-				if (gpf.size <= 4 && gpf.size > 0) {
-					ps.println("	protected ArrayList<Integer> "+gpf.name+" = new ArrayList<Integer>();");
-				} else if (gpf.size > 4 && gpf.size <= 8) {
-					ps.println("	protected ArrayList<Long> "+gpf.name+" = new ArrayList<Long>();");
-				} else {
-					log.error("Bad size for field: "+gpf.size);
-					return false;
-				}
-			} else if ("decimal".equalsIgnoreCase(gpf.type)) {
-				log.error("Decimal fields are not implement yet");
-				/*if (gpf.size <= 4 && gpf.size > 0) {
-					ps.println("	protected float "+gpf.name+" = 0.0;");
-				} else if (gpf.size > 4 && gpf.size <= 8) {
-					ps.println("	protected double "+gpf.name+" = 0.0;");
-				} else {
-					log.error("Bad size for field: "+gpf.size);
-					return false;
-				}*/
-			} else {
-				log.error("Bad type for field: "+gpf.type);
-				return false;
-			}
-		}
-		return true;
-	}
-	private boolean generateFieldReset(PrintStream ps, BaseProjectorField gpf) {
-		boolean optionIsArray = false;
-		if (gpf.options.options.size() != 0) {
-			for (String option : gpf.options.options) {
-				if ("multiple".equalsIgnoreCase(option)) {
-					optionIsArray = true;
-				}
-			}
-		}
-		if (!optionIsArray) {
-			if ("string".equalsIgnoreCase(gpf.type)) {
-				ps.println("		this."+gpf.name+" = \"\";");
-			} else if ("integer".equalsIgnoreCase(gpf.type)) {
-				ps.println("		this."+gpf.name+" = 0;");
-			} else if ("decimal".equalsIgnoreCase(gpf.type)) {
-				ps.println("		this."+gpf.name+" = 0.0;");
-			} else {
-				log.error("Bad type for field: "+gpf.type);
-				return false;
-			}
-		} else {
-			if ("string".equalsIgnoreCase(gpf.type)) {
-				ps.println("		this."+gpf.name+" = new ArrayList<String>();");
-			} else if ("integer".equalsIgnoreCase(gpf.type) && gpf.size <= 4) {
-				ps.println("		this."+gpf.name+" = new ArrayList<Integer>();");
-			} else if ("integer".equalsIgnoreCase(gpf.type) && gpf.size <= 8) {
-				ps.println("		this."+gpf.name+" = new ArrayList<Long>();");
-			} else if ("decimal".equalsIgnoreCase(gpf.type) && gpf.size <= 4) {
-				ps.println("		this."+gpf.name+" = new ArrayList<Float>();");
-			} else if ("decimal".equalsIgnoreCase(gpf.type) && gpf.size <= 8) {
-				ps.println("		this."+gpf.name+" = new ArrayList<Double>();");
-			} else {
-				log.error("Bad type for field: "+gpf.type);
-				return false;
-			}
-		}
-		return true;
-	}
-	private boolean generateFieldLoad(PrintStream ps, BaseProjectorField gpf) {
-		boolean optionIsArray = false;
-		if (gpf.options.options.size() != 0) {
-			for (String option : gpf.options.options) {
-				if ("multiple".equalsIgnoreCase(option)) {
-					optionIsArray = true;
-				}
-			}
-		}
-		ps.println("			} else if (\""+gpf.elementName+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
-		ps.println("				configNode.removeChild(currentConfigNode);");
-		if (!optionIsArray) {
-			if ("string".equalsIgnoreCase(gpf.type)) {
-				ps.println("				this."+gpf.name+" = currentConfigNode.getFirstChild().getNodeValue();");
-			} else if ("integer".equalsIgnoreCase(gpf.type)) {
-				ps.println("				try {");
-				ps.println("					this."+gpf.name+" = Util.parseInt(currentConfigNode.getFirstChild().getNodeValue());");
-				ps.println("				} catch (Exception e) {");
-				ps.println("					log.error(\"Error parsing "+gpf.elementName+": \"+currentConfigNode.getFirstChild().getNodeValue());");
-				ps.println("				}");
-			} else if ("decimal".equalsIgnoreCase(gpf.type)) {
-				log.error("Decimal field loading not implemented yet...");
-			}
-		} else {
-			if ("string".equalsIgnoreCase(gpf.type)) {
-				ps.println("				this."+gpf.name+".add(currentConfigNode.getFirstChild().getNodeValue());");
-			} else if ("integer".equalsIgnoreCase(gpf.type)) {
-				ps.println("				try {");
-				ps.println("					this."+gpf.name+".add(Util.parseInt(currentConfigNode.getFirstChild().getNodeValue()));");
-				ps.println("				} catch (Exception e) {");
-				ps.println("					log.error(\"Error parsing "+gpf.elementName+": \"+currentConfigNode.getFirstChild().getNodeValue());");
-				ps.println("				}");
-			} else if ("decimal".equalsIgnoreCase(gpf.type)) {
-				log.error("Decimal field loading not implemented yet...");
-			}
-		}
-		return true;
-	}
 	private boolean generateConfigureCode(PrintStream ps, String indent) {
 		ps.println(indent+"@Override");
 		ps.println(indent+"public boolean configure(Node configNode) {");
@@ -184,9 +40,8 @@ public class ProjectorObject {
 			ps.println(indent+"}");
 		}
 		//wipe fields, create new references
-		for (int i=0; i<this.gpo.fields.size(); i++) {
-			BaseProjectorField gpf = this.gpo.fields.get(i);
-			if (!generateFieldReset(ps, gpf)) {
+		for (ProjectorField pf : this.fields) {
+			if (!pf.generateReset(ps, indent)) {
 				return false;
 			}
 		}
@@ -203,9 +58,8 @@ public class ProjectorObject {
 		ps.println(indent+"(\"#text\".compareToIgnoreCase(currentConfigNode.getNodeName())==0))	{");
 		ps.println(indent+"	continue;");
 		//Generate loading of fields from XML
-		for (int i=0; i<this.gpo.fields.size(); i++) {
-			BaseProjectorField gpf = this.gpo.fields.get(i);
-			if (!generateFieldLoad(ps, gpf)) {
+		for (ProjectorField pf : this.fields) {
+			if (!pf.generateLoad(ps, indent)) {
 				return false;
 			}
 		}
@@ -448,9 +302,8 @@ public class ProjectorObject {
 		String indent = "\t";
 		
 		//generate fields and references
-		for (int i=0; i<this.gpo.fields.size(); i++) {
-			BaseProjectorField gpf = this.gpo.fields.get(i);
-			if (!generateFieldDeclaration(ps, gpf)) {
+		for (ProjectorField pf : this.fields) {
+			if (!pf.generateDeclaration(ps, indent)) {
 				return false;
 			}
 		}

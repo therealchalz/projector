@@ -173,9 +173,7 @@
       <elementName>elementName</elementName>
       <type>string</type>
       <size>255</size>
-      <options>
-		<option>optional</option>
-	  </options>
+      <options/>
     </field>
     <field>
       <name>targetType</name>

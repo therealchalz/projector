@@ -183,7 +183,7 @@ public class Projector extends BaseProjector {
 		ProjectorDtdGenerator pdg2 = new ProjectorDtdGenerator();
 		pdg2.writeDtd("projectorOut.dtd", this);
 		
-		installProjectorForTesting();
+		//installProjectorForTesting();
 		
 		log.info("Projector is finished.");
 	}

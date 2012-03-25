@@ -1,9 +1,10 @@
-package ca.brood.projector;
+package ca.brood.projector.base;
 
+import ca.brood.projector.*;
 import org.apache.log4j.Logger;
 import org.w3c.dom.*;
 
-public class BaseProjectorProject extends BaseGenerated {
+public abstract class BaseProjectorProject extends BaseGenerated {
 	protected String name = "";
 	protected String projectPackage = "";
 	protected String rootElement = "";
@@ -11,6 +12,30 @@ public class BaseProjectorProject extends BaseGenerated {
 	protected BaseProjectorProject() {
 		super();
 		log = Logger.getLogger("ProjectorProject");
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String val) {
+		this.name = val;
+	}
+	public String getProjectPackage() {
+		return projectPackage;
+	}
+	public void setProjectPackage(String val) {
+		this.projectPackage = val;
+	}
+	public String getRootElement() {
+		return rootElement;
+	}
+	public void setRootElement(String val) {
+		this.rootElement = val;
+	}
+	public String getRootObject() {
+		return rootObject;
+	}
+	public void setRootObject(String val) {
+		this.rootObject = val;
 	}
 	@Override
 	public boolean configure(Node configNode) {

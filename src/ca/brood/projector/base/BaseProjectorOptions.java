@@ -1,14 +1,21 @@
-package ca.brood.projector;
+package ca.brood.projector.base;
 
+import ca.brood.projector.*;
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
 import org.w3c.dom.*;
 
-public class BaseProjectorOptions extends BaseGenerated {
+public abstract class BaseProjectorOptions extends BaseGenerated {
 	protected ArrayList<String> options = new ArrayList<String>();
 	protected BaseProjectorOptions() {
 		super();
 		log = Logger.getLogger("ProjectorOptions");
+	}
+	public ArrayList<String> getOptions() {
+		return options;
+	}
+	public void setOptions(ArrayList<String> val) {
+		this.options = val;
 	}
 	@Override
 	public boolean configure(Node configNode) {

@@ -1,40 +1,20 @@
 package ca.brood.projector;
 
+import ca.brood.projector.base.BaseProjectorObject;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-
-
-import org.apache.log4j.Logger;
-
-public class ProjectorObject {
-	private Logger log;
-	private BaseProjectorObject gpo;
-	protected ArrayList<ProjectorReference> references = new ArrayList<ProjectorReference>();
-	protected ArrayList<ProjectorField> fields = new ArrayList<ProjectorField>();
+public class ProjectorObject extends BaseProjectorObject {
 	public ProjectorObject() {
-		log = Logger.getLogger("ProjectorObject");
+		super();
 	}
-	public ProjectorObject(BaseProjectorObject o) {
-		log = Logger.getLogger("ProjectorObject");
-		gpo = o;
-		references = new ArrayList<ProjectorReference>();
-		fields = new ArrayList<ProjectorField>();
-		for (BaseProjectorReference bpr : gpo.references) {
-			references.add(new ProjectorReference(bpr));
-		}
-		for (BaseProjectorField bpf : gpo.fields) {
-			fields.add(new ProjectorField(bpf));
-		}
-	}
-	
 	private boolean generateConfigureCode(PrintStream ps, String indent) {
 		ps.println(indent+"@Override");
 		ps.println(indent+"public boolean configure(Node configNode) {");
 		indent+="\t";
 		//Go through super first if we're a subclass
-		if (!gpo.superclass.equals("")) {
+		if (!this.getSuperclass().equals("")) {
 			ps.println(indent+"if (!super.configure(configNode)) {");
 			ps.println(indent+"	return false;");
 			ps.println(indent+"}");
@@ -74,16 +54,16 @@ public class ProjectorObject {
 		indent = indent.substring(1);
 		ps.println(indent+"}");
 		//Print debug info for loaded fields
-		for (int i=0; i<this.gpo.fields.size(); i++) {
-			BaseProjectorField gpf = this.gpo.fields.get(i);
-			ps.println(indent+"log.debug(\""+this.gpo.name+" "+gpf.name+": \"+this."+gpf.name+");");
+		for (int i=0; i<this.getFields().size(); i++) {
+			ProjectorField gpf = this.getFields().get(i);
+			ps.println(indent+"log.debug(\""+this.getName()+" "+gpf.getName()+": \"+this."+gpf.getName()+");");
 		}
 		ps.println(indent+"return true;");
 		indent = indent.substring(1);
 		ps.println(indent+"}");
 		return true;
 	}
-	private boolean generateLoadCode(PrintStream ps, BaseProjectorProject gpp) {
+	private boolean generateLoadCode(PrintStream ps, ProjectorProject gpp) {
 		ps.println("	protected boolean load(String filename) {");
 		ps.println("		log.info(\"Loading file: \"+filename);");
 		ps.println();
@@ -108,11 +88,11 @@ public class ProjectorObject {
 		ps.println("		}");
 		ps.println("		Node currentConfigNode = doc.getDocumentElement();");
 		ps.println("		log.debug(\"Reading configuration now\");");
-		ps.println("		if (\""+gpp.rootElement+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0) {");
+		ps.println("		if (\""+gpp.getRootElement()+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0) {");
 		ps.println("			log.debug(\"Configuring project...\");");
 		ps.println("			this.configure(currentConfigNode);");
 		ps.println("		} else {");
-		ps.println("			log.fatal(\"Bad XML file: root element isn't a "+gpp.rootElement+".\");");
+		ps.println("			log.fatal(\"Bad XML file: root element isn't a "+gpp.getRootElement()+".\");");
 		ps.println("			return false;");
 		ps.println("		}");
 		ps.println("		log.info(\"Done with \"+filename);");
@@ -120,7 +100,7 @@ public class ProjectorObject {
 		ps.println("	}");
 		return true;
 	}
-	private boolean generateFileSaveCode(PrintStream ps, BaseProjectorProject gpp) {
+	private boolean generateFileSaveCode(PrintStream ps, ProjectorProject gpp) {
 		ps.println("	protected boolean save(String filename) {");
 		ps.println("		log.info(\"Saving to file: \"+filename);");
 		ps.println();
@@ -129,12 +109,12 @@ public class ProjectorObject {
 		ps.println("		try {");
 		ps.println("			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();");
 		ps.println("			doc = dBuilder.newDocument();");
-		ps.println("			doc.appendChild(this.save(doc, \""+gpp.rootElement+"\"));");
+		ps.println("			doc.appendChild(this.save(doc, \""+gpp.getRootElement()+"\"));");
 		ps.println("			TransformerFactory transformerFactory = TransformerFactory.newInstance();");
 		ps.println("			Transformer transformer = transformerFactory.newTransformer();");
 		ps.println("			DOMSource source = new DOMSource(doc);");
 		ps.println("			StreamResult result = new StreamResult(new File(filename));");
-		ps.println("			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, \""+gpp.name.toLowerCase()+".dtd\");");
+		ps.println("			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, \""+gpp.getName().toLowerCase()+".dtd\");");
 		ps.println("			transformer.setOutputProperty(OutputKeys.INDENT, \"yes\");");
 		ps.println("			transformer.setOutputProperty(\"{http://xml.apache.org/xslt}indent-amount\", \"2\");");
 		ps.println("			transformer.transform(source, result);");
@@ -149,7 +129,7 @@ public class ProjectorObject {
 		return true;
 	}
 
-	private boolean generateSaveCode(PrintStream ps, BaseProjectorObject bpo) {
+	private boolean generateSaveCode(PrintStream ps, ProjectorObject bpo) {
 		ps.println("	@Override");
 		ps.println("	public Element save(Document doc, String root) {");
 		//Generate save for superclass if applicable
@@ -160,40 +140,40 @@ public class ProjectorObject {
 		}
 		//Generate saves for fields
 		int fieldCount = 1;
-		for (BaseProjectorField bpf : bpo.fields) {
+		for (ProjectorField bpf : bpo.fields) {
 			String indent = "\t\t";
 			boolean optionIsArray = false;
-			if (bpf.options.options.size() != 0) {
-				for (String option : bpf.options.options) {
+			if (bpf.getOptions().getOptions().size() != 0) {
+				for (String option : bpf.getOptions().getOptions()) {
 					if ("multiple".equalsIgnoreCase(option)) {
 						optionIsArray = true;
 					}
 				}
 			}
 			if (optionIsArray){
-				if (bpf.type.equalsIgnoreCase("string")) {
-					ps.println(indent+"for (String s : this."+bpf.name+") {");
-				} else if (bpf.type.equalsIgnoreCase("integer")) {
-					ps.println(indent+"for (Integer s : this."+bpf.name+") {");
+				if (bpf.getType().equalsIgnoreCase("string")) {
+					ps.println(indent+"for (String s : this."+bpf.getName()+") {");
+				} else if (bpf.getType().equalsIgnoreCase("integer")) {
+					ps.println(indent+"for (Integer s : this."+bpf.getName()+") {");
 				} else {
 					log.error("Error - bad type for multiple option");
 				}
 				indent+="\t";
 			}
-			if (bpf.type.equalsIgnoreCase("string")) {
-				ps.println(indent+"if (!"+(optionIsArray? "s" : bpf.name)+".equals(\"\")) {");
+			if (bpf.getType().equalsIgnoreCase("string")) {
+				ps.println(indent+"if (!"+(optionIsArray? "s" : bpf.getName())+".equals(\"\")) {");
 				indent+= "\t";
 			}
-			ps.println(indent+"Element f"+(fieldCount)+" = doc.createElement(\""+(bpf.elementName.equals("") ? bpf.name : bpf.elementName)+"\");");
-			if (bpf.type.equalsIgnoreCase("string")){
-				ps.println(indent+"f"+fieldCount+".appendChild(doc.createTextNode("+(optionIsArray? "s" : bpf.name)+"));");
-			} else if (bpf.type.equalsIgnoreCase("integer")) {
-				ps.println(indent+"f"+fieldCount+".appendChild(doc.createTextNode(Integer.toString("+(optionIsArray? "s" : bpf.name)+")));");
-			} else if (bpf.type.equalsIgnoreCase("decimal")) {
+			ps.println(indent+"Element f"+(fieldCount)+" = doc.createElement(\""+(bpf.getElementName().equals("") ? bpf.getName() : bpf.getElementName())+"\");");
+			if (bpf.getType().equalsIgnoreCase("string")){
+				ps.println(indent+"f"+fieldCount+".appendChild(doc.createTextNode("+(optionIsArray? "s" : bpf.getName())+"));");
+			} else if (bpf.getType().equalsIgnoreCase("integer")) {
+				ps.println(indent+"f"+fieldCount+".appendChild(doc.createTextNode(Integer.toString("+(optionIsArray? "s" : bpf.getName())+")));");
+			} else if (bpf.getType().equalsIgnoreCase("decimal")) {
 				log.error("Error: saving decimal fields isn't supported yet");
 			}
 			ps.println(indent+"ret.appendChild(f"+fieldCount+");");
-			if (bpf.type.equalsIgnoreCase("string")) {
+			if (bpf.getType().equalsIgnoreCase("string")) {
 				indent = indent.substring(1);
 				ps.println(indent+"}");
 			}
@@ -204,27 +184,27 @@ public class ProjectorObject {
 			fieldCount++;
 		}
 		//Generate saves for references
-		for (BaseProjectorReference bpr : bpo.references) {
-			if (bpr.relationship.equals("onetoone")) {
-				if (bpr.subclassTypes.size() == 0) {
-					ps.println("		ret.appendChild("+bpr.name+".save(doc, \""+(bpr.elementName.equals("") ? bpr.name : bpr.elementName )+"\"));");
+		for (ProjectorReference bpr : bpo.references) {
+			if (bpr.getRelationship().equals("onetoone")) {
+				if (bpr.getSubclassTypes().size() == 0) {
+					ps.println("		ret.appendChild("+bpr.getName()+".save(doc, \""+(bpr.getElementName().equals("") ? bpr.getName() : bpr.getElementName() )+"\"));");
 				} else {
 					boolean firstSubclass = true;
-					for (BaseSubclassType bst : bpr.subclassTypes) {
+					for (SubclassType bst : bpr.getSubclassTypes()) {
 						if (firstSubclass) { //same as others except for "if" vs "else if"
-							ps.println("		if ("+bpr.name+" instanceof Base"+bst.targetType+") {");
+							ps.println("		if ("+bpr.getName()+" instanceof Base"+bst.getTargetType()+") {");
 							firstSubclass = false;
 						} else {
-							ps.println("		} else if ("+bpr.name+" instanceof Base"+bst.targetType+") {");
+							ps.println("		} else if ("+bpr.getName()+" instanceof Base"+bst.getTargetType()+") {");
 						}
-						ps.println("			ret.appendChild("+bpr.name+".save(doc, \""+bst.elementName+"\"));");
+						ps.println("			ret.appendChild("+bpr.getName()+".save(doc, \""+bst.getElementName()+"\"));");
 					}
 					ps.println("		}");
 				}
-			} else if (bpr.relationship.equals("onetomany")) {
-				if (bpr.subclassTypes.size() == 0) {
-					ps.println("		for (Base"+bpr.targetType+" base"+bpr.targetType+" : "+bpr.name+") {");
-					ps.println("			ret.appendChild(base"+bpr.targetType+".save(doc, \""+(bpr.elementName.equals("") ? bpr.name : bpr.elementName )+"\"));");
+			} else if (bpr.getRelationship().equals("onetomany")) {
+				if (bpr.getSubclassTypes().size() == 0) {
+					ps.println("		for (Base"+bpr.getTargetType()+" base"+bpr.getTargetType()+" : "+bpr.getName()+") {");
+					ps.println("			ret.appendChild(base"+bpr.getTargetType()+".save(doc, \""+(bpr.getElementName().equals("") ? bpr.getName() : bpr.getElementName() )+"\"));");
 					ps.println("		}");
 				} else {
 					log.error("One to many subclass types saving to xml is not implemented yet");
@@ -236,10 +216,19 @@ public class ProjectorObject {
 
 		return true;
 	}
-	public boolean generate(String location, String packageStr, BaseProjectorProject gpp) {
+	public boolean generate(String location, String packageStr, ProjectorProject gpp) {
+		boolean success = generateBaseClass(location+"/base", packageStr, gpp);
+		if (success)
+			success = generateStandardClass(location, packageStr, gpp);
+		return success;
+	}
+	public boolean generateStandardClass(String location, String packageStr, ProjectorProject gpp) {
 		PrintStream ps;
-		String className = "Base"+this.gpo.name;
+		String className = this.getName();
 		String fileName = location+"/"+className+".java";
+		java.io.File file = new java.io.File(fileName);
+		if (file.exists())
+			return true;
 		try {
 			ps = new PrintStream(fileName);
 		} catch (FileNotFoundException e) {
@@ -249,6 +238,30 @@ public class ProjectorObject {
 		log.debug("Generating: "+fileName);
 		ps.println("package "+packageStr+";");
 		ps.println("");
+		ps.println("import "+packageStr+".base.Base"+className+";");
+		ps.println("");
+		ps.println("public class "+className+" extends Base"+className+" {");
+		ps.println("	public "+className+"() {");
+		ps.println("		super();");
+		ps.println("	}");
+		ps.println("}");
+		ps.println("");
+		return true;
+	}
+	private boolean generateBaseClass(String location, String packageStr, ProjectorProject gpp) {
+		PrintStream ps;
+		String className = "Base"+this.getName();
+		String fileName = location+"/"+className+".java";
+		try {
+			ps = new PrintStream(fileName);
+		} catch (FileNotFoundException e) {
+			log.error("Error creating output file: "+fileName);
+			return false;
+		}
+		log.debug("Generating: "+fileName);
+		ps.println("package "+packageStr+".base;");
+		ps.println("");
+		ps.println("import "+packageStr+".*;");
 		//if we have onetomany relations or 'multiple' option fields, import ArrayList
 		boolean doneImport = false;
 		for (ProjectorField pf : this.fields) {
@@ -265,7 +278,7 @@ public class ProjectorObject {
 			}
 		}
 		//if this is the main object, import the extra stuff:
-		if (this.gpo.name.equals(gpp.name)) {
+		if (this.getName().equals(gpp.getName())) {
 			ps.println("import java.io.*;");
 			ps.println("import javax.xml.parsers.*;");
 			ps.println("import org.apache.log4j.PropertyConfigurator;");
@@ -274,13 +287,13 @@ public class ProjectorObject {
 			ps.println("import javax.xml.transform.stream.StreamResult;");
 		}
 		//if this object has an integer/decimal field or is the main object, have to import util
-		if (this.gpo.name.equals(gpp.name)) {
-			ps.println("import "+gpp.projectPackage+".util.*;");
+		if (this.getName().equals(gpp.getName())) {
+			ps.println("import "+gpp.getProjectPackage()+".util.*;");
 		} else {
-			for (int i=0; i<this.gpo.fields.size(); i++) {
-				if (("integer".equalsIgnoreCase(this.gpo.fields.get(i).type)) ||
-						("decimal".equalsIgnoreCase(this.gpo.fields.get(i).type))){
-					ps.println("import "+gpp.projectPackage+".util.*;");
+			for (int i=0; i<this.getFields().size(); i++) {
+				if (("integer".equalsIgnoreCase(this.getFields().get(i).getType())) ||
+						("decimal".equalsIgnoreCase(this.getFields().get(i).getType()))){
+					ps.println("import "+gpp.getProjectPackage()+".util.*;");
 					break;
 				}
 			}
@@ -288,10 +301,10 @@ public class ProjectorObject {
 		ps.println("import org.apache.log4j.Logger;");
 		ps.println("import org.w3c.dom.*;");
 		ps.println("");
-		if (gpo.superclass.equals("")) {
-			ps.println("public class "+className+" extends BaseGenerated {");
+		if (this.getSuperclass().equals("")) {
+			ps.println("public abstract class "+className+" extends BaseGenerated {");
 		} else {
-			ps.println("public class "+className+" extends Base"+gpo.superclass+" {");
+			ps.println("public abstract class "+className+" extends Base"+this.getSuperclass()+" {");
 		}
 		
 		String indent = "\t";
@@ -310,29 +323,40 @@ public class ProjectorObject {
 		//Constructor:
 		ps.println(indent+"protected "+className+"() {");
 		ps.println(indent+"	super();");
-		if (this.gpo.name.equals(gpp.name)) {
+		if (this.getName().equals(gpp.getName())) {
 			ps.println(indent+"	PropertyConfigurator.configure(\"logger.config\");");
 		}
-		ps.println(indent+"	log = Logger.getLogger(\""+this.gpo.name+"\");");
+		ps.println(indent+"	log = Logger.getLogger(\""+this.getName()+"\");");
 		ps.println(indent+"}");
+		//Getters and Setters
+		for (ProjectorField pf: this.fields) {
+			if (!pf.generateGettersAndSetters(ps,indent)) {
+				return false;
+			}
+		}
+		for (ProjectorReference pr : this.references) {
+			if (!pr.generateGettersAndSetters(ps, indent)) {
+				return false;
+			}
+		}
 		//Configure override:
 		if (!generateConfigureCode(ps, indent)) {
-			log.error("Couldn't generate configure code for "+this.gpo.name);
+			log.error("Couldn't generate configure code for "+this.getName());
 			return false;
 		}
 		//Save override:
-		if (!generateSaveCode(ps, this.gpo)) {
-			log.error("Couldn't generate save code for "+this.gpo.name);
+		if (!generateSaveCode(ps, this)) {
+			log.error("Couldn't generate save code for "+this.getName());
 			return false;
 		}
-		if (this.gpo.name.equals(gpp.name)) {
+		if (this.getName().equals(gpp.getName())) {
 			//This is the main object, so we add the XML loading and saving code
 			if (!generateLoadCode(ps, gpp)) {
-				log.error("Couldn't generate run code for "+this.gpo.name);
+				log.error("Couldn't generate run code for "+this.getName());
 				return false;
 			}
 			if (!generateFileSaveCode(ps, gpp)) {
-				log.error("Couldn't generate file save code for "+this.gpo.name);
+				log.error("Couldn't generate file save code for "+this.getName());
 				return false;
 			}
 		}
@@ -340,3 +364,5 @@ public class ProjectorObject {
 		return true;
 	}
 }
+
+

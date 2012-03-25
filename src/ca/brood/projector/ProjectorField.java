@@ -1,59 +1,50 @@
 package ca.brood.projector;
 
+import ca.brood.projector.base.BaseProjectorField;
 import java.io.PrintStream;
-
+import ca.brood.projector.util.Util;
 import org.apache.log4j.Logger;
 
-public class ProjectorField {
-	private Logger log;
-	private BaseProjectorField bpf;
-	private ProjectorOptions fieldOptions;
-	
+public class ProjectorField extends BaseProjectorField {
 	public ProjectorField() {
-		log = Logger.getLogger("ProjectorField");
+		super();
 	}
-	public ProjectorField(BaseProjectorField o) {
-		this();
-		bpf = o;
-		fieldOptions = new ProjectorOptions(o.options);
-	}
-	
 	public boolean hasOptionMultiple() {
-		if (fieldOptions.hasOption(ProjectorOptions.Options.MULTIPLE))
+		if (this.getOptions().hasOption(ProjectorOptions.Options.MULTIPLE)) {
 			return true;
+		}
 		return false;
 	}
-	
-	public boolean generateDeclaration(PrintStream ps, String indent) {
-		if (bpf.name.length() == 0) {
-			log.error("Bad name for field: ");
-			return false;
-		}
-		if (bpf.elementName.equals("")) {
-			bpf.elementName = bpf.name;
-		}
+	private boolean isArray() {
 		boolean optionIsArray = false;
-		if (bpf.options.options.size() != 0) {
-			for (String option : bpf.options.options) {
+		if (this.getOptions().getOptions().size() != 0) {
+			for (String option : this.getOptions().getOptions()) {
 				if ("multiple".equalsIgnoreCase(option)) {
 					optionIsArray = true;
 				}
 			}
 		}
+		return optionIsArray;
+	}
+	public boolean generateDeclaration(PrintStream ps, String indent) {
+		if (!verifyFields()) {
+			return false;
+		}
 		
+		boolean optionIsArray = isArray();
 		if (!optionIsArray) {
-			if ("string".equalsIgnoreCase(bpf.type)) {
-				ps.println(indent+"protected String "+bpf.name+" = \"\";");
-			} else if ("integer".equalsIgnoreCase(bpf.type)) {
-				if (bpf.size <= 4 && bpf.size > 0) {
-					ps.println(indent+"protected int "+bpf.name+" = 0;");
-				} else if (bpf.size > 4 && bpf.size <= 8) {
-					ps.println(indent+"protected long "+bpf.name+" = 0;");
+			if ("string".equalsIgnoreCase(getType())) {
+				ps.println(indent+"protected String "+getName()+" = \"\";");
+			} else if ("integer".equalsIgnoreCase(getType())) {
+				if (getSize() <= 4 && getSize() > 0) {
+					ps.println(indent+"protected int "+getName()+" = 0;");
+				} else if (getSize() > 4 && getSize() <= 8) {
+					ps.println(indent+"protected long "+getName()+" = 0;");
 				} else {
-					log.error("Bad size for field: "+bpf.size);
+					log.error("Bad size for field: "+getSize());
 					return false;
 				}
-			} else if ("decimal".equalsIgnoreCase(bpf.type)) {
+			} else if ("decimal".equalsIgnoreCase(getType())) {
 				log.error("Decimal fields are not implement yet");
 				/*if (gpf.size <= 4 && gpf.size > 0) {
 					ps.println("	protected float "+gpf.name+" = 0.0;");
@@ -64,71 +55,149 @@ public class ProjectorField {
 					return false;
 				}*/
 			} else {
-				log.error("Bad type for field: "+bpf.type);
+				log.error("Bad type for field: "+getType());
 				return false;
 			}
 		} else {
-			if ("string".equalsIgnoreCase(bpf.type)) {
-				ps.println(indent+"protected ArrayList<String> "+bpf.name+" = new ArrayList<String>();");
-			} else if ("integer".equalsIgnoreCase(bpf.type)) {
-				if (bpf.size <= 4 && bpf.size > 0) {
-					ps.println(indent+"protected ArrayList<Integer> "+bpf.name+" = new ArrayList<Integer>();");
-				} else if (bpf.size > 4 && bpf.size <= 8) {
-					ps.println(indent+"protected ArrayList<Long> "+bpf.name+" = new ArrayList<Long>();");
+			if ("string".equalsIgnoreCase(getType())) {
+				ps.println(indent+"protected ArrayList<String> "+getName()+" = new ArrayList<String>();");
+			} else if ("integer".equalsIgnoreCase(getType())) {
+				if (getSize() <= 4 && getSize() > 0) {
+					ps.println(indent+"protected ArrayList<Integer> "+getName()+" = new ArrayList<Integer>();");
+				} else if (getSize() > 4 && getSize() <= 8) {
+					ps.println(indent+"protected ArrayList<Long> "+getName()+" = new ArrayList<Long>();");
 				} else {
-					log.error("Bad size for field: "+bpf.size);
+					log.error("Bad size for field: "+getSize());
 					return false;
 				}
-			} else if ("decimal".equalsIgnoreCase(bpf.type)) {
+			} else if ("decimal".equalsIgnoreCase(getType())) {
 				log.error("Decimal fields are not implement yet");
-				/*if (bpf.size <= 4 && bpf.size > 0) {
-					ps.println(indent+"protected float "+bpf.name+" = 0.0;");
+				/*if (getSize() <= 4 && getSize() > 0) {
+					ps.println(indent+"protected float "+getName()+" = 0.0;");
 				} else if (gpf.size > 4 && gpf.size <= 8) {
-					ps.println(indent+"protected double "+bpf.name+" = 0.0;");
+					ps.println(indent+"protected double "+getName()+" = 0.0;");
 				} else {
-					log.error("Bad size for field: "+bpf.size);
+					log.error("Bad size for field: "+getSize());
 					return false;
 				}*/
 			} else {
-				log.error("Bad type for field: "+bpf.type);
+				log.error("Bad type for field: "+getType());
 				return false;
 			}
 		}
 		return true;
 	}
+	private boolean verifyFields() {
+		if (this.getElementName().equals("")) {
+			this.setElementName(this.getName());
+		}
+		if (this.getName().length() == 0) {
+			log.error("Bad name for field: ");
+			return false;
+		}
+		return true;
+	}
+	public boolean generateGettersAndSetters(PrintStream ps, String indent) {
+		if (!verifyFields()) {
+			return false;
+		}
+		boolean optionIsArray = isArray();
+		String fieldType = "error";
+		
+		if (!optionIsArray) {
+			if ("string".equalsIgnoreCase(getType())) {
+				fieldType = "String";
+			} else if ("integer".equalsIgnoreCase(getType())) {
+				if (getSize() <= 4 && getSize() > 0) {
+					fieldType = "int";
+				} else if (getSize() > 4 && getSize() <= 8) {
+					fieldType = "long";
+				} else {
+					log.error("Bad size for field: "+getSize());
+					return false;
+				}
+			} else if ("decimal".equalsIgnoreCase(getType())) {
+				log.error("Decimal fields are not implement yet");
+				/*if (gpf.size <= 4 && gpf.size > 0) {
+					ps.println("	protected float "+gpf.name+" = 0.0;");
+				} else if (gpf.size > 4 && gpf.size <= 8) {
+					ps.println("	protected double "+gpf.name+" = 0.0;");
+				} else {
+					log.error("Bad size for field: "+gpf.size);
+					return false;
+				}*/
+			} else {
+				log.error("Bad type for field: "+getType());
+				return false;
+			}
+		} else {
+			if ("string".equalsIgnoreCase(getType())) {
+				fieldType = "ArrayList<String>";
+			} else if ("integer".equalsIgnoreCase(getType())) {
+				if (getSize() <= 4 && getSize() > 0) {
+					fieldType = "ArrayList<Integer>";
+				} else if (getSize() > 4 && getSize() <= 8) {
+					fieldType = "ArrayList<Long>";
+				} else {
+					log.error("Bad size for field: "+getSize());
+					return false;
+				}
+			} else if ("decimal".equalsIgnoreCase(getType())) {
+				log.error("Decimal fields are not implement yet");
+				/*if (getSize() <= 4 && getSize() > 0) {
+					ps.println(indent+"protected float "+getName()+" = 0.0;");
+				} else if (gpf.size > 4 && gpf.size <= 8) {
+					ps.println(indent+"protected double "+getName()+" = 0.0;");
+				} else {
+					log.error("Bad size for field: "+getSize());
+					return false;
+				}*/
+			} else {
+				log.error("Bad type for field: "+getType());
+				return false;
+			}
+		}
+		ps.println(indent+"public "+fieldType+" get"+Util.UppercaseFirstCharacter(getName())+"() {");
+		ps.println(indent+"	return "+getName()+";");
+		ps.println(indent+"}");
+		ps.println(indent+"public void set"+Util.UppercaseFirstCharacter(getName())+"("+fieldType+" val) {");
+		ps.println(indent+"	this."+getName()+" = val;");
+		ps.println(indent+"}");
+		return true;
+	}
 	public boolean generateReset(PrintStream ps, String indent) {
 		boolean optionIsArray = false;
-		if (bpf.options.options.size() != 0) {
-			for (String option : bpf.options.options) {
+		if (getOptions().getOptions().size() != 0) {
+			for (String option : getOptions().getOptions()) {
 				if ("multiple".equalsIgnoreCase(option)) {
 					optionIsArray = true;
 				}
 			}
 		}
 		if (!optionIsArray) {
-			if ("string".equalsIgnoreCase(bpf.type)) {
-				ps.println(indent+"this."+bpf.name+" = \"\";");
-			} else if ("integer".equalsIgnoreCase(bpf.type)) {
-				ps.println(indent+"this."+bpf.name+" = 0;");
-			} else if ("decimal".equalsIgnoreCase(bpf.type)) {
-				ps.println(indent+"this."+bpf.name+" = 0.0;");
+			if ("string".equalsIgnoreCase(getType())) {
+				ps.println(indent+"this."+getName()+" = \"\";");
+			} else if ("integer".equalsIgnoreCase(getType())) {
+				ps.println(indent+"this."+getName()+" = 0;");
+			} else if ("decimal".equalsIgnoreCase(getType())) {
+				ps.println(indent+"this."+getName()+" = 0.0;");
 			} else {
-				log.error("Bad type for field: "+bpf.type);
+				log.error("Bad type for field: "+getType());
 				return false;
 			}
 		} else {
-			if ("string".equalsIgnoreCase(bpf.type)) {
-				ps.println(indent+"this."+bpf.name+" = new ArrayList<String>();");
-			} else if ("integer".equalsIgnoreCase(bpf.type) && bpf.size <= 4) {
-				ps.println(indent+"this."+bpf.name+" = new ArrayList<Integer>();");
-			} else if ("integer".equalsIgnoreCase(bpf.type) && bpf.size <= 8) {
-				ps.println(indent+"this."+bpf.name+" = new ArrayList<Long>();");
-			} else if ("decimal".equalsIgnoreCase(bpf.type) && bpf.size <= 4) {
-				ps.println(indent+"this."+bpf.name+" = new ArrayList<Float>();");
-			} else if ("decimal".equalsIgnoreCase(bpf.type) && bpf.size <= 8) {
-				ps.println(indent+"this."+bpf.name+" = new ArrayList<Double>();");
+			if ("string".equalsIgnoreCase(getType())) {
+				ps.println(indent+"this."+getName()+" = new ArrayList<String>();");
+			} else if ("integer".equalsIgnoreCase(getType()) && getSize() <= 4) {
+				ps.println(indent+"this."+getName()+" = new ArrayList<Integer>();");
+			} else if ("integer".equalsIgnoreCase(getType()) && getSize() <= 8) {
+				ps.println(indent+"this."+getName()+" = new ArrayList<Long>();");
+			} else if ("decimal".equalsIgnoreCase(getType()) && getSize() <= 4) {
+				ps.println(indent+"this."+getName()+" = new ArrayList<Float>();");
+			} else if ("decimal".equalsIgnoreCase(getType()) && getSize() <= 8) {
+				ps.println(indent+"this."+getName()+" = new ArrayList<Double>();");
 			} else {
-				log.error("Bad type for field: "+bpf.type);
+				log.error("Bad type for field: "+getType());
 				return false;
 			}
 		}
@@ -136,38 +205,38 @@ public class ProjectorField {
 	}
 	public boolean generateLoad(PrintStream ps, String indent) {
 		boolean optionIsArray = false;
-		if (bpf.options.options.size() != 0) {
-			for (String option : bpf.options.options) {
+		if (getOptions().getOptions().size() != 0) {
+			for (String option : getOptions().getOptions()) {
 				if ("multiple".equalsIgnoreCase(option)) {
 					optionIsArray = true;
 				}
 			}
 		}
-		ps.println(indent+"} else if (\""+bpf.elementName+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
+		ps.println(indent+"} else if (\""+getElementName()+"\".compareToIgnoreCase(currentConfigNode.getNodeName())==0){");
 		indent += "\t";
 		ps.println(indent+"configNode.removeChild(currentConfigNode);");
 		if (!optionIsArray) {
-			if ("string".equalsIgnoreCase(bpf.type)) {
-				ps.println(indent+"this."+bpf.name+" = currentConfigNode.getFirstChild().getNodeValue();");
-			} else if ("integer".equalsIgnoreCase(bpf.type)) {
+			if ("string".equalsIgnoreCase(getType())) {
+				ps.println(indent+"this."+getName()+" = currentConfigNode.getFirstChild().getNodeValue();");
+			} else if ("integer".equalsIgnoreCase(getType())) {
 				ps.println(indent+"try {");
-				ps.println(indent+"	this."+bpf.name+" = Util.parseInt(currentConfigNode.getFirstChild().getNodeValue());");
+				ps.println(indent+"	this."+getName()+" = Util.parseInt(currentConfigNode.getFirstChild().getNodeValue());");
 				ps.println(indent+"} catch (Exception e) {");
-				ps.println(indent+"	log.error(\"Error parsing "+bpf.elementName+": \"+currentConfigNode.getFirstChild().getNodeValue());");
+				ps.println(indent+"	log.error(\"Error parsing "+getElementName()+": \"+currentConfigNode.getFirstChild().getNodeValue());");
 				ps.println(indent+"}");
-			} else if ("decimal".equalsIgnoreCase(bpf.type)) {
+			} else if ("decimal".equalsIgnoreCase(getType())) {
 				log.error("Decimal field loading not implemented yet...");
 			}
 		} else {
-			if ("string".equalsIgnoreCase(bpf.type)) {
-				ps.println(indent+"this."+bpf.name+".add(currentConfigNode.getFirstChild().getNodeValue());");
-			} else if ("integer".equalsIgnoreCase(bpf.type)) {
+			if ("string".equalsIgnoreCase(getType())) {
+				ps.println(indent+"this."+getName()+".add(currentConfigNode.getFirstChild().getNodeValue());");
+			} else if ("integer".equalsIgnoreCase(getType())) {
 				ps.println(indent+"try {");
-				ps.println(indent+"	this."+bpf.name+".add(Util.parseInt(currentConfigNode.getFirstChild().getNodeValue()));");
+				ps.println(indent+"	this."+getName()+".add(Util.parseInt(currentConfigNode.getFirstChild().getNodeValue()));");
 				ps.println(indent+"} catch (Exception e) {");
-				ps.println(indent+"	log.error(\"Error parsing "+bpf.elementName+": \"+currentConfigNode.getFirstChild().getNodeValue());");
+				ps.println(indent+"	log.error(\"Error parsing "+getElementName()+": \"+currentConfigNode.getFirstChild().getNodeValue());");
 				ps.println(indent+"}");
-			} else if ("decimal".equalsIgnoreCase(bpf.type)) {
+			} else if ("decimal".equalsIgnoreCase(getType())) {
 				log.error("Decimal field loading not implemented yet...");
 			}
 		}

@@ -1,9 +1,9 @@
 package ca.brood.projector;
 
+import ca.brood.projector.base.BaseProjector;
 import java.io.*;
 
 public class Projector extends BaseProjector {
-	
 	public Projector() {
 		super();
 		log.info("Projector is starting...");
@@ -28,33 +28,34 @@ public class Projector extends BaseProjector {
 		if (!testDir("projects"))
 			return;
 		
-		if (!testDir("projects/"+this.project.name))
+		if (!testDir("projects/"+this.project.getName()))
 			return;
 		
-		if (!testDir("projects/"+this.project.name+"/lib/"))
+		if (!testDir("projects/"+this.project.getName()+"/lib/"))
 			return;
 
-		String javaPath = "projects/"+this.project.name+"/src/"+this.project.projectPackage.replace(".", "/");
+		String javaPath = "projects/"+this.project.getName()+"/src/"+this.project.getProjectPackage().replace(".", "/");
 		if (!testDir(javaPath))
 			return;
 		
 		if (!testDir(javaPath+"/util"))
 			return;
 		
-		log.info("Starting file generation");
+		if (!testDir(javaPath+"/base"))
+			return;
 		
-		for (int i=0; i<this.projectObjects.size(); i++) {
-			ProjectorObject gpo = new ProjectorObject(this.projectObjects.get(i));
-			gpo.generate(javaPath, this.project.projectPackage, this.project);
+		log.info("Starting file generation");
+		for (ProjectorObject po : this.getProjectObjects()) {
+			po.generate(javaPath, this.getProject().getProjectPackage(), this.getProject());
 		}
 		String[] stdFiles = {"BaseGenerated.java","SimpleXmlErrorHandler.java", "Util.java", "XmlErrorCallback.java"};
-		copyStdFiles("src/ca/brood/projector/", "projects/"+this.project.name+"/src/"+this.project.projectPackage.replaceAll("\\.", "/")+"/", stdFiles, "ca.brood.projector", this.project.projectPackage);
+		copyStdFiles("src/ca/brood/projector/", "projects/"+this.project.getName()+"/src/"+this.project.getProjectPackage().replaceAll("\\.", "/")+"/", stdFiles, "ca.brood.projector", this.project.getProjectPackage());
 		//Hack: install a default logger.config file
 		String[] loggerFile = {"logger.config"};
-		copyStdFiles(".", "projects/"+this.project.name+"/", loggerFile, "projector",this.project.name.toLowerCase());
+		copyStdFiles(".", "projects/"+this.project.getName()+"/", loggerFile, "projector",this.project.getName().toLowerCase());
 		
 		//Copy logger libs over now
-		copyFile(new File("lib/log4j-1.2.16.jar"), new File("projects/"+this.project.name+"/lib/log4j-1.2.16.jar"));
+		copyFile(new File("lib/log4j-1.2.16.jar"), new File("projects/"+this.project.getName()+"/lib/log4j-1.2.16.jar"));
 	}
 	
 	private void copyStdFiles(String checkDir, String installDir, String[] stdFiles, String oldPackage, String newPackage) {
@@ -112,9 +113,14 @@ public class Projector extends BaseProjector {
 			if (pwdFiles[i].isDirectory()) {
 				installDir(checkDir+pwdFiles[i].getName()+"/", installDir+pwdFiles[i].getName()+"/");
 			} else {
-				if (pwdFiles[i].getName().endsWith(".java")) {
-					log.debug("Copying "+pwdFiles[i].getName()+" from "+checkDir+" to "+installDir);
-					renameAndCopy(pwdFiles[i], installDir+pwdFiles[i].getName());
+				if (pwd.getName().equalsIgnoreCase(this.getProject().getName())) {
+					//Don't overwrite the non generated
+					continue;
+				} else {
+					if (pwdFiles[i].getName().endsWith(".java")) {
+						log.debug("Copying "+pwdFiles[i].getName()+" from "+checkDir+" to "+installDir);
+						renameAndCopy(pwdFiles[i], installDir+pwdFiles[i].getName());
+					}
 				}
 			}
 		}
@@ -183,9 +189,10 @@ public class Projector extends BaseProjector {
 		ProjectorDtdGenerator pdg2 = new ProjectorDtdGenerator();
 		pdg2.writeDtd("projectorOut.dtd", this);
 		
-		//installProjectorForTesting();
+		installProjectorForTesting();
 		
 		log.info("Projector is finished.");
 	}
 	
 }
+

@@ -1,59 +1,81 @@
 package ca.brood.projector;
 
+import ca.brood.projector.base.BaseProjectorReference;
 import java.io.PrintStream;
+import ca.brood.projector.util.*;
 
-import org.apache.log4j.Logger;
-
-public class ProjectorReference {
-	private BaseProjectorReference bpr;
-	private ProjectorOptions referenceOptions;
-	private Logger log;
-	
+public class ProjectorReference extends BaseProjectorReference {
 	public ProjectorReference() {
-		log = Logger.getLogger("ProjectorReference");
+		super();
 	}
-	public ProjectorReference(BaseProjectorReference o) {
-		this();
-		bpr = o;
-		referenceOptions = new ProjectorOptions(bpr.options);
-	}
+
+
 	public boolean isOnetoMany() {
-		return "onetomany".equalsIgnoreCase(bpr.relationship);
+		return "onetomany".equalsIgnoreCase(getRelationship());
 	}
 	public boolean isOnetoOne() {
-		return "onetoone".equalsIgnoreCase(bpr.relationship);
+		return "onetoone".equalsIgnoreCase(getRelationship());
 	}
 	
 	public boolean generateDeclaration(PrintStream ps, String indent) {
-		if (bpr.targetType.equals("")) {
-			log.error("Invalid reference targetType: ");
+		if (!verifyFields()) {
 			return false;
 		}
-		if (bpr.name.equals("")) {
-			log.error("Invalid reference name: ");
-			return false;
-		}
-		if (bpr.elementName.equals("")) {
-			bpr.elementName = bpr.name;
-		}
-		String objType = "Base"+bpr.targetType;
+		String objType = getTargetType();
 		if (this.isOnetoOne()) {
-			ps.println(indent+"protected "+objType+" "+bpr.name+" = new "+objType+"();");
+			ps.println(indent+"protected "+objType+" "+getName()+" = new "+objType+"();");
 		} else if (this.isOnetoMany()) {
-			ps.println(indent+"protected ArrayList<"+objType+"> "+bpr.name+" = new ArrayList<"+objType+">();");
+			ps.println(indent+"protected ArrayList<"+objType+"> "+getName()+" = new ArrayList<"+objType+">();");
 		} else {
-			log.error("Invalid reference relationship: "+bpr.relationship);
+			log.error("Invalid reference relationship: "+getRelationship());
 			return false;
 		}
 		return true;
 	}
+	private boolean verifyFields() {
+		if (getElementName().equals("")) {
+			setElementName(getName());
+		}
+		if (getTargetType().equals("")) {
+			log.error("Invalid reference targetType: ");
+			return false;
+		}
+		if (getName().equals("")) {
+			log.error("Invalid reference name: ");
+			return false;
+		}
+		return true;
+	}
+	public boolean generateGettersAndSetters(PrintStream ps, String indent) {
+		if (!verifyFields()) {
+			return false;
+		}
+		String objType = getTargetType();
+		if (this.isOnetoOne()) {
+			objType = getTargetType();
+		} else if (this.isOnetoMany()) {
+			objType = "ArrayList<"+getTargetType()+">";
+		} else {
+			log.error("Invalid reference relationship: "+getRelationship());
+			return false;
+		}
+		
+		ps.println(indent+"public "+objType+" get"+Util.UppercaseFirstCharacter(getName())+"() {");
+		ps.println(indent+"	return "+getName()+";");
+		ps.println(indent+"}");
+		ps.println(indent+"public void set"+Util.UppercaseFirstCharacter(getName())+"("+objType+" val) {");
+		ps.println(indent+"	this."+getName()+" = val;");
+		ps.println(indent+"}");
+		
+		return true;
+	}
 	
 	public boolean generateReset(PrintStream ps, String indent) {
-		String objType = "Base"+bpr.targetType;
+		String objType = getTargetType();
 		if (this.isOnetoOne()) {
-			ps.println(indent+"this."+bpr.name+" = new "+objType+"();");
+			ps.println(indent+"this."+getName()+" = new "+objType+"();");
 		} else if (this.isOnetoMany()) {
-			ps.println(indent+"this."+bpr.name+" = new ArrayList<"+objType+">();");
+			ps.println(indent+"this."+getName()+" = new ArrayList<"+objType+">();");
 		}
 		return true;
 	}
@@ -62,30 +84,31 @@ public class ProjectorReference {
 		indent += "\t";
 		if (this.isOnetoOne()) {
 			if (reinstantiate) {
-				ps.println(indent+"this."+bpr.name+" = new "+targetType+"();");
+				ps.println(indent+"this."+getName()+" = new "+targetType+"();");
 			}
-			ps.println(indent+"this."+bpr.name+".configure(currentConfigNode);");
+			ps.println(indent+"this."+getName()+".configure(currentConfigNode);");
 		} else if (this.isOnetoMany()) {
 			String objType = targetType;
 			String variable = targetType.substring(0, 1).toLowerCase()+targetType.substring(1);
 			ps.println(indent+objType+" "+variable+" = new "+objType+"();");
 			ps.println(indent+"if ("+variable+".configure(currentConfigNode)){");
-			ps.println(indent+"	this."+bpr.name+".add("+variable+");");
+			ps.println(indent+"	this."+getName()+".add("+variable+");");
 			ps.println(indent+"}");
 		} else {
-			log.error("Bad relationship: "+this.bpr.relationship);
+			log.error("Bad relationship: "+this.getRelationship());
 			return false;
 		}
 		return true;
 	}
 	public boolean generateLoad(PrintStream ps, String indent) {
-		if (bpr.subclassTypes.size() == 0) {
-			generateLoadText(ps, indent, bpr.elementName, "Base"+bpr.targetType, false);
+		if (getSubclassTypes().size() == 0) {
+			generateLoadText(ps, indent, getElementName(), getTargetType(), false);
 		} else {
-			for (BaseSubclassType bst : bpr.subclassTypes) {
-				generateLoadText(ps, indent, bst.elementName, "Base"+bst.targetType, true);
+			for (SubclassType bst : getSubclassTypes()) {
+				generateLoadText(ps, indent, bst.getElementName(), bst.getTargetType(), true);
 			}
 		}
 		return true;
 	}
 }
+

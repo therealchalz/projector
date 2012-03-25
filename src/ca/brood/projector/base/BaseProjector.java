@@ -1,5 +1,6 @@
-package ca.brood.projector;
+package ca.brood.projector.base;
 
+import ca.brood.projector.*;
 import java.util.ArrayList;
 import java.io.*;
 import javax.xml.parsers.*;
@@ -11,18 +12,30 @@ import ca.brood.projector.util.*;
 import org.apache.log4j.Logger;
 import org.w3c.dom.*;
 
-public class BaseProjector extends BaseGenerated {
-	protected BaseProjectorProject project = new BaseProjectorProject();
-	protected ArrayList<BaseProjectorObject> projectObjects = new ArrayList<BaseProjectorObject>();
+public abstract class BaseProjector extends BaseGenerated {
+	protected ProjectorProject project = new ProjectorProject();
+	protected ArrayList<ProjectorObject> projectObjects = new ArrayList<ProjectorObject>();
 	protected BaseProjector() {
 		super();
 		PropertyConfigurator.configure("logger.config");
 		log = Logger.getLogger("Projector");
 	}
+	public ProjectorProject getProject() {
+		return project;
+	}
+	public void setProject(ProjectorProject val) {
+		this.project = val;
+	}
+	public ArrayList<ProjectorObject> getProjectObjects() {
+		return projectObjects;
+	}
+	public void setProjectObjects(ArrayList<ProjectorObject> val) {
+		this.projectObjects = val;
+	}
 	@Override
 	public boolean configure(Node configNode) {
-		this.project = new BaseProjectorProject();
-		this.projectObjects = new ArrayList<BaseProjectorObject>();
+		this.project = new ProjectorProject();
+		this.projectObjects = new ArrayList<ProjectorObject>();
 		NodeList configNodes = configNode.getChildNodes();
 		for (int i=0; i<configNodes.getLength(); i++) {
 			Node currentConfigNode = configNodes.item(i);
@@ -32,9 +45,9 @@ public class BaseProjector extends BaseGenerated {
 			} else if ("project".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
 				this.project.configure(currentConfigNode);
 			} else if ("object".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
-				BaseProjectorObject baseProjectorObject = new BaseProjectorObject();
-				if (baseProjectorObject.configure(currentConfigNode)){
-					this.projectObjects.add(baseProjectorObject);
+				ProjectorObject projectorObject = new ProjectorObject();
+				if (projectorObject.configure(currentConfigNode)){
+					this.projectObjects.add(projectorObject);
 				}
 			} else {
 				log.warn("Got unknown node in config: "+currentConfigNode.getNodeName());

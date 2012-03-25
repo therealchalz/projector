@@ -12,4 +12,7 @@ public class Util {
 		}
 		return ret;
 	}
+	public static String UppercaseFirstCharacter(String in) {
+		return in.substring(0, 1).toUpperCase()+in.substring(1);
+	}
 }

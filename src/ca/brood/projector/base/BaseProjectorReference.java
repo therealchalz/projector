@@ -1,19 +1,56 @@
-package ca.brood.projector;
+package ca.brood.projector.base;
 
+import ca.brood.projector.*;
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
 import org.w3c.dom.*;
 
-public class BaseProjectorReference extends BaseGenerated {
+public abstract class BaseProjectorReference extends BaseGenerated {
 	protected String name = "";
 	protected String elementName = "";
 	protected String targetType = "";
 	protected String relationship = "";
-	protected ArrayList<BaseSubclassType> subclassTypes = new ArrayList<BaseSubclassType>();
-	protected BaseProjectorOptions options = new BaseProjectorOptions();
+	protected ArrayList<SubclassType> subclassTypes = new ArrayList<SubclassType>();
+	protected ProjectorOptions options = new ProjectorOptions();
 	protected BaseProjectorReference() {
 		super();
 		log = Logger.getLogger("ProjectorReference");
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String val) {
+		this.name = val;
+	}
+	public String getElementName() {
+		return elementName;
+	}
+	public void setElementName(String val) {
+		this.elementName = val;
+	}
+	public String getTargetType() {
+		return targetType;
+	}
+	public void setTargetType(String val) {
+		this.targetType = val;
+	}
+	public String getRelationship() {
+		return relationship;
+	}
+	public void setRelationship(String val) {
+		this.relationship = val;
+	}
+	public ArrayList<SubclassType> getSubclassTypes() {
+		return subclassTypes;
+	}
+	public void setSubclassTypes(ArrayList<SubclassType> val) {
+		this.subclassTypes = val;
+	}
+	public ProjectorOptions getOptions() {
+		return options;
+	}
+	public void setOptions(ProjectorOptions val) {
+		this.options = val;
 	}
 	@Override
 	public boolean configure(Node configNode) {
@@ -21,8 +58,8 @@ public class BaseProjectorReference extends BaseGenerated {
 		this.elementName = "";
 		this.targetType = "";
 		this.relationship = "";
-		this.subclassTypes = new ArrayList<BaseSubclassType>();
-		this.options = new BaseProjectorOptions();
+		this.subclassTypes = new ArrayList<SubclassType>();
+		this.options = new ProjectorOptions();
 		NodeList configNodes = configNode.getChildNodes();
 		for (int i=0; i<configNodes.getLength(); i++) {
 			Node currentConfigNode = configNodes.item(i);
@@ -42,9 +79,9 @@ public class BaseProjectorReference extends BaseGenerated {
 				configNode.removeChild(currentConfigNode);
 				this.relationship = currentConfigNode.getFirstChild().getNodeValue();
 			} else if ("subclassType".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
-				BaseSubclassType baseSubclassType = new BaseSubclassType();
-				if (baseSubclassType.configure(currentConfigNode)){
-					this.subclassTypes.add(baseSubclassType);
+				SubclassType subclassType = new SubclassType();
+				if (subclassType.configure(currentConfigNode)){
+					this.subclassTypes.add(subclassType);
 				}
 			} else if ("options".compareToIgnoreCase(currentConfigNode.getNodeName())==0){
 				this.options.configure(currentConfigNode);

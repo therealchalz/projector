@@ -1,10 +1,9 @@
 package ca.brood.projector;
 
-import org.apache.log4j.Logger;
+import ca.brood.projector.base.BaseProjectorOptions;
 
-public class ProjectorOptions {
-	private Logger log;
-	private BaseProjectorOptions bpo;
+public class ProjectorOptions extends BaseProjectorOptions {
+
 	public enum Options {
 		MULTIPLE("multiple"), 
 		OPTIONAL("optional");
@@ -13,22 +12,17 @@ public class ProjectorOptions {
 			text = s;
 		}
 	};
-	
 	public ProjectorOptions() {
-		log = Logger.getLogger("ProjectorOptions");
+		super();
 	}
-	public ProjectorOptions(BaseProjectorOptions o) {
-		this();
-		bpo = o;
-	}
-	
+
 	public boolean hasOption(Options o) {
-		for (String s : bpo.options) {
+		for (String s : getOptions()) {
 			if (o.text.equalsIgnoreCase(s)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
 }
+

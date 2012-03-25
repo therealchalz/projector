@@ -11,19 +11,19 @@ import org.apache.log4j.Logger;
 public class ProjectorDtdGenerator {
 	private Logger log;
 	private ArrayList<String> definedElements;
-	private ArrayList<BaseProjectorObject> allObjects;
+	private ArrayList<ProjectorObject> allObjects;
 	public ProjectorDtdGenerator() {
 		log = Logger.getLogger("ProjectorDtdGenerator");
 		definedElements = new ArrayList<String>();
-		allObjects = new ArrayList<BaseProjectorObject>();
+		allObjects = new ArrayList<ProjectorObject>();
 	}
-	private boolean writeObject(PrintStream ps, String rootElement, BaseProjectorObject bpo) {
-		ArrayList<BaseProjectorField> fieldsToWrite = new ArrayList<BaseProjectorField>();
-		ArrayList<BaseProjectorReference> objectsToWrite = new ArrayList<BaseProjectorReference>();
+	private boolean writeObject(PrintStream ps, String rootElement, ProjectorObject bpo) {
+		ArrayList<ProjectorField> fieldsToWrite = new ArrayList<ProjectorField>();
+		ArrayList<ProjectorReference> objectsToWrite = new ArrayList<ProjectorReference>();
 		
 		ps.print("<!ELEMENT "+rootElement+" (");
 		boolean firstField = true;
-		for (BaseProjectorField bpf : bpo.fields) {
+		for (ProjectorField bpf : bpo.getFields()) {
 			if (firstField) {
 				firstField = false;
 			} else {
@@ -31,8 +31,8 @@ public class ProjectorDtdGenerator {
 			}
 			boolean optionIsOptional = false;
 			boolean optionIsArray = false;
-			if (bpf.options.options.size() != 0) {
-				for (String option : bpf.options.options) {
+			if (bpf.getOptions().getOptions().size() != 0) {
+				for (String option : bpf.getOptions().getOptions()) {
 					if ("optional".equalsIgnoreCase(option)) {
 						optionIsOptional = true;
 					}
@@ -41,48 +41,48 @@ public class ProjectorDtdGenerator {
 					}
 				}
 			}
-			ps.print((bpf.elementName.equals("") ? bpf.name : bpf.elementName));
+			ps.print((bpf.getElementName().equals("") ? bpf.getName() : bpf.getElementName()));
 			if (optionIsOptional && optionIsArray) {
-				log.error("Error: "+bpf.name+" has both optional and multiple options");
+				log.error("Error: "+bpf.getName()+" has both optional and multiple options");
 			}
 			if (optionIsOptional) {
 				ps.print("?");
 			} else if (optionIsArray) {
 				ps.print("*");
 			}
-			if (!definedElements.contains((bpf.elementName.equals("") ? bpf.name : bpf.elementName))) {
-				definedElements.add((bpf.elementName.equals("") ? bpf.name : bpf.elementName));
+			if (!definedElements.contains((bpf.getElementName().equals("") ? bpf.getName() : bpf.getElementName()))) {
+				definedElements.add((bpf.getElementName().equals("") ? bpf.getName() : bpf.getElementName()));
 				fieldsToWrite.add(bpf);
 			}
 		}
 		
-		for (BaseProjectorReference bpr : bpo.references) {
+		for (ProjectorReference bpr : bpo.getReferences()) {
 			if (firstField) {
 				firstField = false;
 			} else {
 				ps.print(",");
 			}
 			boolean optionIsOptional = false;
-			if (bpr.options.options.size() != 0) {
-				for (String option : bpr.options.options) {
+			if (bpr.getOptions().getOptions().size() != 0) {
+				for (String option : bpr.getOptions().getOptions()) {
 					if ("optional".equalsIgnoreCase(option)) {
 						optionIsOptional = true;
 					}
 				}
 			}
-			ps.print((bpr.elementName.equals("") ? bpr.name : bpr.elementName));
-			if (bpr.relationship.equalsIgnoreCase("onetomany")) {
+			ps.print((bpr.getElementName().equals("") ? bpr.getName() : bpr.getElementName()));
+			if (bpr.getRelationship().equalsIgnoreCase("onetomany")) {
 				ps.print("*");
-			} else if (bpr.relationship.equalsIgnoreCase("onetoone")) {
+			} else if (bpr.getRelationship().equalsIgnoreCase("onetoone")) {
 				if (optionIsOptional) {
 					ps.print("?");
 				}
 			} else {
-				log.fatal("Unsupported relationship in DTD save: "+bpr.relationship);
+				log.fatal("Unsupported relationship in DTD save: "+bpr.getRelationship());
 				return false;
 			}
-			if (!definedElements.contains((bpr.elementName.equals("") ? bpr.name : bpr.elementName))) {
-				definedElements.add((bpr.elementName.equals("") ? bpr.name : bpr.elementName));
+			if (!definedElements.contains((bpr.getElementName().equals("") ? bpr.getName() : bpr.getElementName()))) {
+				definedElements.add((bpr.getElementName().equals("") ? bpr.getName() : bpr.getElementName()));
 				objectsToWrite.add(bpr);
 			}
 		}
@@ -90,14 +90,14 @@ public class ProjectorDtdGenerator {
 		ps.println(")>");
 		
 		//Define the fields now
-		for (BaseProjectorField bpf : fieldsToWrite) {
-			ps.println("<!ELEMENT "+(bpf.elementName.equals("") ? bpf.name : bpf.elementName)+" (#PCDATA)>");
+		for (ProjectorField bpf : fieldsToWrite) {
+			ps.println("<!ELEMENT "+(bpf.getElementName().equals("") ? bpf.getName() : bpf.getElementName())+" (#PCDATA)>");
 		}
 		//Recurse on the objects here
-		for (BaseProjectorReference bpr : objectsToWrite) {
-			for (BaseProjectorObject nextObject : this.allObjects) {
-				if (nextObject.name.equals(bpr.targetType)) {
-					if (!writeObject(ps, (bpr.elementName.equals("") ? bpr.name : bpr.elementName), nextObject)) {
+		for (ProjectorReference bpr : objectsToWrite) {
+			for (ProjectorObject nextObject : this.allObjects) {
+				if (nextObject.getName().equals(bpr.getTargetType())) {
+					if (!writeObject(ps, (bpr.getElementName().equals("") ? bpr.getName() : bpr.getElementName()), nextObject)) {
 						return false;
 					}
 					break;
@@ -107,7 +107,7 @@ public class ProjectorDtdGenerator {
 		
 		return true;
 	}
-	public boolean writeDtd(String filename, BaseProjector bp) {
+	public boolean writeDtd(String filename, Projector bp) {
 		PrintStream ps;
 		try {
 			ps = new PrintStream(filename);
@@ -118,23 +118,23 @@ public class ProjectorDtdGenerator {
 		log.debug("Generating: "+filename);
 		
 		//Get project info and all the objects
-		BaseProjectorProject bpp = bp.project;
-		this.allObjects = bp.projectObjects;
+		ProjectorProject bpp = bp.getProject();
+		this.allObjects = bp.getProjectObjects();
 		
 		//Start with root element/root object for DTD, then recurse
-		BaseProjectorObject rootObject = null;
-		for (BaseProjectorObject bpo : this.allObjects) {
-			if (bpo.name.equals(bpp.rootObject)) {
+		ProjectorObject rootObject = null;
+		for (ProjectorObject bpo : this.allObjects) {
+			if (bpo.getName().equals(bpp.getRootObject())) {
 				rootObject = bpo;
 				break;
 			}
 		}
 		if (rootObject == null) {
-			log.fatal("Couldn't find root object: "+bpp.rootObject);
+			log.fatal("Couldn't find root object: "+bpp.getRootObject());
 			ps.close();
 			return false;
 		}
-		writeObject(ps, bpp.rootElement, rootObject);
+		writeObject(ps, bpp.getRootElement(), rootObject);
 		
 		
 		log.debug("Done with "+filename);

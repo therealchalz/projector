@@ -1,14 +1,27 @@
-package ca.brood.projector;
+package ca.brood.projector.base;
 
+import ca.brood.projector.*;
 import org.apache.log4j.Logger;
 import org.w3c.dom.*;
 
-public class BaseSubclassType extends BaseGenerated {
+public abstract class BaseSubclassType extends BaseGenerated {
 	protected String elementName = "";
 	protected String targetType = "";
 	protected BaseSubclassType() {
 		super();
 		log = Logger.getLogger("SubclassType");
+	}
+	public String getElementName() {
+		return elementName;
+	}
+	public void setElementName(String val) {
+		this.elementName = val;
+	}
+	public String getTargetType() {
+		return targetType;
+	}
+	public void setTargetType(String val) {
+		this.targetType = val;
 	}
 	@Override
 	public boolean configure(Node configNode) {

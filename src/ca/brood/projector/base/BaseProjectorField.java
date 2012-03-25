@@ -1,18 +1,49 @@
-package ca.brood.projector;
+package ca.brood.projector.base;
 
+import ca.brood.projector.*;
 import ca.brood.projector.util.*;
 import org.apache.log4j.Logger;
 import org.w3c.dom.*;
 
-public class BaseProjectorField extends BaseGenerated {
+public abstract class BaseProjectorField extends BaseGenerated {
 	protected String name = "";
 	protected String elementName = "";
 	protected String type = "";
 	protected int size = 0;
-	protected BaseProjectorOptions options = new BaseProjectorOptions();
+	protected ProjectorOptions options = new ProjectorOptions();
 	protected BaseProjectorField() {
 		super();
 		log = Logger.getLogger("ProjectorField");
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String val) {
+		this.name = val;
+	}
+	public String getElementName() {
+		return elementName;
+	}
+	public void setElementName(String val) {
+		this.elementName = val;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String val) {
+		this.type = val;
+	}
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int val) {
+		this.size = val;
+	}
+	public ProjectorOptions getOptions() {
+		return options;
+	}
+	public void setOptions(ProjectorOptions val) {
+		this.options = val;
 	}
 	@Override
 	public boolean configure(Node configNode) {
@@ -20,7 +51,7 @@ public class BaseProjectorField extends BaseGenerated {
 		this.elementName = "";
 		this.type = "";
 		this.size = 0;
-		this.options = new BaseProjectorOptions();
+		this.options = new ProjectorOptions();
 		NodeList configNodes = configNode.getChildNodes();
 		for (int i=0; i<configNodes.getLength(); i++) {
 			Node currentConfigNode = configNodes.item(i);
